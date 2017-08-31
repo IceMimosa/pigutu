@@ -77,7 +77,7 @@ public class MobileController {
         return "mIndex";
     }
 
-    @GetMapping("/recommend")
+    @GetMapping("/recommend/{page}")
     public String recommend(Model model, @PathVariable("page") int page) {
         TuUtils.addCategory(model,categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(page);

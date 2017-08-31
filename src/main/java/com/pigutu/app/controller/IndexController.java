@@ -60,7 +60,7 @@ public class IndexController {
         return "imageSet";
     }
 
-    @GetMapping("/hot")
+    @GetMapping("/hot/{page}")
     public String hot(Model model, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.hotRank(page);
@@ -68,10 +68,18 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/recommend")
+    @GetMapping("/recommend/{page}")
     public String recommend(Model model, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(page);
+        model.addAttribute("imageSetLists", imageSetListEntities);
+        return "index";
+    }
+
+    @GetMapping("/error")
+    public String error(Model model) {
+        TuUtils.addCategory(model, categoryDao);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(1);
         model.addAttribute("imageSetLists", imageSetListEntities);
         return "index";
     }
