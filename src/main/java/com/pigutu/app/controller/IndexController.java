@@ -8,10 +8,14 @@ import com.pigutu.app.mapper.ImageSetListDao;
 import com.pigutu.app.utils.TuConfig;
 import com.pigutu.app.utils.TuUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -56,6 +60,8 @@ public class IndexController {
         TuUtils.addCategory(model, categoryDao);
         imageSetListDao.addViewCount(id);
         List<ImageSetEntity> imageSetEntities = imageSetDao.findAll(id);
+        ImageSetListEntity imageSetListEntity = imageSetListDao.getImageSetListEntity(id);
+        model.addAttribute("imageSetListEntity", imageSetListEntity);
         model.addAttribute("imageSetLists", imageSetEntities);
         return "imageSet";
     }
@@ -76,18 +82,14 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/error")
-    public String error(Model model) {
-        TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(1);
-        model.addAttribute("imageSetLists", imageSetListEntities);
-        return "index";
-    }
 
     @GetMapping("/index/{page}")
     public String index(Model model, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> categoryEntities = imageSetListDao.recommendRank(page);
+        if(StringUtils.isEmpty(page)){
+            page = 1;
+        }
+        List<ImageSetListEntity> categoryEntities = imageSetListDao.recommendRank(page-1);
         model.addAttribute("imageSetLists", categoryEntities);
         return "index";
     }
@@ -101,7 +103,7 @@ public class IndexController {
     }
 
     @GetMapping("/view")
-    public String viewImage(){
+    public String viewImage() {
         return "viewImage";
     }
 }

@@ -13,7 +13,7 @@
     <title>妹子图 - 每日分享高清美女图片</title>
     <meta name="keywords" content="妹子图,美女图片,性感美女,mm">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
-    <link href="./妹子图 - 每日分享高清美女图片_files/style.css" rel="stylesheet" type="text/css">
+    <link href="http://hellohappy.oss-cn-shanghai.aliyuncs.com/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

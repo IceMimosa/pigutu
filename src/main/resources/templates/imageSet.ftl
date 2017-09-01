@@ -5,9 +5,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>极品尤物喷血写真!性感妹子秀白嫩身材_妹子图</title>
+    <title>${imageSetListEntity.getTitle()}_屁股图</title>
     <meta name="keywords" content="秀人网,性感">
-    <meta name="description" content="妹子图分享高清美女图片-极品尤物喷血写真!性感妹子秀白嫩身材。www.mmjpg.com">
+    <meta name="description" content="妹子图分享高清美女图片-${imageSetListEntity.getTitle()} www.pigutu.com">
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.mmjpg.com/mm/870">
     <link href="http://hellohappy.oss-cn-shanghai.aliyuncs.com/css/image.css" rel="stylesheet" type="text/css">
 </head>
@@ -23,8 +23,8 @@
 </div>
 <div class="main">
     <div class="article">
-        <h2>极品尤物喷血写真!性感妹子秀白嫩身材</h2>
-        <div class="info"><i>发表于: 2017年01月20日</i><i>来源: 妹子图</i><i class="viewall on" id="viewall" onclick="openall(1);">浏览全部</i><i>人气(3758684)</i><i
+        <h2>${imageSetListEntity.getTitle()}</h2>
+        <div class="info"><i>发表于: ${imageSetListEntity.getCreate_time()}</i><i>来源: 屁股图</i><i class="viewall on" id="viewall" onclick="openall(1);">浏览全部</i><i>人气(${imageSetListEntity.getView_count()})</i><i
                 id="like">喜欢(7397)</i><i class="like" onclick="likemm(870,1);">给妹子点赞</i></div>
         <div class="content" id="content"><#list imageSetLists as imageSet>
             <img src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSet.getUrl()}"></#list></div>

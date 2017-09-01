@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>屁股图- 每日分享高清美女图片</title>
-    <meta name="keywords" content="美女图片,性感美女,妹子图,mm,pigutu">
+    <meta name="keywords" content="美女图片,性感美女,妹子图,pigutu">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
     <meta name="mobile-agent" content="format=html5;url=http://m.pigutu.com"/>
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com">
@@ -22,8 +22,8 @@
 <body>
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
-    <div class="nav"><a href="http://www.pigutu.com">首页</a><a href="http://www.pigutu.com/hot/" class="hot">浏览排行榜</a><a
-            href="http://www.mmjpg.com/top/" class="good">推荐美图</a><a href="http://www.pigutu.com/more/">标签</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
+    <div class="nav"><a href="http://www.pigutu.com">首页</a><a href="http://www.pigutu.com/hot/1" class="hot">浏览排行榜</a><a
+            href="http://www.mmjpg.com/top/" class="good">推荐美图</a><a href="http://www.pigutu.com/more/1">标签</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
     </div>
     <div class="subnav"><span>所有</span><#list categorys as category><a
             href="/beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>
@@ -32,10 +32,14 @@
     <div class="pic">
         <ul>
         <#list imageSetLists as imageSetList>
-            <li><a href="http://www.pigutu.com:8080/image/${imageSetList.getId()?c}" target="_blank"><img src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSetList.getCover_url()}"
-                                                                            width="220" height="330"
-                                                                            alt="${imageSetList.getTitle()}"/></a><span
-                    class="title"><a href="http://www.mmjpg.com/mm/1082" target="_blank">${imageSetList.getTitle()}</a></span>
+            <li><a href="http://www.pigutu.com:8080/image/${imageSetList.getId()?c}" target="_blank"><img
+                    src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSetList.getCover_url()}"
+                    width="220" height="330"
+                    alt="${imageSetList.getTitle()}"/></a><span
+                    class="title"><a href="http://www.pigutu.com:8080/image/${imageSetList.getId()?c}"
+                                     target="_blank"><img
+                    src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSetList.getCover_url()}"
+                    target="_blank">${imageSetList.getTitle()}</a></span>
                 <!--<span>${imageSetList.getCreate_time()} 发布</span>--><span
                         class="view">浏览(${imageSetList.getView_count()})</span></li></#list></ul>
     </div>
@@ -57,8 +61,7 @@
          * @param page
          */
         function switchPage(divId, page) {
-
-            alert('to do...');
+            window.location.href='/'+page;
         }
     </script>
 </div>

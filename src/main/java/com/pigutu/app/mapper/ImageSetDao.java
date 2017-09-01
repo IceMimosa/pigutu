@@ -2,10 +2,12 @@ package com.pigutu.app.mapper;
 
 import com.pigutu.app.entity.ImageSetEntity;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
+@Repository
 public interface ImageSetDao {
 
     @Select("SELECT * FROM image_set where all_images_id = #{all_images_id}")

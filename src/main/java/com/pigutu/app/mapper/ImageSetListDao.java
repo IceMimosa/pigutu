@@ -2,10 +2,13 @@ package com.pigutu.app.mapper;
 
 import com.pigutu.app.entity.ImageSetListEntity;
 import org.apache.ibatis.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
+@Repository
 public interface ImageSetListDao {
 
     @Select({"SELECT * FROM image_set_list order by create_time desc limit  #{page},18"})
@@ -27,6 +30,7 @@ public interface ImageSetListDao {
 
     /**
      * 搜索排行暂时决定用like_count排序
+     *
      * @param keyword
      * @param pageStart
      * @return
@@ -106,6 +110,9 @@ public interface ImageSetListDao {
     List<ImageSetListEntity> likeRank(@Param("page") int pageStart);
 
     @Update({"UPDATE image_set_list set view_count=view_count+1 where id = #{id}"})
+    void addViewCount(@Param("id") int id);
+
+    @Select({"SELECT * FROM image_set_list where id = #{id}"})
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "title", column = "title"),
@@ -119,5 +126,5 @@ public interface ImageSetListDao {
             @Result(property = "view_count", column = "view_count"),
             @Result(property = "recommend_count", column = "recommend_count")
     })
-   void addViewCount(@Param("id") int id);
+    ImageSetListEntity getImageSetListEntity(@Param("id") int id);
 }
