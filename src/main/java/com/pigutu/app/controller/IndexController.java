@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -91,15 +92,19 @@ public class IndexController {
         }
         List<ImageSetListEntity> categoryEntities = imageSetListDao.recommendRank(page-1);
         model.addAttribute("imageSetLists", categoryEntities);
+        model.addAttribute("pageCount", imageSetListDao.count());
+        model.addAttribute("pageIndex", page);
         return "index";
     }
 
-    @GetMapping("/search/{keyword}/{page}")
-    public String recommend(Model model, @PathVariable("keyword") String keyword, @PathVariable("page") int page) {
+    @PostMapping("/search/{page}")
+    public String recommend(Model model,String key, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(keyword, page);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, page-1);
         model.addAttribute("imageSetLists", imageSetListEntities);
-        return "index";
+        model.addAttribute("pageCount",imageSetListDao.searchCount(key));
+        model.addAttribute("pageIndex",page);
+        return "search";
     }
 
     @GetMapping("/view")

@@ -22,7 +22,7 @@
 <body>
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
-    <div class="nav"><a href="http://www.pigutu.com">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a><a
+    <div class="nav"><a href="${url}">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a><a
             href="${url}recommend/1" class="good">推荐美图</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
     </div>
     <div class="subnav"><span>所有</span><#list categorys as category><a
@@ -67,39 +67,56 @@
         pageNum=pageCount/18+1;
     }
     pageNum = parseInt(pageNum);
-    for(var i=1;i<=7;i++){
-        if(pageIndex<=3){
-            if(i==1&&pageIndex!=1)
-                html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
-           if(pageIndex==i){
-               html+='<em>'+pageIndex+'</em>';
-           }else{
-               html+='<a href="${url}index/'+i+'">'+i+'</a>';
-           }
-           if(i==7)
-           html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
-        }else if(pageIndex>=pageNum-3){
-            if(i==1)
-            html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
-            if(pageIndex==i){
+    if(pageNum>7){
+        for(var i=1;i<=7;i++){
+            if(pageIndex<=3){
+                if(i==1&&pageIndex!=1)
+                    html+='<a href="${url}search/'+(pageIndex-1)+'" class="ch">上一页</a>';
+                if(pageIndex==i){
+                    html+='<em>'+pageIndex+'</em>';
+                }else{
+                    html+='<a href="${url}search/'+i+'">'+i+'</a>';
+                }
+                if(i==7)
+                    html+='<a href="${url}search/'+(pageIndex+1)+'" class="ch">下一页</a>';
+            }else if(pageIndex>=pageNum-3){
+                if(i==1)
+                    html+='<a href="${url}search/'+(pageIndex-1)+'" class="ch">上一页</a>';
+                if(pageIndex==i){
+                    html+='<em>'+pageIndex+'</em>';
+                }else{
+                    html+='<a href="${url}search/'+(pageIndex-i-1)+'">'+(pageIndex-i-1)+'</a>';
+                }
+                if(i==7&&pageIndex!=pageNum)
+                    html+='<a href="${url}search/'+(pageIndex+1)+'" class="ch">下一页</a>';
+            }else{
+                if(i==1)
+                    html+='<a href="${url}search/'+(pageIndex-1)+'" class="ch">上一页</a>';
+                if(4==i){
+                    html+='<em>'+pageIndex+'</em>';
+                }else{
+                    html+='<a href="${url}search/'+(pageIndex+i-4)+'">'+(pageIndex+i-4)+'</a>';
+                }
+                if(i==7)
+                    html+='<a href="${url}search/'+(pageIndex+1)+'" class="ch">下一页</a>';
+            }
+        }
+    }else if(pageNum>0){
+        for(var n=1;n<=pageNum;n++){
+            if(pageIndex!=1){
+                html+='<a href="${url}search/'+(pageIndex-1)+'" class="ch">上一页</a>';
+            }
+            if(pageIndex==n){
                 html+='<em>'+pageIndex+'</em>';
             }else{
-                html+='<a href="${url}index/'+(pageIndex-i-1)+'">'+(pageIndex-i-1)+'</a>';
+                html+='<a href="${url}search/'+n+'">'+n+'</a>';
             }
-            if(i==7&&pageIndex!=pageNum)
-                html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
-        }else{
-            if(i==1)
-            html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
-            if(4==i){
-                html+='<em>'+pageIndex+'</em>';
-            }else{
-                html+='<a href="${url}index/'+(pageIndex+i-4)+'">'+(pageIndex+i-4)+'</a>';
+            if(n==pageNum&&pageIndex!=pageNum){
+                html+='<a href="${url}search/'+(pageIndex+1)+'" class="ch">下一页</a>';
             }
-            if(i==7)
-            html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
         }
     }
+
     obj.html(html);
 </script>
 </body>

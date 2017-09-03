@@ -15,55 +15,92 @@
             top.location.href = 'http://m.pigutu.com';
         }
     </script>
-    <script type="text/javascript" src="./PagingManage.js?version=2"></script>
+    <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/PagingManage.js?version=3"></script>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <body>
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
-    <div class="nav"><a href="http://www.pigutu.com">首页</a><a href="http://www.pigutu.com/hot/1" class="hot">浏览排行榜</a><a
-            href="http://www.mmjpg.com/top/" class="good">推荐美图</a><a href="http://www.pigutu.com/more/1">标签</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
+    <div class="nav"><a href="http://www.pigutu.com">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a><a
+            href="${url}recommend/1" class="good">推荐美图</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
     </div>
     <div class="subnav"><span>所有</span><#list categorys as category><a
-            href="/beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>
+            href="${url}beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>
 </div>
 <div class="main">
     <div class="pic">
         <ul>
         <#list imageSetLists as imageSetList>
-            <li><a href="http://www.pigutu.com:8080/image/${imageSetList.getId()?c}" target="_blank"><img
-                    src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSetList.getCover_url()}"
+            <li><a href="${url}image/${imageSetList.getId()?c}" target="_blank"><img
+                    src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSetList.getCover_url()}/thumb"
                     width="220" height="330"
                     alt="${imageSetList.getTitle()}"/></a><span
-                    class="title"><a href="http://www.pigutu.com:8080/image/${imageSetList.getId()?c}"
-                                     target="_blank"><img
-                    src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSetList.getCover_url()}"
-                    target="_blank">${imageSetList.getTitle()}</a></span>
-                <!--<span>${imageSetList.getCreate_time()} 发布</span>--><span
-                        class="view">浏览(${imageSetList.getView_count()})</span></li></#list></ul>
+                    class="title"><a href="${url}image/${imageSetList.getId()?c}"
+                                     target="_blank">${imageSetList.getTitle()}</a></span><span
+                    class="view">浏览(${imageSetList.getView_count()})</span></li></#list></ul>
+        <div class="page"></div>
+    </div>
+    <div class="sidebar">
+        <div class="search"><form name="formsearch" method="post" action="/search/1"><input name="key" type="text" id="key" value="搜妹子" onfocus="searchnow();"><span onclick="searchpic();"></span></form></div>
     </div>
     <div style="clear: both;"></div>
-    <div id="mypage" class="page"></div>
 </div>
-<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2016 屁股图 湘ICP备16007494号-3</span></p>
+
+
+</div>
+
+<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2016 屁股图 湘ICP3</span></p>
 </div>
 <div style="display:none;">
-    <script type="text/javascript" src="images/mmjpg.js?151205"></script>
-    <script type="text/javascript">
-        $(function () {
-            PagingManage($('#mypage'), 100, 10, 1);
-        });
-
-        /**
-         * 响应动态生成的分页按钮的的点击事件
-         * @param divId
-         * @param page
-         */
-        function switchPage(divId, page) {
-            window.location.href='/'+page;
-        }
-    </script>
+    <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/image.js"></script>
 </div>
+<script type="text/javascript">
+    var obj = $('.page');
+    var pageCount = ${pageCount?c};
+    var pageIndex = ${pageIndex?c};
+    var pageNum ;
+    var html='';
+    if(pageCount%18==0){
+        pageNum =pageCount/18;
+    }else{
+        pageNum=pageCount/18+1;
+    }
+    pageNum = parseInt(pageNum);
+    for(var i=1;i<=7;i++){
+        if(pageIndex<=3){
+            if(i==1&&pageIndex!=1)
+                html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
+           if(pageIndex==i){
+               html+='<em>'+pageIndex+'</em>';
+           }else{
+               html+='<a href="${url}index/'+i+'">'+i+'</a>';
+           }
+           if(i==7)
+           html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
+        }else if(pageIndex>=pageNum-3){
+            if(i==1)
+            html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
+            if(pageIndex==i){
+                html+='<em>'+pageIndex+'</em>';
+            }else{
+                html+='<a href="${url}index/'+(pageIndex-i-1)+'">'+(pageIndex-i-1)+'</a>';
+            }
+            if(i==7&&pageIndex!=pageNum)
+                html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
+        }else{
+            if(i==1)
+            html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
+            if(4==i){
+                html+='<em>'+pageIndex+'</em>';
+            }else{
+                html+='<a href="${url}index/'+(pageIndex+i-4)+'">'+(pageIndex+i-4)+'</a>';
+            }
+            if(i==7)
+            html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
+        }
+    }
+    obj.html(html);
+</script>
 </body>
 </html>
