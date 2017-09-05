@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>index</title>
     <style>
-        html,body {
+        html, body {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -19,6 +19,6 @@
     </style>
 </head>
 <body>
-
+<img src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageUrl}/pigutu"/>
 </body>
 </html>

@@ -28,6 +28,9 @@ public interface ImageSetListDao {
     @Select({"SELECT count(*) FROM image_set_list"})
     int count();
 
+    @Select({"SELECT count(*) FROM image_set_list where category = #{category}"})
+    int categoryCount(@Param("category") String category);
+
     /**
      * 搜索排行暂时决定用like_count排序
      *
@@ -120,6 +123,9 @@ public interface ImageSetListDao {
 
     @Update({"UPDATE image_set_list set view_count=view_count+1 where id = #{id}"})
     void addViewCount(@Param("id") int id);
+
+    @Update({"UPDATE image_set_list set like_count=like_count+1 where id = #{id}"})
+    void addLikeCount(@Param("id") int id);
 
     @Select({"SELECT * FROM image_set_list where id = #{id}"})
     @Results({

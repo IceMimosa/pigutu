@@ -33,6 +33,7 @@ public class MobileController {
         TuUtils.addCategory(model,categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(page);
         model.addAttribute("imageSetLists", imageSetListEntities);
+        model.addAttribute("pageIndex", page);
         return "mIndex";
     }
 

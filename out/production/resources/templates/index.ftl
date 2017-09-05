@@ -42,7 +42,7 @@
         <div class="page"></div>
     </div>
     <div class="sidebar">
-        <div class="search"><form name="formsearch" method="post" action="/search/1"><input name="key" type="text" id="key" value="搜妹子" onfocus="searchnow();"><span onclick="searchpic();"></span></form></div>
+        <div class="search"><form name="formsearch" method="get" action="/search/1"><input name="key" type="text" id="key" value="搜妹子" onfocus="searchnow();"><span onclick="searchpic();"></span></form></div>
     </div>
     <div style="clear: both;"></div>
 </div>
@@ -50,7 +50,7 @@
 
 </div>
 
-<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2016 屁股图 湘ICP3</span></p>
+<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2016 屁股图 苏ICP备15000307号</span></p>
 </div>
 <div style="display:none;">
     <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/image.js"></script>

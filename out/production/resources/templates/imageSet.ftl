@@ -14,11 +14,10 @@
 
 <body>
 <div class="topbar">
-    <div class="header"><h1>妹子图 - 每日分享高清美女图片</h1></div>
+    <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
     <div class="nav"><a href="http://www.pigutu.com/">首页</a><a href="http://www.pigutu.com/hot/1"
                                                                class="hot">浏览排行榜</a><a
             href="http://www.pigutu.com/recommend/1" class="good">推荐美图</a><a
-            href="http://www.pigutu.com/recommend/1">标签</a><a
             href="http://m.mmjpg.com/mm/870" class="mobile">手机版</a></div>
     <div class="subnav"><a href="http://www.pigutu.com/">所有</a><#list categorys as category><a
             href="/beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>
@@ -26,13 +25,18 @@
 <div class="main">
     <div class="article">
         <h2>${imageSetListEntity.getTitle()}</h2>
-        <div class="info"><i>发表于: ${imageSetListEntity.getCreate_time()}</i><i>来源: 屁股图</i><i>人气(${imageSetListEntity.getView_count()})</i><i
-                id="like">喜欢(7397)</i><i class="like" onclick="likemm(870,1);">给妹子点赞</i></div>
+        <div class="info"><i>发表于: ${imageSetListEntity.getCreate_time()}</i><i>来源:
+            屁股图</i><i>人气(${imageSetListEntity.getView_count()})</i><i
+                id="like">喜欢(${imageSetListEntity.getLike_count()})</i><i class="like" onclick="likemm(870,1);">给妹子点赞</i>
+        </div>
         <div class="content" id="content"><#list imageSetLists as imageSet>
-            <img src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSet.getUrl()}/pigutu"></#list></div>
+            <a href="/view/${imageSet.getUrl()}"><img src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSet.getUrl()}/pigutu"></a></#list></div>
         <div class="other">
-            <div class="tags"><a href="http://www.mmjpg.com/tag/xiuren">秀人网</a><a
-                    href="http://www.mmjpg.com/tag/xinggan">性感</a></div>
+            <div class="tags">
+                <#list imageSetListEntity.getLabel()?split(",") as label>
+                    <a href="${url}search/1?key=${label}">${label}</a>
+                </#list>
+                </div>
             <div class="share"><span>分享到:</span><i title="分享到QQ空间" onclick="sharemm(1);"></i><i title="分享到新浪微博"
                                                                                                 onclick="sharemm(2);"></i>
             </div>
@@ -52,7 +56,7 @@
         <script type="text/javascript">var picinfo = [2017, 870, 38];</script>
     </div>
 </div>
-<div class="footer"><p><span>最好看的美女图片就在妹子图，记住我们的网址 pigutu.com<br>Copyright © 2016 妹子图 湘ICP备1600号-3</span></p></div>
+<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br>Copyright © 2016 妹子图 湘ICP备1600号-3</span></p></div>
 <div style="display:none;">
     <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/image.js"></script>
 </div>

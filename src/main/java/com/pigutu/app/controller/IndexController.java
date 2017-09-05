@@ -53,6 +53,8 @@ public class IndexController {
         TuUtils.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, page - 1);
         model.addAttribute("imageSetLists", imageSetListEntities);
+        model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
+        model.addAttribute("pageIndex", page);
         return "index";
     }
 
@@ -72,6 +74,8 @@ public class IndexController {
         TuUtils.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.hotRank(page);
         model.addAttribute("imageSetLists", imageSetListEntities);
+        model.addAttribute("pageCount", imageSetListDao.count());
+        model.addAttribute("pageIndex", page);
         return "index";
     }
 
@@ -80,6 +84,8 @@ public class IndexController {
         TuUtils.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(page);
         model.addAttribute("imageSetLists", imageSetListEntities);
+        model.addAttribute("pageCount", imageSetListDao.count());
+        model.addAttribute("pageIndex", page);
         return "index";
     }
 
@@ -87,28 +93,35 @@ public class IndexController {
     @GetMapping("/index/{page}")
     public String index(Model model, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        if(StringUtils.isEmpty(page)){
+        if (StringUtils.isEmpty(page)) {
             page = 1;
         }
-        List<ImageSetListEntity> categoryEntities = imageSetListDao.recommendRank(page-1);
+        List<ImageSetListEntity> categoryEntities = imageSetListDao.recommendRank(page - 1);
         model.addAttribute("imageSetLists", categoryEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
         return "index";
     }
 
-    @PostMapping("/search/{page}")
-    public String recommend(Model model,String key, @PathVariable("page") int page) {
+    @GetMapping("/search/{page}")
+    public String recommend(Model model, String key, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, page-1);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, page - 1);
         model.addAttribute("imageSetLists", imageSetListEntities);
-        model.addAttribute("pageCount",imageSetListDao.searchCount(key));
-        model.addAttribute("pageIndex",page);
+        model.addAttribute("pageCount", imageSetListDao.searchCount(key));
+        model.addAttribute("pageIndex", page);
+        model.addAttribute("key", key);
         return "search";
     }
 
-    @GetMapping("/view")
-    public String viewImage() {
+    @GetMapping("/view/{imageUrl}")
+    public String viewImage(Model model,@PathVariable("imageUrl") int imageUrl) {
+        model.addAttribute("imageUrl", imageUrl);
         return "viewImage";
+    }
+
+    @GetMapping("/like")
+    public void addLikeCount(int id) {
+        imageSetListDao.addLikeCount(id);
     }
 }

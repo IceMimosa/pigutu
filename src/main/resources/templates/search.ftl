@@ -15,7 +15,8 @@
             top.location.href = 'http://m.pigutu.com';
         }
     </script>
-    <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/PagingManage.js?version=3"></script>
+    <script type="text/javascript"
+            src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/PagingManage.js?version=3"></script>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
@@ -42,7 +43,11 @@
         <div class="page"></div>
     </div>
     <div class="sidebar">
-        <div class="search"><form name="formsearch" method="post" action="/search/1"><input name="key" type="text" id="key" value="搜妹子" onfocus="searchnow();"><span onclick="searchpic();"></span></form></div>
+        <div class="search">
+            <form name="formsearch" method="get" action="/search/1"><input name="key" type="text" id="key" value="搜索"
+                                                                           onfocus="searchnow();"><span
+                    onclick="searchpic();"></span></form>
+        </div>
     </div>
     <div style="clear: both;"></div>
 </div>
@@ -59,62 +64,93 @@
     var obj = $('.page');
     var pageCount = ${pageCount?c};
     var pageIndex = ${pageIndex?c};
-    var pageNum ;
-    var html='';
-    if(pageCount%18==0){
-        pageNum =pageCount/18;
-    }else{
-        pageNum=pageCount/18+1;
+    var pageNum;
+    var html = '';
+
+    if (pageCount % 18 == 0) {
+        pageNum = pageCount / 18;
+    } else {
+        pageNum = pageCount / 18 + 1;
     }
     pageNum = parseInt(pageNum);
-    if(pageNum>7){
-        for(var i=1;i<=7;i++){
-            if(pageIndex<=3){
-                if(i==1&&pageIndex!=1)
-                    html+='<a href="${url}search/'+(pageIndex-1)+'" class="ch">上一页</a>';
-                if(pageIndex==i){
-                    html+='<em>'+pageIndex+'</em>';
-                }else{
-                    html+='<a href="${url}search/'+i+'">'+i+'</a>';
+    if (pageNum > 7) {
+        for (var i = 1; i <= 7; i++) {
+            if (pageIndex <= 3) {
+                if (i == 1 && pageIndex != 1)
+                    html += getPage(1,pageIndex - 1,'${key}');
+                if (pageIndex == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2,i,'${key}');
                 }
-                if(i==7)
-                    html+='<a href="${url}search/'+(pageIndex+1)+'" class="ch">下一页</a>';
-            }else if(pageIndex>=pageNum-3){
-                if(i==1)
-                    html+='<a href="${url}search/'+(pageIndex-1)+'" class="ch">上一页</a>';
-                if(pageIndex==i){
-                    html+='<em>'+pageIndex+'</em>';
-                }else{
-                    html+='<a href="${url}search/'+(pageIndex-i-1)+'">'+(pageIndex-i-1)+'</a>';
+                if (i == 7)
+                    html += getPage(3,(pageIndex + 1) ,'${key}');
+            } else if (pageIndex >= pageNum - 3) {
+                if (i == 1)
+                    html += getPage(1,(pageIndex - 1),'${key}');
+                if (pageIndex == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2,(pageIndex - i - 1) ,'${key}');
                 }
-                if(i==7&&pageIndex!=pageNum)
-                    html+='<a href="${url}search/'+(pageIndex+1)+'" class="ch">下一页</a>';
-            }else{
-                if(i==1)
-                    html+='<a href="${url}search/'+(pageIndex-1)+'" class="ch">上一页</a>';
-                if(4==i){
-                    html+='<em>'+pageIndex+'</em>';
-                }else{
-                    html+='<a href="${url}search/'+(pageIndex+i-4)+'">'+(pageIndex+i-4)+'</a>';
+                if (i == 7 && pageIndex != pageNum)
+                    html += getPage(3,(pageIndex + 1) ,'${key}');
+            } else {
+                if (i == 1)
+                    html += getPage(1,(pageIndex - 1),'${key}');
+                if (4 == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2,(pageIndex + i - 4),'${key}');
                 }
-                if(i==7)
-                    html+='<a href="${url}search/'+(pageIndex+1)+'" class="ch">下一页</a>';
+                if (i == 7)
+                    html +=getPage(3,(pageIndex + 1),'${key}');
             }
         }
-    }else if(pageNum>0){
-        for(var n=1;n<=pageNum;n++){
-            if(pageIndex!=1){
-                html+='<a href="${url}search/'+(pageIndex-1)+'" class="ch">上一页</a>';
+    } else if (pageNum > 0) {
+        for (var n = 1; n <= pageNum; n++) {
+            if (n == 1 && pageIndex != 1) {
+                html += getPage(1,(pageIndex - 1) ,'${key}');
             }
-            if(pageIndex==n){
-                html+='<em>'+pageIndex+'</em>';
-            }else{
-                html+='<a href="${url}search/'+n+'">'+n+'</a>';
+            if (pageIndex == n) {
+                html += '<em>' + pageIndex + '</em>';
+            } else {
+                html += getPage(2,n,'${key}');
             }
-            if(n==pageNum&&pageIndex!=pageNum){
-                html+='<a href="${url}search/'+(pageIndex+1)+'" class="ch">下一页</a>';
+            if (n == pageNum && pageIndex != pageNum) {
+                html += getPage(3,(pageIndex + 1),'${key}');
             }
         }
+    }
+
+    function getPage(mode,page, key) {
+        if (key === null) {
+            switch (mode){
+                case 1:
+                    page = '<a href="./' + page + '" class="ch">上一页</a>';
+                    break;
+                case 2:
+                    page = '<a href="./' + page + '">' + page + '</a>';
+                    break;
+                case 3:
+                    page =  '<a href="./' + (pageIndex + 1) + '" class="ch">下一页</a>';;
+                    break;
+            }
+        } else {
+           switch (mode){
+               case 1:
+                   page = '<a href="./' + page + '?key='+key+'" class="ch">上一页</a>';
+                   break;
+               case 2:
+                   page = '<a href="./' + page + '?key='+key+'">' + page + '</a>';
+                   break;
+               case 3:
+                   page = '<a href="./' + page + '?key='+key+'" class="ch">下一页</a>';;
+                   break;
+
+           }
+        }
+        return page;
     }
 
     obj.html(html);
