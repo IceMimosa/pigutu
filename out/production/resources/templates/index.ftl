@@ -38,7 +38,7 @@
                     alt="${imageSetList.getTitle()}"/></a><span
                     class="title"><a href="${url}image/${imageSetList.getId()?c}"
                                      target="_blank">${imageSetList.getTitle()}</a></span><span
-                    class="view">浏览(${imageSetList.getView_count()})</span></li></#list></ul>
+                    class="view">浏览(${(imageSetList.getView_count()+35298)?c})</span></li></#list></ul>
         <div class="page"></div>
     </div>
     <div class="sidebar">
@@ -55,7 +55,7 @@
 <div style="display:none;">
     <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/image.js"></script>
 </div>
-<script type="text/javascript">
+<#--<script type="text/javascript">
     var obj = $('.page');
     var pageCount = ${pageCount?c};
     var pageIndex = ${pageIndex?c};
@@ -100,6 +100,102 @@
             html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
         }
     }
+    obj.html(html);
+</script>-->
+<script type="text/javascript">
+    var obj = $('.page');
+    var pageCount = ${pageCount?c};
+    var pageIndex = ${pageIndex?c};
+    var pageUrl= '${pageUrl}';
+    var pageNum;
+    var html = '';
+
+    if (pageCount % 18 == 0) {
+        pageNum = pageCount / 18;
+    } else {
+        pageNum = pageCount / 18 + 1;
+    }
+    pageNum = parseInt(pageNum);
+    if (pageNum > 7) {
+        for (var i = 1; i <= 7; i++) {
+            if (pageIndex <= 3) {
+                if (i == 1 && pageIndex != 1)
+                    html += getPage(1,pageIndex - 1,'${key}');
+                if (pageIndex == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2,i,'${key}');
+                }
+                if (i == 7)
+                    html += getPage(3,(pageIndex + 1) ,'${key}');
+            } else if (pageIndex >= pageNum - 3) {
+                if (i == 1)
+                    html += getPage(1,(pageIndex - 1),'${key}');
+                if (pageIndex == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2,(pageIndex - i - 1) ,'${key}');
+                }
+                if (i == 7 && pageIndex != pageNum)
+                    html += getPage(3,(pageIndex + 1) ,'${key}');
+            } else {
+                if (i == 1)
+                    html += getPage(1,(pageIndex - 1),'${key}');
+                if (4 == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2,(pageIndex + i - 4),'${key}');
+                }
+                if (i == 7)
+                    html +=getPage(3,(pageIndex + 1),'${key}');
+            }
+        }
+    } else if (pageNum > 0) {
+        for (var n = 1; n <= pageNum; n++) {
+            if (n == 1 && pageIndex != 1) {
+                html += getPage(1,(pageIndex - 1) ,'${key}');
+            }
+            if (pageIndex == n) {
+                html += '<em>' + pageIndex + '</em>';
+            } else {
+                html += getPage(2,n,'${key}');
+            }
+            if (n == pageNum && pageIndex != pageNum) {
+                html += getPage(3,(pageIndex + 1),'${key}');
+            }
+        }
+    }
+
+    function getPage(mode,page, key) {
+        if (key.length==0) {
+            switch (mode){
+                case 1:
+                    page = '<a href="'+pageUrl+'/' + page + '" class="ch">上一页</a>';
+                    break;
+                case 2:
+                    page = '<a href="'+pageUrl+'/' + page + '">' + page + '</a>';
+                    break;
+                case 3:
+                    page =  '<a href="'+pageUrl+'/' + (pageIndex + 1) + '" class="ch">下一页</a>';;
+                    break;
+            }
+        } else {
+            switch (mode){
+                case 1:
+                    page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">上一页</a>';
+                    break;
+                case 2:
+                    page = '<a href="'+pageUrl+'/' + page + '?key='+key+'">' + page + '</a>';
+                    break;
+                case 3:
+                    page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">下一页</a>';;
+                    break;
+
+            }
+        }
+        return page;
+    }
+
     obj.html(html);
 </script>
 </body>

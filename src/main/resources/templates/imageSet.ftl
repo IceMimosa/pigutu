@@ -30,7 +30,7 @@
                 id="like">喜欢(${imageSetListEntity.getLike_count()})</i><i class="like" onclick="likemm(870,1);">给妹子点赞</i>
         </div>
         <div class="content" id="content"><#list imageSetLists as imageSet>
-            <a href="/view/${imageSet.getUrl()}"><img src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSet.getUrl()}/pigutu"></a></#list></div>
+            <a href="/view?imageUrl=${imageSet.getUrl()}"><img src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSet.getUrl()}/pigutu"></a></#list></div>
         <div class="other">
             <div class="tags">
                 <#list imageSetListEntity.getLabel()?split(",") as label>

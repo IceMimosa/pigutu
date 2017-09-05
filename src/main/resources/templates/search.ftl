@@ -64,6 +64,7 @@
     var obj = $('.page');
     var pageCount = ${pageCount?c};
     var pageIndex = ${pageIndex?c};
+    var pageUrl= ${pageUrl};
     var pageNum;
     var html = '';
 
@@ -127,25 +128,25 @@
         if (key === null) {
             switch (mode){
                 case 1:
-                    page = '<a href="./' + page + '" class="ch">上一页</a>';
+                    page = '<a href="'+pageUrl+'/' + page + '" class="ch">上一页</a>';
                     break;
                 case 2:
-                    page = '<a href="./' + page + '">' + page + '</a>';
+                    page = '<a href="'+pageUrl+'/' + page + '">' + page + '</a>';
                     break;
                 case 3:
-                    page =  '<a href="./' + (pageIndex + 1) + '" class="ch">下一页</a>';;
+                    page =  '<a href="'+pageUrl+'/' + (pageIndex + 1) + '" class="ch">下一页</a>';;
                     break;
             }
         } else {
            switch (mode){
                case 1:
-                   page = '<a href="./' + page + '?key='+key+'" class="ch">上一页</a>';
+                   page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">上一页</a>';
                    break;
                case 2:
-                   page = '<a href="./' + page + '?key='+key+'">' + page + '</a>';
+                   page = '<a href="'+pageUrl+'/' + page + '?key='+key+'">' + page + '</a>';
                    break;
                case 3:
-                   page = '<a href="./' + page + '?key='+key+'" class="ch">下一页</a>';;
+                   page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">下一页</a>';;
                    break;
 
            }
