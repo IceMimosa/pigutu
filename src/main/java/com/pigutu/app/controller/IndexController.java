@@ -55,6 +55,7 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
         model.addAttribute("pageIndex", page);
+        model.addAttribute("pageUrl", TuConfig.url+"beauty/"+category);
         return "index";
     }
 
@@ -76,6 +77,7 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
+        model.addAttribute("pageUrl", TuConfig.url+"hot");
         return "index";
     }
 
@@ -86,6 +88,7 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
+        model.addAttribute("pageUrl", TuConfig.url+"recommend");
         return "index";
     }
 
@@ -100,6 +103,8 @@ public class IndexController {
         model.addAttribute("imageSetLists", categoryEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
+        model.addAttribute("pageUrl", TuConfig.url+"index");
+        model.addAttribute("key", "");
         return "index";
     }
 
@@ -111,11 +116,12 @@ public class IndexController {
         model.addAttribute("pageCount", imageSetListDao.searchCount(key));
         model.addAttribute("pageIndex", page);
         model.addAttribute("key", key);
-        return "search";
+        model.addAttribute("pageUrl", TuConfig.url+"search");
+        return "index";
     }
 
-    @GetMapping("/view/{imageUrl}")
-    public String viewImage(Model model,@PathVariable("imageUrl") int imageUrl) {
+    @GetMapping("/view")
+    public String viewImage(Model model,String imageUrl) {
         model.addAttribute("imageUrl", imageUrl);
         return "viewImage";
     }
