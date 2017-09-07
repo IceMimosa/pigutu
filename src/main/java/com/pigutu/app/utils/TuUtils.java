@@ -13,6 +13,7 @@ public class TuUtils {
         model.addAttribute("categorys", categoryEntities);
         model.addAttribute("showUrl", TuConfig.url);
         model.addAttribute("url", TuConfig.url);
+        model.addAttribute("mUrl", TuConfig.mUrl);
         model.addAttribute("key", "");
     }
 }

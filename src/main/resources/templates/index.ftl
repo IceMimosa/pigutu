@@ -8,21 +8,20 @@
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
     <meta name="mobile-agent" content="format=html5;url=http://m.pigutu.com"/>
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com">
-    <link href="http://hellohappy.oss-cn-shanghai.aliyuncs.com/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="http://img.pigutu.com/css/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         var ubr = navigator.userAgent.toLowerCase();
         if (ubr.indexOf('mobile') > -1) {
             top.location.href = 'http://m.pigutu.com';
         }
     </script>
-    <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/PagingManage.js?version=3"></script>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <body>
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
-    <div class="nav"><a href="http://www.pigutu.com">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a><a
+    <div class="nav"><a href="${url}">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a><a
             href="${url}recommend/1" class="good">推荐美图</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
     </div>
     <div class="subnav"><span>所有</span><#list categorys as category><a
@@ -33,7 +32,7 @@
         <ul>
         <#list imageSetLists as imageSetList>
             <li><a href="${url}image/${imageSetList.getId()?c}" target="_blank"><img
-                    src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSetList.getCover_url()}/thumb"
+                    src="http://img.pigutu.com/img/${imageSetList.getCover_url()}/thumb"
                     width="220" height="330"
                     alt="${imageSetList.getTitle()}"/></a><span
                     class="title"><a href="${url}image/${imageSetList.getId()?c}"
@@ -53,7 +52,7 @@
 <div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2016 屁股图 苏ICP备15000307号</span></p>
 </div>
 <div style="display:none;">
-    <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/image.js"></script>
+    <script type="text/javascript" src="http://img.pigutu.com/js/image.js"></script>
 </div>
 <#--<script type="text/javascript">
     var obj = $('.page');

@@ -64,6 +64,7 @@ public class IndexController {
         ImageSetListEntity imageSetListEntity = imageSetListDao.getImageSetListEntity(id);
         model.addAttribute("imageSetListEntity", imageSetListEntity);
         model.addAttribute("imageSetLists", imageSetEntities);
+        model.addAttribute("id",id);
         return "imageSet";
     }
 
@@ -106,7 +107,7 @@ public class IndexController {
     }
 
     @GetMapping("/search/{page}")
-    public String recommend(Model model, String key, @PathVariable("page") int page) {
+    public String search(Model model, String key, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, page - 1);
         model.addAttribute("imageSetLists", imageSetListEntities);

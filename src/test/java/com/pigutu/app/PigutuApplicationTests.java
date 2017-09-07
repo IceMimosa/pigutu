@@ -11,8 +11,6 @@ public class PigutuApplicationTests {
 
     @Test
     public void contextLoads() {
-        String a = "1.00";
-        System.out.println(Integer.parseInt(a));
     }
 
 }
