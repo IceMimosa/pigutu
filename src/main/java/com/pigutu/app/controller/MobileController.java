@@ -58,6 +58,9 @@ public class MobileController {
         TuUtils.addCategory(model,categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, page - 1);
         model.addAttribute("imageSetLists", imageSetListEntities);
+        model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
+        model.addAttribute("pageIndex", page);
+        model.addAttribute("pageUrl", TuConfig.url+"beauty/"+category);
         return "mIndex";
     }
 

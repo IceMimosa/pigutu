@@ -127,6 +127,9 @@ public interface ImageSetListDao {
     @Update({"UPDATE image_set_list set like_count=like_count+1 where id = #{id}"})
     void addLikeCount(@Param("id") int id);
 
+    @Select({"SELECT like_count FROM image_set_list where id = #{id}"})
+    int likeCount(@Param("id") int id);
+
     @Select({"SELECT * FROM image_set_list where id = #{id}"})
     @Results({
             @Result(property = "id", column = "id"),
