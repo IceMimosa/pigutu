@@ -15,7 +15,9 @@ public class InterceptorAdapter extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:/index/1");
         registry.addViewController("/m").setViewName("forward:/m/index/1");
-
+ /*       registry.addViewController("/401").setViewName("forward:http://img.pigutu.com/error.html");
+        registry.addViewController("/404").setViewName("forward:http://img.pigutu.com/error.html");
+        registry.addViewController("/500").setViewName("forward:http://img.pigutu.com/error.html");*/
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

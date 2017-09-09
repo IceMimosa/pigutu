@@ -7,8 +7,10 @@ import com.pigutu.app.mapper.ImageSetDao;
 import com.pigutu.app.mapper.ImageSetListDao;
 import com.pigutu.app.utils.TuConfig;
 import com.pigutu.app.utils.TuUtils;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class IndexController {
@@ -28,6 +31,9 @@ public class IndexController {
 
     @Autowired
     ImageSetDao imageSetDao;
+
+    @Autowired
+    MessageSource messageSource;
 
     @GetMapping("/all/{id}")
     public String all(Model model, @PathVariable(value = "id") int id) {
@@ -46,36 +52,45 @@ public class IndexController {
     }
 
     @GetMapping("/beauty/{category}/{page}")
-    public String findByCategory(Model model, @PathVariable(value = "category") String category, @PathVariable(value = "page") int page) {
+    public String findByCategory(HttpServletRequest request, Model model, @PathVariable(value = "category") String category, @PathVariable(value = "page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, page - 1);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, (page - 1) * TuConfig.pageNumber);
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url+"beauty/"+category);
+        model.addAttribute("pageUrl", TuConfig.url + "beauty/" + category);
+        if (request.getServerName().startsWith("m")||TuConfig.mobileDebug) {
+            return "mIndex";
+        }
         return "index";
     }
 
     @GetMapping("/image/{id}")
-    public String findImageById(Model model, @PathVariable(value = "id") int id) {
+    public String findImageById(HttpServletRequest request, Model model, @PathVariable(value = "id") int id) {
         TuUtils.addCategory(model, categoryDao);
         imageSetListDao.addViewCount(id);
         List<ImageSetEntity> imageSetEntities = imageSetDao.findAll(id);
         ImageSetListEntity imageSetListEntity = imageSetListDao.getImageSetListEntity(id);
         model.addAttribute("imageSetListEntity", imageSetListEntity);
         model.addAttribute("imageSetLists", imageSetEntities);
-        model.addAttribute("id",id);
+        model.addAttribute("id", id);
+        if (request.getServerName().startsWith("m")||TuConfig.mobileDebug) {
+            return "mImageSet";
+        }
         return "imageSet";
     }
 
     @GetMapping("/hot/{page}")
-    public String hot(Model model, @PathVariable("page") int page) {
+    public String hot(HttpServletRequest request, Model model, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.hotRank(page);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.hotRank((page - 1) * TuConfig.pageNumber);
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url+"hot");
+        model.addAttribute("pageUrl", TuConfig.url + "hot");
+        if (request.getServerName().startsWith("m")||TuConfig.mobileDebug) {
+            return "mIndex";
+        }
         return "index";
     }
 
@@ -86,42 +101,60 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url+"recommend");
+        model.addAttribute("pageUrl", TuConfig.url + "recommend");
         return "index";
     }
 
 
     @GetMapping("/index/{page}")
-    public String index(Model model, @PathVariable("page") int page) {
+    public String index(HttpServletRequest request, Model model, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
         if (StringUtils.isEmpty(page)) {
             page = 1;
         }
-        List<ImageSetListEntity> categoryEntities = imageSetListDao.recommendRank(page - 1);
+        //String a = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+        List<ImageSetListEntity> categoryEntities = imageSetListDao.index((page - 1) * TuConfig.pageNumber);
         model.addAttribute("imageSetLists", categoryEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url+"index");
+        model.addAttribute("pageUrl", TuConfig.url + "index");
+        model.addAttribute("mPageUrl", TuConfig.mUrl + "index");
         model.addAttribute("key", "");
+        if (request.getServerName().startsWith("m")||TuConfig.mobileDebug) {
+            return "mIndex";
+        }
+        if(page==1){
+            return "firstIndex";
+        }
         return "index";
     }
 
     @GetMapping("/search/{page}")
-    public String search(Model model, String key, @PathVariable("page") int page) {
+    public String search(HttpServletRequest request, Model model, String key, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, page - 1);
+        key = TuUtils.stringFilter(key);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, (page - 1) * TuConfig.pageNumber);
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.searchCount(key));
         model.addAttribute("pageIndex", page);
         model.addAttribute("key", key);
-        model.addAttribute("pageUrl", TuConfig.url+"search");
+        model.addAttribute("pageUrl", TuConfig.url + "search");
+        if (request.getServerName().startsWith("m")||TuConfig.mobileDebug) {
+            return "mIndex";
+        }
         return "index";
     }
 
     @GetMapping("/view")
-    public String viewImage(Model model,String imageUrl) {
+    public String viewImage(Model model, String imageUrl) {
         model.addAttribute("imageUrl", imageUrl);
         return "viewImage";
+    }
+
+    @GetMapping("/category")
+    public String category(Model model) {
+        TuUtils.addCategory(model, categoryDao);
+        return "mCategory";
     }
 
     @GetMapping("/like")
@@ -129,5 +162,15 @@ public class IndexController {
     public int addLikeCount(int id) {
         imageSetListDao.addLikeCount(id);
         return imageSetListDao.likeCount(id);
+
+    }
+
+    @GetMapping("/myrecommend")
+    @ResponseBody
+    public List<ImageSetListEntity> randomRommend(Model model) {
+        Random random = new Random();
+        int page = random.nextInt(60);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.myRecommend(page  * TuConfig.myRecommendNumber);
+        return imageSetListEntities;
     }
 }

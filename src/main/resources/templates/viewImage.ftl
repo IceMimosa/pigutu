@@ -6,10 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <title>美女图片_屁股图</title>
-    <meta name="keywords" content="秀人网,性感">
+    <meta name="keywords" content="pigutu,屁股图">
     <meta name="description" content="屁股图分享高清美女图片- www.pigutu.com">
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.mmjpg.com/mm/870">
     <link href="http://hellohappy.oss-cn-shanghai.aliyuncs.com/css/image.css" rel="stylesheet" type="text/css">
+    <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
     <style>
         html, body {
             width: 100%;

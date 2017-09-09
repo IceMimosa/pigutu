@@ -57,7 +57,12 @@ public interface ImageSetListDao {
     @Select({"SELECT count(*) FROM image_set_list where title like '%${keyword}%' or label like '%${keyword}%'"})
     int searchCount(@Param("keyword") String keyword);
 
-    @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},18"})
+    /**
+     * 热度 采用view——count首页喜欢排行榜
+     * @param pageStart
+     * @return
+     */
+    @Select({"SELECT * FROM image_set_list order by view_count desc limit  #{page},18"})
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "title", column = "title"),
@@ -73,7 +78,23 @@ public interface ImageSetListDao {
     })
     List<ImageSetListEntity> hotRank(@Param("page") int pageStart);
 
-    @Select({"SELECT * FROM image_set_list where category=#{category} order by create_time desc limit  #{page},18"})
+    @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},18"})
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "cover_url", column = "cover_url"),
+            @Result(property = "like_count", column = "like_count"),
+            @Result(property = "img_count", column = "img_count"),
+            @Result(property = "comment_count", column = "comment_count"),
+            @Result(property = "category", column = "category"),
+            @Result(property = "label", column = "label"),
+            @Result(property = "create_time", column = "create_time"),
+            @Result(property = "view_count", column = "view_count"),
+            @Result(property = "recommend_count", column = "recommend_count")
+    })
+    List<ImageSetListEntity> index(@Param("page") int pageStart);
+
+    @Select({"SELECT * FROM image_set_list where category=#{category} order by like_count desc limit  #{page},18"})
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "title", column = "title"),
@@ -89,7 +110,7 @@ public interface ImageSetListDao {
     })
     List<ImageSetListEntity> findByCategory(@Param("category") String category, @Param("page") int pageStart);
 
-    @Select({"SELECT * FROM image_set_list order by recommend_count desc limit  #{page},18"})
+    @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},18"})
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "title", column = "title"),
@@ -145,4 +166,18 @@ public interface ImageSetListDao {
             @Result(property = "recommend_count", column = "recommend_count")
     })
     ImageSetListEntity getImageSetListEntity(@Param("id") int id);
+
+    @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},8"})
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "cover_url", column = "cover_url"),
+            @Result(property = "like_count", column = "like_count"),
+            @Result(property = "img_count", column = "img_count"),
+            @Result(property = "comment_count", column = "comment_count"),
+            @Result(property = "category", column = "category"),
+            @Result(property = "label", column = "label"),
+            @Result(property = "create_time", column = "create_time")
+    })
+    List<ImageSetListEntity> myRecommend(@Param("page") int pageStart);
 }

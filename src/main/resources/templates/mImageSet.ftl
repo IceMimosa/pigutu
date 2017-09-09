@@ -26,10 +26,7 @@
                 <li><i class="icon"></i><a href="http://m.pigutu.com/">首页</a></li>
                 <li><i class="icon"></i><a href="http://m.pigutu.com/hot">排行榜</a></li>
                 <li><i class="icon"></i><a href="http://m.pigutu.com/top">推荐</a></li>
-                <li><i class="icon"></i><a href="http://m.pigutu.com/more">标签</a></li>
-            <#list categorys as category>
-                <li><i class="icon"></i><a href="${category.getParameter()}">${category.getTitle()}</a></li>
-            </#list>
+                <li><i class="icon"></i><a href="http://m.pigutu.com/category">分类</a></li>
             </ul>
         </li>
     </ul>
@@ -43,7 +40,7 @@
     <ul class="article" id="article">
     <#list imageSetLists as imageSetList>
         <li>
-            <div class="pic"><img src="https://www.baidu.com/img/bd_logo1.png"></div>
+            <div class="pic"><img src="http://img.pigutu.com/img/${imageSetList.getUrl()}/pigutu"></div>
         </li>
     </#list>
     </ul>
@@ -57,11 +54,11 @@
 </div>-->
 <div class="footer">
     <div class="tool"><span><a href="http://www.pigutu.com/">去电脑版</a></span><span class="gotop"><a
-            href="http://m.pigutu.com/#">返回顶部</a></span></div>
-    <div class="copyright">Copyright © 2016 屁股图 pigutu.com</div>
+            href="#">返回顶部</a></span></div>
+    <div class="copyright">Copyright © 2017 屁股图 pigutu.com</div>
 </div>
 <div id="topbtn" onclick="goscrolltop();"></div>
-<script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/mimage.js"></script>
+<script type="text/javascript" src="http://img.pigutu.com/js/mimage.js"></script>
 
 </body>
 </html>

@@ -10,6 +10,12 @@
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com">
     <link href="http://img.pigutu.com/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
+    <script type="text/javascript">
+        var ubr = navigator.userAgent.toLowerCase();
+        if (ubr.indexOf('mobile') > -1) {
+            top.location.href = 'http://m.pigutu.com';
+        }
+    </script>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 

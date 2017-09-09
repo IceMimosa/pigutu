@@ -10,6 +10,7 @@
     <meta name="description" content="妹子图分享高清美女图片-${imageSetListEntity.getTitle()} www.pigutu.com">
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.mmjpg.com/mm/870">
     <link href="http://img.pigutu.com/css/image.css" rel="stylesheet" type="text/css">
+    <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
     <div class="nav"><a href="http://www.pigutu.com/">首页</a><a href="http://www.pigutu.com/hot/1"
                                                                class="hot">浏览排行榜</a><a
             href="http://www.pigutu.com/recommend/1" class="good">推荐美图</a><a
-            href="http://m.mmjpg.com/mm/870" class="mobile">手机版</a></div>
+            href="http://m.pigutu.com/" class="mobile">手机版</a></div>
     <div class="subnav"><a href="http://www.pigutu.com/">所有</a><#list categorys as category><a
             href="/beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>
 </div>
@@ -28,10 +29,10 @@
         <div class="info"><i>发表于: ${imageSetListEntity.getCreate_time()}</i><i>来源:
             pigutu</i><i>人气(${(imageSetListEntity.getView_count()+35298)?c})</i><i
                 id="like">喜欢(${imageSetListEntity.getLike_count()})</i><i class="like"
-                                                                          onclick="likemm(${id},1);">给妹子点赞</i>
+                                                                          onclick="likemm(${id?c},1);">给妹子点赞</i>
         </div>
         <div class="content" id="content"><#list imageSetLists as imageSet>
-            <a href="/view?imageUrl=${imageSet.getUrl()}"><img
+            <a href="/view?imageUrl=${imageSet.getUrl()}" target="_blank"><img
                     src="http://img.pigutu.com/img/${imageSet.getUrl()}/pigutu"></a></#list></div>
         <div class="other">
             <div class="tags">
@@ -58,7 +59,7 @@
         <script type="text/javascript">var picinfo = [2017, 870, 38];</script>
     </div>
 </div>
-<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br>Copyright © 2016 妹子图 湘ICP备1600号-3</span></p></div>
+<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br>Copyright © 屁股图 苏ICP备15000307号</span></p></div>
 <div style="display:none;">
     <script type="text/javascript" src="http://img.pigutu.com/js/image.js"></script>
 </div>

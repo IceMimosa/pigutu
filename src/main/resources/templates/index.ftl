@@ -9,12 +9,7 @@
     <meta name="mobile-agent" content="format=html5;url=http://m.pigutu.com"/>
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com">
     <link href="http://img.pigutu.com/css/style.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript">
-        var ubr = navigator.userAgent.toLowerCase();
-        if (ubr.indexOf('mobile') > -1) {
-            top.location.href = 'http://m.pigutu.com';
-        }
-    </script>
+    <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
@@ -49,153 +44,105 @@
 
 </div>
 
-<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2016 屁股图 苏ICP备15000307号</span></p>
+<div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2017 屁股图 苏ICP备15000307号</span></p>
 </div>
 <div style="display:none;">
     <script type="text/javascript" src="http://img.pigutu.com/js/image.js"></script>
 </div>
-<#--<script type="text/javascript">
-    var obj = $('.page');
-    var pageCount = ${pageCount?c};
-    var pageIndex = ${pageIndex?c};
-    var pageNum ;
-    var html='';
-    if(pageCount%18==0){
-        pageNum =pageCount/18;
-    }else{
-        pageNum=pageCount/18+1;
-    }
-    pageNum = parseInt(pageNum);
-    for(var i=1;i<=7;i++){
-        if(pageIndex<=3){
-            if(i==1&&pageIndex!=1)
-                html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
-           if(pageIndex==i){
-               html+='<em>'+pageIndex+'</em>';
-           }else{
-               html+='<a href="${url}index/'+i+'">'+i+'</a>';
-           }
-           if(i==7)
-           html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
-        }else if(pageIndex>=pageNum-3){
-            if(i==1)
-            html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
-            if(pageIndex==i){
-                html+='<em>'+pageIndex+'</em>';
-            }else{
-                html+='<a href="${url}index/'+(pageIndex-i-1)+'">'+(pageIndex-i-1)+'</a>';
-            }
-            if(i==7&&pageIndex!=pageNum)
-                html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
-        }else{
-            if(i==1)
-            html+='<a href="${url}/index/'+(pageIndex-1)+'" class="ch">上一页</a>';
-            if(4==i){
-                html+='<em>'+pageIndex+'</em>';
-            }else{
-                html+='<a href="${url}index/'+(pageIndex+i-4)+'">'+(pageIndex+i-4)+'</a>';
-            }
-            if(i==7)
-            html+='<a href="${url}/index/'+(pageIndex+1)+'" class="ch">下一页</a>';
-        }
-    }
-    obj.html(html);
-</script>-->
 <script type="text/javascript">
     var obj = $('.page');
-    var pageCount = ${pageCount?c};
-    var pageIndex = ${pageIndex?c};
-    var pageUrl= '${pageUrl}';
-    var pageNum;
-    var html = '';
+var pageCount = ${pageCount?c};
+var pageIndex = ${pageIndex?c};
+var pageUrl= '${pageUrl}';
+var pageNum;
+var html = '';
 
-    if (pageCount % 18 == 0) {
-        pageNum = pageCount / 18;
-    } else {
-        pageNum = pageCount / 18 + 1;
-    }
-    pageNum = parseInt(pageNum);
-    if (pageNum > 7) {
-        for (var i = 1; i <= 7; i++) {
-            if (pageIndex <= 3) {
-                if (i == 1 && pageIndex != 1)
-                    html += getPage(1,pageIndex - 1,'${key}');
-                if (pageIndex == i) {
-                    html += '<em>' + pageIndex + '</em>';
-                } else {
-                    html += getPage(2,i,'${key}');
-                }
-                if (i == 7)
-                    html += getPage(3,(pageIndex + 1) ,'${key}');
-            } else if (pageIndex >= pageNum - 3) {
-                if (i == 1)
-                    html += getPage(1,(pageIndex - 1),'${key}');
-                if (pageIndex == i) {
-                    html += '<em>' + pageIndex + '</em>';
-                } else {
-                    html += getPage(2,(pageIndex - i - 1) ,'${key}');
-                }
-                if (i == 7 && pageIndex != pageNum)
-                    html += getPage(3,(pageIndex + 1) ,'${key}');
-            } else {
-                if (i == 1)
-                    html += getPage(1,(pageIndex - 1),'${key}');
-                if (4 == i) {
-                    html += '<em>' + pageIndex + '</em>';
-                } else {
-                    html += getPage(2,(pageIndex + i - 4),'${key}');
-                }
-                if (i == 7)
-                    html +=getPage(3,(pageIndex + 1),'${key}');
-            }
-        }
-    } else if (pageNum > 0) {
-        for (var n = 1; n <= pageNum; n++) {
-            if (n == 1 && pageIndex != 1) {
-                html += getPage(1,(pageIndex - 1) ,'${key}');
-            }
-            if (pageIndex == n) {
+if (pageCount % 18 == 0) {
+    pageNum = pageCount / 18;
+} else {
+    pageNum = pageCount / 18 + 1;
+}
+pageNum = parseInt(pageNum);
+if (pageNum > 7) {
+    for (var i = 1; i <= 7; i++) {
+        if (pageIndex <= 3) {
+            if (i == 1 && pageIndex != 1)
+                html += getPage(1,pageIndex - 1,'${key}');
+            if (pageIndex == i) {
                 html += '<em>' + pageIndex + '</em>';
             } else {
-                html += getPage(2,n,'${key}');
+                html += getPage(2,i,'${key}');
             }
-            if (n == pageNum && pageIndex != pageNum) {
-                html += getPage(3,(pageIndex + 1),'${key}');
+            if (i == 7)
+                html += getPage(3,(pageIndex + 1) ,'${key}');
+        } else if (pageIndex >= pageNum - 3) {
+            if (i == 1)
+                html += getPage(1,(pageIndex - 1),'${key}');
+            if (pageIndex == i) {
+                html += '<em>' + pageIndex + '</em>';
+            } else {
+                html += getPage(2,(pageIndex - i - 1) ,'${key}');
             }
-        }
-    }
-
-    function getPage(mode,page, key) {
-        if (key.length==0) {
-            switch (mode){
-                case 1:
-                    page = '<a href="'+pageUrl+'/' + page + '" class="ch">上一页</a>';
-                    break;
-                case 2:
-                    page = '<a href="'+pageUrl+'/' + page + '">' + page + '</a>';
-                    break;
-                case 3:
-                    page =  '<a href="'+pageUrl+'/' + (pageIndex + 1) + '" class="ch">下一页</a>';;
-                    break;
-            }
+            if (i == 7 && pageIndex != pageNum)
+                html += getPage(3,(pageIndex + 1) ,'${key}');
         } else {
-            switch (mode){
-                case 1:
-                    page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">上一页</a>';
-                    break;
-                case 2:
-                    page = '<a href="'+pageUrl+'/' + page + '?key='+key+'">' + page + '</a>';
-                    break;
-                case 3:
-                    page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">下一页</a>';;
-                    break;
-
+            if (i == 1)
+                html += getPage(1,(pageIndex - 1),'${key}');
+            if (4 == i) {
+                html += '<em>' + pageIndex + '</em>';
+            } else {
+                html += getPage(2,(pageIndex + i - 4),'${key}');
             }
+            if (i == 7)
+                html +=getPage(3,(pageIndex + 1),'${key}');
         }
-        return page;
     }
+} else if (pageNum > 0) {
+    for (var n = 1; n <= pageNum; n++) {
+        if (n == 1 && pageIndex != 1) {
+            html += getPage(1,(pageIndex - 1) ,'${key}');
+        }
+        if (pageIndex == n) {
+            html += '<em>' + pageIndex + '</em>';
+        } else {
+            html += getPage(2,n,'${key}');
+        }
+        if (n == pageNum && pageIndex != pageNum) {
+            html += getPage(3,(pageIndex + 1),'${key}');
+        }
+    }
+}
 
-    obj.html(html);
-</script>
+function getPage(mode,page, key) {
+    if (key.length==0) {
+        switch (mode){
+            case 1:
+                page = '<a href="'+pageUrl+'/' + page + '" class="ch">上一页</a>';
+                break;
+            case 2:
+                page = '<a href="'+pageUrl+'/' + page + '">' + page + '</a>';
+                break;
+            case 3:
+                page =  '<a href="'+pageUrl+'/' + (pageIndex + 1) + '" class="ch">下一页</a>';;
+                break;
+        }
+    } else {
+        switch (mode){
+            case 1:
+                page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">上一页</a>';
+                break;
+            case 2:
+                page = '<a href="'+pageUrl+'/' + page + '?key='+key+'">' + page + '</a>';
+                break;
+            case 3:
+                page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">下一页</a>';;
+                break;
+
+        }
+    }
+    return page;
+}
+
+obj.html(html);</script>
 </body>
 </html>
