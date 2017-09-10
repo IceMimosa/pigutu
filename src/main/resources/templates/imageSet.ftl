@@ -11,6 +11,7 @@
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.mmjpg.com/mm/870">
     <link href="http://img.pigutu.com/css/image.css" rel="stylesheet" type="text/css">
     <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -44,6 +45,12 @@
                                                                                                 onclick="sharemm(2);"></i>
             </div>
         </div>
+        <div class="hot">
+            <dl id="hot" class="myrecommend">
+                <dt>美图推荐</dt>
+            </dl>
+        </div>
+        <div class="showmore"><span onclick="myrecommend();">换一批妹子图</span></div>
 
     </div>
     <div class="sidebar">
@@ -63,6 +70,38 @@
 <div style="display:none;">
     <script type="text/javascript" src="http://img.pigutu.com/js/image.js"></script>
 </div>
-
+<script type="text/javascript">
+    myrecommend();
+    //图片点赞
+    function myrecommend(){
+        if(window.XMLHttpRequest){
+            xmlhttp = new XMLHttpRequest;
+            if(xmlhttp.overrideMimeType){
+                xmlhttp.overrideMimeType('text/xml');
+            }
+        }else if(window.ActiveXObject){
+            xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        xmlhttp.onreadystatechange = recommendcallback;
+        xmlhttp.open('GET','/myrecommend?number=8',true);
+        xmlhttp.send(null);
+    }
+    function recommendcallback(){
+        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+            var renum = xmlhttp.responseText;
+            var obj = $.parseJSON(renum);
+            var html='';
+            for(var i=0;i<8;i++){
+                if(i==0||i==4){
+                    html+='<dd class="left"><a href="${url}image/'+obj[i].id+'" target="_blank"><img src="http://img.pigutu.com/img/'+obj[i].cover_url+'/thumb" width="182" height="277" alt="'+obj[i].title+'" />'+obj[i].title+'</a></dd>';
+                }else{
+                    html+='<dd><a href="${url}image/'+obj[i].id+'" target="_blank"><img src="http://img.pigutu.com/img/'+obj[i].cover_url+'/thumb" width="182" height="277" alt="'+obj[i].title+'" />'+obj[i].title+'</a></dd>';
+                }
+            }
+            html = '<dt>美图推荐</dt>' + html;
+            $('.myrecommend').html(html);
+        }
+    }
+</script>
 </body>
 </html>

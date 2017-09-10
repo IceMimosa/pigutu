@@ -167,7 +167,7 @@ public interface ImageSetListDao {
     })
     ImageSetListEntity getImageSetListEntity(@Param("id") int id);
 
-    @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},8"})
+    @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},#{pageNumber}"})
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "title", column = "title"),
@@ -179,5 +179,5 @@ public interface ImageSetListDao {
             @Result(property = "label", column = "label"),
             @Result(property = "create_time", column = "create_time")
     })
-    List<ImageSetListEntity> myRecommend(@Param("page") int pageStart);
+    List<ImageSetListEntity> myRecommend(@Param("page") int pageStart,@Param("pageNumber")int pageNumber);
 }

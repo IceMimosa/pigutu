@@ -165,12 +165,17 @@ public class IndexController {
 
     }
 
+    /**
+     * 推荐，目标智能推荐，现在随机前100页
+     * @param model
+     * @return
+     */
     @GetMapping("/myrecommend")
     @ResponseBody
-    public List<ImageSetListEntity> randomRommend(Model model) {
+    public List<ImageSetListEntity> randomRommend(Model model,int number) {
         Random random = new Random();
-        int page = random.nextInt(60);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.myRecommend(page  * TuConfig.myRecommendNumber);
+        int page = random.nextInt(100);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.myRecommend(page  * number,number);
         return imageSetListEntities;
     }
 }

@@ -56,7 +56,7 @@
 <div class="footer">
     <div class="tool"><span><a href="http://www.pigutu.com/">去电脑版</a></span><span class="gotop"><a
             href="#">返回顶部</a></span></div>
-    <div class="copyright">Copyright © 2016 屁股图 pigutu.com</div>
+    <div class="copyright">Copyright © 2017 屁股图 pigutu.com</div>
 </div>
 <div id="topbtn" onclick="goscrolltop();"></div>
 <script type="text/javascript" src="http://img.pigutu.com/js/mimage.js"></script>
