@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0019)http://m.mmjpg.com/ -->
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,12 +20,12 @@
 <div id="header">
     <ul class="topbar">
         <li class="searchbtn"><span class="icon" onclick="viewsearch();"></span></li>
-        <li class="logo"><a href="http://m.mmjpg.com/">屁股图</a></li>
+        <li class="logo"><a href="http://m.pigutu.com/">Pigutu</a></li>
         <li class="nav"><span class="icon" onclick="viewnav();"></span>
             <ul class="menu" id="menu">
                 <li><i class="icon"></i><a href="http://m.pigutu.com/">首页</a></li>
                 <li><i class="icon"></i><a href="http://m.pigutu.com/hot/1">排行榜</a></li>
-                <li><i class="icon"></i><a href="http://m.pigutu.com/recommend/1">推荐</a></li>
+                <li><i class="icon"></i><a href="http://m.pigutu.com/update/1">更新</a></li>
                 <li><i class="icon"></i><a href="http://m.pigutu.com/category">分类</a></li>
             </ul>
         </li>

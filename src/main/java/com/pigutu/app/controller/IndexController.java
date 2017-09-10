@@ -35,19 +35,17 @@ public class IndexController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/all/{id}")
-    public String all(Model model, @PathVariable(value = "id") int id) {
+    @GetMapping("/update/{page}")
+    public String all(HttpServletRequest request,Model model, @PathVariable(value = "page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findAllByPage((id - 1) * TuConfig.pageNumber);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findAllByPage((page - 1) * TuConfig.pageNumber);
         model.addAttribute("imageSetLists", imageSetListEntities);
-        int pageCount;
-        int count = imageSetListDao.count();
-        if (count % 18 == 0) {
-            pageCount = count / 18;
-        } else {
-            pageCount = count / 18 + 1;
+        model.addAttribute("pageCount", imageSetListDao.count());
+        model.addAttribute("pageIndex", page);
+        model.addAttribute("pageUrl", TuConfig.url + "hot");
+        if (request.getServerName().startsWith("m")||TuConfig.mobileDebug) {
+            return "mIndex";
         }
-        model.addAttribute("pageCount", pageCount);
         return "index";
     }
 

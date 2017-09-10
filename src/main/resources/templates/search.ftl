@@ -58,7 +58,7 @@
 <div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2016 屁股图 湘ICP3</span></p>
 </div>
 <div style="display:none;">
-    <script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/image.js"></script>
+    <script type="text/javascript" src="http://img.pigutu.com/js/image.js"></script>
 </div>
 <script type="text/javascript">
     var obj = $('.page');

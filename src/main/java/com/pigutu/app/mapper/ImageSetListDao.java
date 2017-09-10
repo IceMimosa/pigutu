@@ -21,7 +21,9 @@ public interface ImageSetListDao {
             @Result(property = "comment_count", column = "comment_count"),
             @Result(property = "category", column = "category"),
             @Result(property = "label", column = "label"),
-            @Result(property = "create_time", column = "create_time")
+            @Result(property = "create_time", column = "create_time"),
+            @Result(property = "view_count", column = "view_count"),
+            @Result(property = "recommend_count", column = "recommend_count")
     })
     List<ImageSetListEntity> findAllByPage(@Param("page") int pageStart);
 

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0019)http://m.mmjpg.com/ -->
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,16 +10,16 @@
           content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-title" content="屁股图">
     <title>屁股图 - 每日分享高清美女图片</title>
-    <meta name="keywords" content="屁股图,美女图片,性感美女,mm">
+    <meta name="keywords" content="屁股图,美女图片,性感美女,pigutu,mm">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
-    <link href="http://hellohappy.oss-cn-shanghai.aliyuncs.com/css/mstyle.css" rel="stylesheet" type="text/css">
+    <link href="http://img.pigutu.com/css/mstyle.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 <div id="header">
     <ul class="topbar">
         <li class="searchbtn"><span class="icon" onclick="viewsearch();"></span></li>
-        <li class="logo"><a href="http://m.mmjpg.com/">屁股图</a></li>
+        <li class="logo"><a href="http://m.pigutu.com/">屁股图</a></li>
         <li class="nav"><span class="icon" onclick="viewnav();"></span>
             <ul class="menu" id="menu">
                 <li><i class="icon"></i><a href="http://m.pigutu.com/index/1">首页</a></li>
@@ -53,7 +52,7 @@
     <div class="copyright">Copyright © 2017 屁股图 pigutu.com</div>
 </div>
 <div id="topbtn" onclick="goscrolltop();"></div>
-<script type="text/javascript" src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/mimage.js"></script>
+<script type="text/javascript" src="http://img.pigutu.com/js/mimage.js"></script>
 
 </body>
 </html>

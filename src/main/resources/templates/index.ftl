@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>屁股图- 每日分享高清美女图片</title>
-    <meta name="keywords" content="美女图片,性感美女,妹子图,pigutu">
+    <meta name="keywords" content="美女图片,性感美女,屁股图,pigutu">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
     <meta name="mobile-agent" content="format=html5;url=http://m.pigutu.com"/>
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com">
@@ -17,7 +17,7 @@
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
     <div class="nav"><a href="${url}">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a><a
-            href="${url}recommend/1" class="good">推荐美图</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
+            href="${url}update/1" class="good">最新美图</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
     </div>
     <div class="subnav"><span>所有</span><#list categorys as category><a
             href="${url}beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>

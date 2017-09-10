@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0027)http://www.mmjpg.com/mm/870 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,7 +7,7 @@
     <title>${imageSetListEntity.getTitle()}_屁股图</title>
     <meta name="keywords" content="${ImageSetListEntity.getLabel()}">
     <meta name="description" content="妹子图分享高清美女图片-${imageSetListEntity.getTitle()} www.pigutu.com">
-    <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.mmjpg.com/mm/870">
+    <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com/">
     <link href="http://img.pigutu.com/css/image.css" rel="stylesheet" type="text/css">
     <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>

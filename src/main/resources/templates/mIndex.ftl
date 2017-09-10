@@ -21,12 +21,12 @@
 <div id="header">
     <ul class="topbar">
         <li class="searchbtn"><span class="icon" onclick="viewsearch();"></span></li>
-        <li class="logo"><a href="http://m.mmjpg.com/">Pigutu</a></li>
+        <li class="logo"><a href="http://m.pigutu.com/">Pigutu</a></li>
         <li class="nav"><span class="icon" onclick="viewnav();"></span>
             <ul class="menu" id="menu">
                 <li><i class="icon"></i><a href="${mUrl}index/1">首页</a></li>
                 <li><i class="icon"></i><a href="${mUrl}hot/1">排行榜</a></li>
-                <li><i class="icon"></i><a href="${mUrl}recommend/1">推荐</a></li>
+                <li><i class="icon"></i><a href="${mUrl}update/1">更新</a></li>
                 <li><i class="icon"></i><a href="${mUrl}category">分类</a></li>
             </ul>
         </li>
