@@ -1,10 +1,13 @@
 package com.pigutu.app.controller;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.pigutu.app.entity.ImageSetEntity;
 import com.pigutu.app.entity.ImageSetListEntity;
 import com.pigutu.app.mapper.CategoryDao;
 import com.pigutu.app.mapper.ImageSetDao;
 import com.pigutu.app.mapper.ImageSetListDao;
+import com.pigutu.app.mapper.mybatis.QueryCondition;
 import com.pigutu.app.utils.TuConfig;
 import com.pigutu.app.utils.TuUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +36,10 @@ public class MobileController {
     @GetMapping("/all/{id}")
     public String all(Model model, @PathVariable(value = "id") int id) {
         TuUtils.addCategory(model,categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findAllByPage((id - 1) * TuConfig.pageNumber);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.selectList(
+                Maps.newHashMap(),
+                new QueryCondition().setPaging(id, TuConfig.pageNumber)
+        );
         model.addAttribute("imageSetLists", imageSetListEntities);
         int pageCount;
         int count = imageSetListDao.count();
@@ -61,8 +67,8 @@ public class MobileController {
     public String findImageById(Model model, @PathVariable(value = "id") int id) {
         TuUtils.addCategory(model, categoryDao);
         imageSetListDao.addViewCount(id);
-        List<ImageSetEntity> imageSetEntities = imageSetDao.findAll(id);
-        ImageSetListEntity imageSetListEntity = imageSetListDao.getImageSetListEntity(id);
+        List<ImageSetEntity> imageSetEntities = imageSetDao.selectList(ImmutableMap.of("allImagesId", id));
+        ImageSetListEntity imageSetListEntity = imageSetListDao.select((long) id);
         model.addAttribute("imageSetListEntity", imageSetListEntity);
         model.addAttribute("imageSetLists", imageSetEntities);
         model.addAttribute("id",id);

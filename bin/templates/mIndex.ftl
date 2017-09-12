@@ -45,8 +45,8 @@
             <div class="pic"><a href="http://m.mmjpg.com/mm/1073"><img src="https://www.baidu.com/img/bd_logo1.png"
                                                                        data-img="https://www.baidu.com/img/bd_logo1.png"
                                                                        alt="${imageSetList.getTitle()}"></a></div>
-            <div class="info"><span>${imageSetList.getCreate_time()}</span><span
-                    class="like">喜欢(${imageSetList.getLike_count()})</span></div>
+            <div class="info"><span>${imageSetList.getCreateTime()}</span><span
+                    class="like">喜欢(${imageSetList.getLikeCount()})</span></div>
         </li>
     </#list>
     </ul>

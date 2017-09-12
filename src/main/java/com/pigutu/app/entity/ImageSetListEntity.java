@@ -1,30 +1,25 @@
 package com.pigutu.app.entity;
 
 
+import com.pigutu.app.mapper.mybatis.BaseModel;
+
+import java.io.Serializable;
+
 /**
  * Created by me on 2016/6/24.
  * 所有图集信息
  */
-public class ImageSetListEntity {
-    private int id;
+public class ImageSetListEntity extends BaseModel implements Serializable {
     private String title;
-    private String cover_url;
-    private int like_count;
-    private int img_count;
-    private int comment_count;
+    private String coverUrl;
+    private int likeCount;
+    private int imgCount;
+    private int commentCount;
     private String category;
     private String label;
-    private String create_time;
-    private int view_count;
-    private int recommend_count;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private String createTime;
+    private int viewCount;
+    private int recommendCount;
 
     public String getTitle() {
         return title;
@@ -34,36 +29,36 @@ public class ImageSetListEntity {
         this.title = title;
     }
 
-    public String getCover_url() {
-        return cover_url;
+    public String getCoverUrl() {
+        return coverUrl;
     }
 
-    public void setCover_url(String cover_url) {
-        this.cover_url = cover_url;
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 
-    public int getLike_count() {
-        return like_count;
+    public int getLikeCount() {
+        return likeCount;
     }
 
-    public void setLike_count(int like_count) {
-        this.like_count = like_count;
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
     }
 
-    public int getImg_count() {
-        return img_count;
+    public int getImgCount() {
+        return imgCount;
     }
 
-    public void setImg_count(int img_count) {
-        this.img_count = img_count;
+    public void setImgCount(int imgCount) {
+        this.imgCount = imgCount;
     }
 
-    public int getComment_count() {
-        return comment_count;
+    public int getCommentCount() {
+        return commentCount;
     }
 
-    public void setComment_count(int comment_count) {
-        this.comment_count = comment_count;
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
     public String getCategory() {
@@ -75,34 +70,34 @@ public class ImageSetListEntity {
     }
 
     public String getLabel() {
-        return label;
+        return this.label;
     }
 
     public void setLabel(String label) {
         this.label = label;
     }
 
-    public String getCreate_time() {
-        return create_time;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(String create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
-    public int getView_count() {
-        return view_count;
+    public int getViewCount() {
+        return viewCount;
     }
 
-    public void setView_count(int view_count) {
-        this.view_count = view_count;
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
     }
 
-    public int getRecommend_count() {
-        return recommend_count;
+    public int getRecommendCount() {
+        return recommendCount;
     }
 
-    public void setRecommend_count(int recommend_count) {
-        this.recommend_count = recommend_count;
+    public void setRecommendCount(int recommendCount) {
+        this.recommendCount = recommendCount;
     }
 }

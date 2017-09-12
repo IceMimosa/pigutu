@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class TuUtils {
     public static void addCategory(Model model, CategoryDao categoryDao) {
-        List<CategoryEntity> categoryEntities = categoryDao.findAll();
+        List<CategoryEntity> categoryEntities = categoryDao.selectAll();
         model.addAttribute("categorys", categoryEntities);
         model.addAttribute("showUrl", TuConfig.url);
         model.addAttribute("url", TuConfig.url);

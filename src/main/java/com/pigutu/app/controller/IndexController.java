@@ -1,21 +1,24 @@
 package com.pigutu.app.controller;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.pigutu.app.entity.ImageSetEntity;
 import com.pigutu.app.entity.ImageSetListEntity;
 import com.pigutu.app.mapper.CategoryDao;
 import com.pigutu.app.mapper.ImageSetDao;
 import com.pigutu.app.mapper.ImageSetListDao;
+import com.pigutu.app.mapper.mybatis.QueryCondition;
 import com.pigutu.app.utils.TuConfig;
 import com.pigutu.app.utils.TuUtils;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Random;
@@ -38,7 +41,11 @@ public class IndexController {
     @GetMapping("/update/{page}")
     public String all(HttpServletRequest request,Model model, @PathVariable(value = "page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findAllByPage((page - 1) * TuConfig.pageNumber);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.selectList(
+                Maps.newHashMap(),
+                new QueryCondition().setPaging(page, TuConfig.pageNumber)
+        );
+
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
@@ -52,7 +59,7 @@ public class IndexController {
     @GetMapping("/beauty/{category}/{page}")
     public String findByCategory(HttpServletRequest request, Model model, @PathVariable(value = "category") String category, @PathVariable(value = "page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, (page - 1) * TuConfig.pageNumber);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, page);
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
         model.addAttribute("pageIndex", page);
@@ -67,8 +74,8 @@ public class IndexController {
     public String findImageById(HttpServletRequest request, Model model, @PathVariable(value = "id") int id) {
         TuUtils.addCategory(model, categoryDao);
         imageSetListDao.addViewCount(id);
-        List<ImageSetEntity> imageSetEntities = imageSetDao.findAll(id);
-        ImageSetListEntity imageSetListEntity = imageSetListDao.getImageSetListEntity(id);
+        List<ImageSetEntity> imageSetEntities = imageSetDao.selectList(ImmutableMap.of("allImagesId", id));
+        ImageSetListEntity imageSetListEntity = imageSetListDao.select((long) id);
         model.addAttribute("imageSetListEntity", imageSetListEntity);
         model.addAttribute("imageSetLists", imageSetEntities);
         model.addAttribute("id", id);
@@ -81,7 +88,7 @@ public class IndexController {
     @GetMapping("/hot/{page}")
     public String hot(HttpServletRequest request, Model model, @PathVariable("page") int page) {
         TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.hotRank((page - 1) * TuConfig.pageNumber);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.hotRank(page);
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
@@ -111,7 +118,7 @@ public class IndexController {
             page = 1;
         }
         //String a = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-        List<ImageSetListEntity> categoryEntities = imageSetListDao.index((page - 1) * TuConfig.pageNumber);
+        List<ImageSetListEntity> categoryEntities = imageSetListDao.index(page);
         model.addAttribute("imageSetLists", categoryEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);

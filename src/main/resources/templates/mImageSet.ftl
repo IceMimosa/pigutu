@@ -47,7 +47,7 @@
 </div>-->
 <div class="content">
     <h1>${imageSetListEntity.getTitle()}</h1>
-    <div class="picinfo"><#--<i>${imageSetListEntity.getCreate_time()} 发布</i>--><i>浏览(${(imageSetListEntity.getView_count()+35298)?c})</i><i id="love">喜欢(${imageSetListEntity.getLike_count()})</i></div>
+    <div class="picinfo"><#--<i>${imageSetListEntity.getCreateTime()} 发布</i>--><i>浏览(${(imageSetListEntity.getViewCount()+35298)?c})</i><i id="love">喜欢(${imageSetListEntity.getLikeCont()})</i></div>
 <#list imageSetLists as imageSetList>
     <li>
     <#--    <div class="pic"><img src="http://img.pigutu.com/img/${imageSetList.getUrl()}/pigutu"></div>-->
@@ -91,7 +91,7 @@
             var obj = $.parseJSON(renum);
             var html='';
             for(var i=0;i<4;i++){
-                html+='<li><p><a href="${mUrl}image/'+obj[i].id+'"><img src="http://img.pigutu.com/img/'+obj[i].cover_url+'/thumb" alt="'+obj[i].title+'" /></a><span>'+obj[i].title+'</span></p></li>';
+                html+='<li><p><a href="${mUrl}image/'+obj[i].id+'"><img src="http://img.pigutu.com/img/'+obj[i].coverUrl+'/thumb" alt="'+obj[i].title+'" /></a><span>'+obj[i].title+'</span></p></li>';
             }
             $('.other').html(html);
         }

@@ -25,9 +25,9 @@
 <div class="main">
     <div class="article">
         <h2>${imageSetListEntity.getTitle()}</h2>
-        <div class="info"><i>发表于: ${imageSetListEntity.getCreate_time()}</i><i>来源:
-            pigutu</i><i>人气(${(imageSetListEntity.getView_count()+35298)?c})</i><i
-                id="like">喜欢(${imageSetListEntity.getLike_count()})</i><i class="like"
+        <div class="info"><i>发表于: ${imageSetListEntity.getCreateTime()}</i><i>来源:
+            pigutu</i><i>人气(${(imageSetListEntity.getViewCount()+35298)?c})</i><i
+                id="like">喜欢(${imageSetListEntity.getLikeCount()})</i><i class="like"
                                                                           onclick="likemm(${id},1);">给妹子点赞</i>
         </div>
         <div class="content" id="content"><#list imageSetLists as imageSet>

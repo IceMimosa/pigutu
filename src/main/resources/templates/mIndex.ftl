@@ -42,10 +42,10 @@
     <#list imageSetLists as imageSetList>
         <li><h2><a href="${mUrl}image/${imageSetList.getId()?c}">${imageSetList.getTitle()}</a></h2>
             <div class="pic"><a href="${mUrl}image/${imageSetList.getId()?c}"><img
-                    src="http://img.pigutu.com/img/${imageSetList.getCover_url()}/mindex"
+                    src="http://img.pigutu.com/img/${imageSetList.getCoverUrl()}/mindex"
                     alt="${imageSetList.getTitle()}"></a></div>
-            <div class="info"><span>${imageSetList.getCreate_time()}</span><span
-                    class="like">喜欢(${imageSetList.getLike_count()})</span></div>
+            <div class="info"><span>${imageSetList.getCreateTime()}</span><span
+                    class="like">喜欢(${imageSetList.getLikeCount()})</span></div>
         </li>
     </#list>
     </ul>

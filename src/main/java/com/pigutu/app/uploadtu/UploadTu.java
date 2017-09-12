@@ -3,8 +3,6 @@ package com.pigutu.app.uploadtu;
 import com.pigutu.app.entity.ImageSetListEntity;
 
 import java.io.File;
-import java.util.Calendar;
-import java.util.List;
 
 public class UploadTu {
     private static int start = 10000;
@@ -24,7 +22,7 @@ public class UploadTu {
                 for (File file2 : files) {
                     if (file2.isDirectory()) {
                         System.out.println( file2.getName()+"文件夹:" + file2.getAbsolutePath());
-                        imageSetListEntity.setId(Integer.parseInt(file2.getName().split(",")[0]));
+                        imageSetListEntity.setId((long)Integer.parseInt(file2.getName().split(",")[0]));
                         findFile(file2.getAbsolutePath());
                     }
                 }

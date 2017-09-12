@@ -33,12 +33,12 @@
         <ul>
         <#list imageSetLists as imageSetList>
             <li><a href="${url}image/${imageSetList.getId()?c}" target="_blank"><img
-                    src="http://img.pigutu.com/img/${imageSetList.getCover_url()}/thumb"
+                    src="http://img.pigutu.com/img/${imageSetList.getCoverUrl()}/thumb"
                     width="220" height="330"
                     alt="${imageSetList.getTitle()}"/></a><span
                     class="title"><a href="${url}image/${imageSetList.getId()?c}"
                                      target="_blank">${imageSetList.getTitle()}</a></span><span
-                    class="view">浏览(${(imageSetList.getView_count()+35298)?c})</span></li></#list></ul>
+                    class="view">浏览(${(imageSetList.getViewCount()+35298)?c})</span></li></#list></ul>
         <div class="page"></div>
     </div>
     <div class="sidebar">
