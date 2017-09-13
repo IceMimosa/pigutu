@@ -49,7 +49,7 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url + "hot");
+        model.addAttribute("pageUrl", TuConfig.url + "update");
         if (request.getServerName().startsWith("m")||TuConfig.mobileDebug) {
             return "mIndex";
         }
@@ -183,4 +183,5 @@ public class IndexController {
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.myRecommend(page  * number,number);
         return imageSetListEntities;
     }
+
 }

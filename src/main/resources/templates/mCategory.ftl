@@ -9,8 +9,8 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-title" content="屁股图">
-    <title>屁股图 - 每日分享高清美女图片</title>
-    <meta name="keywords" content="屁股图,美女图片,性感美女,pigutu,mm">
+    <title>Pigutu - 每日分享高清美女图片</title>
+    <meta name="keywords" content="屁股图,美女图片,性感美女,pigutu,妹子图">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
     <link href="http://img.pigutu.com/css/mstyle.css" rel="stylesheet" type="text/css">
 </head>
@@ -19,12 +19,12 @@
 <div id="header">
     <ul class="topbar">
         <li class="searchbtn"><span class="icon" onclick="viewsearch();"></span></li>
-        <li class="logo"><a href="http://m.pigutu.com/">屁股图</a></li>
+        <li class="logo"><a href="http://m.pigutu.com/">Pigutu</a></li>
         <li class="nav"><span class="icon" onclick="viewnav();"></span>
             <ul class="menu" id="menu">
                 <li><i class="icon"></i><a href="http://m.pigutu.com/index/1">首页</a></li>
                 <li><i class="icon"></i><a href="http://m.pigutu.com/hot/1">排行榜</a></li>
-                <li><i class="icon"></i><a href="http://m.pigutu.com/recommend/1">推荐</a></li>
+                <li><i class="icon"></i><a href="http://m.pigutu.com/update/1">更新</a></li>
                 <li><i class="icon"></i><a href="http://m.pigutu.com/category">分类</a></li>
             </ul>
         </li>
