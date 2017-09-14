@@ -1,19 +1,27 @@
 package com.pigutu.app.controller;
 
+import com.pigutu.app.mapper.FeedBackDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+/***
+ * 反馈
+ */
 @Controller
 public class FeedBackController {
+    @Autowired
+    FeedBackDao feedBackDao;
+
     @GetMapping("/feedback")
-    public String feedBack(){
-        return "feedBack";
+    public String feedBack() {
+        return "feedback/feedBack";
     }
+
     @PostMapping("submitfeedback")
-    @ResponseBody
-    public void submitFeedBack(String content){
-        System.out.println(content);
+    public String submitFeedBack(String content) {
+        feedBackDao.insertFeedBack(content);
+        return "feedback/feedBackSucc";
     }
 }

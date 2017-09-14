@@ -3,15 +3,13 @@ package com.pigutu.app.mapper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.pigutu.app.entity.ImageSetListEntity;
+import com.pigutu.app.entity.LikeRecordEntity;
 import com.pigutu.app.mapper.mybatis.BaseDao;
 import com.pigutu.app.mapper.mybatis.DBMeta;
 import com.pigutu.app.mapper.mybatis.OrderBy;
 import com.pigutu.app.mapper.mybatis.QueryCondition;
 import com.pigutu.app.utils.TuConfig;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -90,6 +88,15 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
 
     @Select({"SELECT like_count FROM image_set_list where id = #{id}"})
     int likeCount(@Param("id") int id);
+
+    @Insert("insert into like_record(ip,all_images_id,title,cover_url,time) values (#{ip},#{id},#{title},#{cover_url},now());")
+    long insertLikeRecord(@Param("ip") String ip,@Param("id") int id,@Param("title")String title,@Param("cover_url")String coverUrl);
+
+    @Select("select * from image_set_list where id = #{id}")
+    ImageSetListEntity getLikeRecordCoverUrl(@Param("id") int id);
+
+    @Select("select * from like_record order by id desc limit 0,10")
+    List<LikeRecordEntity> getLikeRecord();
 
     @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},#{pageNumber}"})
     List<ImageSetListEntity> myRecommend(@Param("page") int pageStart,@Param("pageNumber")int pageNumber);

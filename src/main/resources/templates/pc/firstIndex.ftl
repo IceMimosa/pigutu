@@ -10,14 +10,22 @@
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com">
     <link href="http://img.pigutu.com/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
+    <script type="text/javascript">
+        var ubr = navigator.userAgent.toLowerCase();
+        if (ubr.indexOf('mobile') > -1) {
+            top.location.href = 'http://m.pigutu.com';
+        }
+    </script>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <body>
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
-    <div class="nav"><a href="${url}">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a><a
-            href="${url}update/1" class="good">最新美图</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
+    <div class="nav"><a href="${url}">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a>
+        <a href="${url}recommend/1" class="good">推荐美图</a>
+        <a href="${url}feedback" class="good">反馈</a>
+        <i>手机看美女图片可通过m.pigutu.com访问本站</i>
     </div>
     <div class="subnav"><span>所有</span><#list categorys as category><a
             href="${url}beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>
@@ -117,25 +125,25 @@ function getPage(mode,page, key) {
     if (key.length==0) {
         switch (mode){
             case 1:
-                page = '<a href="'+pageUrl+'/' + page + '" class="ch">上一页</a>';
+                page = '<a href="/" class="ch">上一页<'+pageUrl+'/' + page + 'a>';
                 break;
             case 2:
-                page = '<a href="'+pageUrl+'/' + page + '">' + page + '</a>';
+                page = ''+pageUrl+'<a href="/">' + page + '' + page + '</a>';
                 break;
             case 3:
-                page =  '<a href="'+pageUrl+'/' + (pageIndex + 1) + '" class="ch">下一页</a>';;
+                page =  '<a href="/" class="ch">下一页<'+pageUrl+'/' + (pageIndex + 1) + 'a>';;
                 break;
         }
     } else {
         switch (mode){
             case 1:
-                page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">上一页</a>';
+                page = '<a href="/?key=" class="ch">上一页<'+pageUrl+'/' + page + ''+key+'a>';
                 break;
             case 2:
-                page = '<a href="'+pageUrl+'/' + page + '?key='+key+'">' + page + '</a>';
+                page = ''+pageUrl+'' + page + '<a href="/?key=">'+key+'' + page + '</a>';
                 break;
             case 3:
-                page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">下一页</a>';;
+                page = '<a href="/?key=" class="ch">下一页<'+pageUrl+'/' + page + ''+key+'a>';;
                 break;
 
         }

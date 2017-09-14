@@ -16,10 +16,11 @@
 <body>
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
-    <div class="nav"><a href="http://www.pigutu.com/">首页</a><a href="http://www.pigutu.com/hot/1"
-                                                               class="hot">浏览排行榜</a><a
-            href="${url}update/1" class="good">最新美图</a><a
-            href="http://m.pigutu.com/" class="mobile">手机版</a></div>
+    <div class="nav"><a href="http://www.pigutu.com/">首页</a>
+        <a href="http://www.pigutu.com/hot/1" class="hot">浏览排行榜</a>
+        <a href="${url}update/1" class="good">最新美图</a>
+        <a href="${url}feedback" class="good">反馈</a>
+        <i>手机看美女图片可通过m.pigutu.com访问本站</i></div>
     <div class="subnav"><a href="http://www.pigutu.com/">所有</a><#list categorys as category><a
             href="/beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>
 </div>
@@ -29,7 +30,7 @@
         <div class="info"><i>发表于: ${imageSetListEntity.getCreateTime()}</i><i>来源:
             pigutu</i><i>人气(${(imageSetListEntity.getViewCount()+35298)?c})</i><i
                 id="like">喜欢(${imageSetListEntity.getLikeCount()})</i><i class="like"
-                                                                          onclick="likemm(${id?c},1);">给妹子点赞</i>
+                                                                         onclick="likemm(${id?c},1);">给妹子点赞</i>
         </div>
         <div class="content" id="content"><#list imageSetLists as imageSet>
             <a href="/view?imageUrl=${imageSet.getUrl()}" target="_blank"><img
@@ -60,6 +61,14 @@
                     onclick="searchpic();"></span></form>
         </div>
         <div class="baidu250" id="baidu250"></div>
+        <dl class="like">
+            <dt><h3>最新点赞</h3></dt>
+        <#list likeRecords as likeRecord>
+            <dd><a href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank"><img src="http://img.pigutu.com/img/${likeRecord.getCoverUrl()}/thumb" alt="${url}image/${likeRecord.getTitle()}"/></a><span><a
+                    href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank">${url}image/${likeRecord.getTitle()}</a></span></dd>
+        </#list>
+        </dl>
+
     </div>
     <div class="clearfloat">
         <script type="text/javascript">var picinfo = [2017, 870, 38];</script>
@@ -71,30 +80,32 @@
 </div>
 <script type="text/javascript">
     myrecommend();
+
     //图片点赞
-    function myrecommend(){
-        if(window.XMLHttpRequest){
+    function myrecommend() {
+        if (window.XMLHttpRequest) {
             xmlhttp = new XMLHttpRequest;
-            if(xmlhttp.overrideMimeType){
+            if (xmlhttp.overrideMimeType) {
                 xmlhttp.overrideMimeType('text/xml');
             }
-        }else if(window.ActiveXObject){
+        } else if (window.ActiveXObject) {
             xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
         }
         xmlhttp.onreadystatechange = recommendcallback;
-        xmlhttp.open('GET','/myrecommend?number=8',true);
+        xmlhttp.open('GET', '/myrecommend?number=8', true);
         xmlhttp.send(null);
     }
-    function recommendcallback(){
-        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+
+    function recommendcallback() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var renum = xmlhttp.responseText;
             var obj = $.parseJSON(renum);
-            var html='';
-            for(var i=0;i<8;i++){
-                if(i==0||i==4){
-                    html+='<dd class="left"><a href="${url}image/'+obj[i].id+'" target="_blank"><img src="http://img.pigutu.com/img/'+obj[i].coverUrl+'/thumb" width="182" height="277" alt="'+obj[i].title+'" />'+obj[i].title+'</a></dd>';
-                }else{
-                    html+='<dd><a href="${url}image/'+obj[i].id+'" target="_blank"><img src="http://img.pigutu.com/img/'+obj[i].coverUrl+'/thumb" width="182" height="277" alt="'+obj[i].title+'" />'+obj[i].title+'</a></dd>';
+            var html = '';
+            for (var i = 0; i < 8; i++) {
+                if (i == 0 || i == 4) {
+                    html += '<dd class="left"><a href="${url}image/' + obj[i].id + '" target="_blank"><img src="http://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
+                } else {
+                    html += '<dd><a href="${url}image/' + obj[i].id + '" target="_blank"><img src="http://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
                 }
             }
             html = '<dt>美图推荐</dt>' + html;
