@@ -1,23 +1,16 @@
 package com.pigutu.app.entity;
 
 
+import com.pigutu.app.mapper.mybatis.BaseModel;
+
 /**
  * Created by me on 2016/6/24.
  * 分类
  */
-public class CategoryEntity {
-    private int id;
+public class CategoryEntity extends BaseModel {
     private String path;
     private String title;
     private String parameter;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getPath() {
         return path;
@@ -41,5 +34,14 @@ public class CategoryEntity {
 
     public void setParameter(String parameter) {
         this.parameter = parameter;
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryEntity{" +
+                "path='" + path + '\'' +
+                ", title='" + title + '\'' +
+                ", parameter='" + parameter + '\'' +
+                '}';
     }
 }

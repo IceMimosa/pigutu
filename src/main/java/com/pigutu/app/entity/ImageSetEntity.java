@@ -1,29 +1,22 @@
 package com.pigutu.app.entity;
 
 
+import com.pigutu.app.mapper.mybatis.BaseModel;
+
 /**
  * Created by me on 2016/6/24.
  * 图集
  */
-public class ImageSetEntity{
-    private int id;
-    private int all_images_id;
+public class ImageSetEntity extends BaseModel {
+    private int allImagesId;
     private String url;
 
-    public int getId() {
-        return id;
+    public int getAllImagesId() {
+        return allImagesId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getAll_images_id() {
-        return all_images_id;
-    }
-
-    public void setAll_images_id(int all_images_id) {
-        this.all_images_id = all_images_id;
+    public void setAllImagesId(int allImagesId) {
+        this.allImagesId = allImagesId;
     }
 
     public String getUrl() {

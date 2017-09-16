@@ -12,3 +12,7 @@ spring:
     url: jdbc:mysql://localhost:3306/me?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
     username: root
     password: 123456
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
