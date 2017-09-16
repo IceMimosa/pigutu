@@ -64,8 +64,8 @@
         <dl class="like">
             <dt><h3>最新点赞</h3></dt>
         <#list likeRecords as likeRecord>
-            <dd><a href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank"><img src="http://img.pigutu.com/img/${likeRecord.getCoverUrl()}/thumb" alt="${url}image/${likeRecord.getTitle()}"/></a><span><a
-                    href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank">${url}image/${likeRecord.getTitle()}</a></span></dd>
+            <dd><a href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank"><img src="http://img.pigutu.com/img/${likeRecord.getCoverUrl()}/like" alt="${likeRecord.getTitle()}"/></a><span><a
+                    href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank">${likeRecord.getTitle()}</a></span></dd>
         </#list>
         </dl>
 

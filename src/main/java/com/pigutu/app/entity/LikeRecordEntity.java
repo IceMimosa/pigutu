@@ -10,16 +10,18 @@ import java.io.Serializable;
  * Date: 2017/9/14
  */
 public class LikeRecordEntity extends BaseModel implements Serializable {
-    private String allImagesId;
+    private int id;
+    private int allImagesId;
     private String ip;
     private String time;
     private String title;
+    private String coverUrl;
 
-    public String getAllImagesId() {
+    public int getAllImagesId() {
         return allImagesId;
     }
 
-    public void setAllImagesId(String allImagesId) {
+    public void setAllImagesId(int allImagesId) {
         this.allImagesId = allImagesId;
     }
 
@@ -45,5 +47,13 @@ public class LikeRecordEntity extends BaseModel implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 }

@@ -119,34 +119,32 @@
         }
     }
 
-    function getPage(mode, page, key) {
-        if (key.length == 0) {
-            switch (mode) {
+    function getPage(mode,page, key) {
+        if (key === null) {
+            switch (mode){
                 case 1:
-                    page = '<a href="/" class="ch">上一页<' + pageUrl + '/' + page + 'a>';
+                    page = '<a href="'+pageUrl+'/' + page + '" class="ch">上一页</a>';
                     break;
                 case 2:
-                    page = '' + pageUrl + '<a href="/">' + page + '' + page + '</a>';
+                    page = '<a href="'+pageUrl+'/' + page + '">' + page + '</a>';
                     break;
                 case 3:
-                    page = '<a href="/" class="ch">下一页<' + pageUrl + '/' + (pageIndex + 1) + 'a>';
-                    ;
+                    page =  '<a href="'+pageUrl+'/' + (pageIndex + 1) + '" class="ch">下一页</a>';;
                     break;
             }
         } else {
-            switch (mode) {
-                case 1:
-                    page = '<a href="/?key=" class="ch">上一页<' + pageUrl + '/' + page + '' + key + 'a>';
-                    break;
-                case 2:
-                    page = '' + pageUrl + '' + page + '<a href="/?key=">' + key + '' + page + '</a>';
-                    break;
-                case 3:
-                    page = '<a href="/?key=" class="ch">下一页<' + pageUrl + '/' + page + '' + key + 'a>';
-                    ;
-                    break;
+           switch (mode){
+               case 1:
+                   page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">上一页</a>';
+                   break;
+               case 2:
+                   page = '<a href="'+pageUrl+'/' + page + '?key='+key+'">' + page + '</a>';
+                   break;
+               case 3:
+                   page = '<a href="'+pageUrl+'/' + page + '?key='+key+'" class="ch">下一页</a>';;
+                   break;
 
-            }
+           }
         }
         return page;
     }
