@@ -24,7 +24,7 @@
             <ul class="menu" id="menu">
                 <li><i class="icon"></i><a href="http://m.pigutu.com/index/1">首页</a></li>
                 <li><i class="icon"></i><a href="http://m.pigutu.com/hot/1">排行榜</a></li>
-                <li><i class="icon"></i><a href="http://m.pigutu.com/recommend/1">推荐</a></li>
+                <li><i class="icon"></i><a href="http://m.pigutu.com/update/1">更新</a></li>
                 <li><i class="icon"></i><a href="http://m.pigutu.com/category">分类</a></li>
             </ul>
         </li>

@@ -24,7 +24,7 @@
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
     <div class="nav"><a href="${url}">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a><a
-            href="${url}recommend/1" class="good">推荐美图</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
+            href="${url}update/1" class="good">最新美图</a><i>手机看美女图片可通过m.pigutu.com访问本站</i>
     </div>
     <div class="subnav"><span>所有</span><#list categorys as category><a
             href="${url}beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>

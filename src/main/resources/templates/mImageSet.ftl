@@ -10,7 +10,7 @@
           content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-title" content="屁股图">
     <title>屁股图 - 每日分享高清美女图片</title>
-    <meta name="keywords" content="${ImageSetListEntity.getLabel()}">
+    <meta name="keywords" content="${imageSetListEntity.getLabel()}">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
     <link href="http://img.pigutu.com/css/mstyle.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
