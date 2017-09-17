@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 @DBMeta(table = ImageSetDao.TABLE)
 public interface ImageSetDao extends BaseDao<ImageSetEntity> {
     String TABLE = "image_set";
-
+    default long insertImageSet(ImageSetEntity imageSetEntity){
+        return insert(imageSetEntity);
+    }
 }

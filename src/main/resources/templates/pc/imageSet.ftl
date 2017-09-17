@@ -34,7 +34,7 @@
         </div>
         <div class="content" id="content"><#list imageSetLists as imageSet>
             <a href="/view?imageUrl=${imageSet.getUrl()}" target="_blank"><img
-                    src="http://img.pigutu.com/img/${imageSet.getUrl()}/pigutu"></a></#list></div>
+                    src="http://img.pigutu.com/img/${imageSet.getUrl()}/${style}"></a></#list></div>
         <div class="other">
             <div class="tags">
             <#list imageSetListEntity.getLabel()?split(",") as label>
@@ -61,7 +61,7 @@
                     onclick="searchpic();"></span></form>
         </div>
         <div class="baidu250" id="baidu250"></div>
-        <dl class="like">
+        <dl class="like" style="margin-top: 50px">
             <dt><h3>最新点赞</h3></dt>
         <#list likeRecords as likeRecord>
             <dd><a href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank"><img src="http://img.pigutu.com/img/${likeRecord.getCoverUrl()}/like" alt="${likeRecord.getTitle()}"/></a><span><a

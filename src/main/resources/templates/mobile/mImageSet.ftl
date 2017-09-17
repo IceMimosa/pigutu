@@ -47,11 +47,11 @@
 </div>-->
 <div class="content">
     <h1>${imageSetListEntity.getTitle()}</h1>
-    <div class="picinfo"><#--<i>${imageSetListEntity.getCreateTime()} 发布</i>--><i>浏览(${(imageSetListEntity.getViewCount()+35298)?c})</i><i id="love">喜欢(${imageSetListEntity.getLikeCont()})</i></div>
+    <div class="picinfo"><#--<i>${imageSetListEntity.getCreateTime()} 发布</i>--><i>浏览(${(imageSetListEntity.getViewCount()+35298)?c})</i><i id="love">喜欢(${imageSetListEntity.getLikeCount()})</i></div>
 <#list imageSetLists as imageSetList>
     <li>
     <#--    <div class="pic"><img src="http://img.pigutu.com/img/${imageSetList.getUrl()}/pigutu"></div>-->
-        <div><img src="http://img.pigutu.com/img/${imageSetList.getUrl()}/pigutu" alt="${imageSetListEntity.getTitle()}" /></div>
+        <div><img src="http://img.pigutu.com/img/${imageSetList.getUrl()}/${style}" alt="${imageSetListEntity.getTitle()}" /></div>
     </li>
 </#list>
 </div>

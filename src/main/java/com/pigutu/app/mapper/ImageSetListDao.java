@@ -100,4 +100,11 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
 
     @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},#{pageNumber}"})
     List<ImageSetListEntity> myRecommend(@Param("page") int pageStart,@Param("pageNumber")int pageNumber);
+
+    @Insert("INSERT INTO image_set_list (`category`, `comment_count`, `cover_url`, `create_time`, `img_count`, `label`, `like_count`, `title`, `view_count`, `recommend_count`) VALUES (#{category},#{comment_count},#{cover_url},now(),#{img_count},#{label},#{like_count},#{title},#{view_count},#{recommend_count})")
+    int insertImageSetList(@Param("category")String category,@Param("comment_count")int comment_count,@Param("cover_url")String cover_url,@Param("img_count")int img_count,@Param("label")String label,@Param("like_count")int like_count,@Param("title")String title,@Param("view_count")int view_count,@Param("recommend_count")int recommend_count);
+
+    /*default long insertImageSetList(ImageSetListEntity imageSetListEntity){
+        return insert(imageSetListEntity);
+    }*/
 }

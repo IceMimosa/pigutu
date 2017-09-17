@@ -27,6 +27,6 @@
     </style>
 </head>
 <body>
-<img src="http://img.pigutu.com/img/${imageUrl}/pigutu"/>
+<img src="http://img.pigutu.com/img/${imageUrl}/${style}"/>
 </body>
 </html>

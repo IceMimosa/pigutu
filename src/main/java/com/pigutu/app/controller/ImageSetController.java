@@ -34,8 +34,6 @@ public class ImageSetController {
     @Autowired
     ImageSetDao imageSetDao;
 
-    @Autowired
-    MessageSource messageSource;
 
     @GetMapping("/image/{id}")
     public String findImageById(HttpServletRequest request, Model model, @PathVariable(value = "id") int id) {
@@ -47,6 +45,25 @@ public class ImageSetController {
         model.addAttribute("imageSetLists", imageSetEntities);
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
         model.addAttribute("id", id);
+        model.addAttribute("style","pigutu");
+        if(id==4964){
+            model.addAttribute("style","lpigutu");
+        }
+        if(id==4965){
+            model.addAttribute("style","lpigutu");
+        }
+        if(id==4966){
+            model.addAttribute("style","lpigutu");
+        }
+        if(id==4967){
+            model.addAttribute("style","lpigutu");
+        }
+        if(id==4968){
+            model.addAttribute("style","lpigutu");
+        }
+        if(id==4969){
+            model.addAttribute("style","lpigutu");
+        }
         if (request.getServerName().startsWith("m")|| TuConfig.mobileDebug) {
             return "mobile/mImageSet";
         }
@@ -55,6 +72,25 @@ public class ImageSetController {
     @GetMapping("/view")
     public String viewImage(Model model, String imageUrl) {
         model.addAttribute("imageUrl", imageUrl);
+        model.addAttribute("style","high");
+        if(imageUrl.contains("4964")){
+            model.addAttribute("style","lhigh");
+        }
+        if(imageUrl.contains("4965")){
+            model.addAttribute("style","lhigh");
+        }
+        if(imageUrl.contains("4966")){
+            model.addAttribute("style","lhigh");
+        }
+        if(imageUrl.contains("4967")){
+            model.addAttribute("style","lhigh");
+        }
+        if(imageUrl.contains("4968")){
+            model.addAttribute("style","lhigh");
+        }
+        if(imageUrl.contains("4969")){
+            model.addAttribute("style","lhigh");
+        }
         return "pc/viewImage";
     }
     @GetMapping("/like")
