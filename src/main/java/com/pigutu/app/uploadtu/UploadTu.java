@@ -8,14 +8,15 @@ import java.io.IOException;
 
 public class UploadTu {
     private static int start = 1;
-    private static int id = 4969;
+    private static int id = 4972;
+    private static String date = "20170919";
     private static ImageSetListEntity imageSetListEntity=new ImageSetListEntity();
     public static void main(String args[]) {
-        upload(id,"翟欣欣合集六(共六集)","20170917/"+id+"/7.jpg",502,15,0,"网络","翟欣欣,苏享茂,毒妻",500,0);
+        upload(id,"微博妹子里穹收费套图嫩的流口水",date+"/"+id+"/17.jpg",593,34,0,"内衣","里穹,嫩,微博",500,0);
         //findDirectory();
     }
     private static void upload(int id,String title,String coverUrl,int likeCount,int imgCount,int commentCount,String category,String label,int viewCount,int recommendCount){
-        String coverUrlTop = "20170917/"+id+"/";
+        String coverUrlTop = date+"/"+id+"/";
         String realUrl="";
         try {
             Jsoup.connect("http://www.pigutu.com/insertImageSetList?title="+title+"&coverUrl="+coverUrl+"&likeCount="+likeCount+"&imgCount="+imgCount+"&commentCount="+commentCount+"&category="+category+"&label="+label+"&viewCount="+viewCount+"&recommendCount="+recommendCount+"&key=26535989jidsf25").ignoreContentType(true).get();
