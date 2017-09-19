@@ -120,7 +120,7 @@
     }
 
     function getPage(mode,page, key) {
-        if (key === null) {
+        if (key.length==0) {
             switch (mode){
                 case 1:
                     page = '<a href="'+pageUrl+'/' + page + '" class="ch">上一页</a>';

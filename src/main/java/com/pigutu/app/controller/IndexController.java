@@ -7,6 +7,7 @@ import com.pigutu.app.entity.ImageSetListEntity;
 import com.pigutu.app.mapper.CategoryDao;
 import com.pigutu.app.mapper.ImageSetDao;
 import com.pigutu.app.mapper.ImageSetListDao;
+import com.pigutu.app.mapper.mybatis.OrderBy;
 import com.pigutu.app.mapper.mybatis.QueryCondition;
 import com.pigutu.app.utils.TuConfig;
 import com.pigutu.app.utils.TuUtils;
@@ -43,7 +44,7 @@ public class IndexController {
         TuUtils.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.selectList(
                 Maps.newHashMap(),
-                new QueryCondition().setPaging(page, TuConfig.pageNumber)
+                new QueryCondition().setPaging(page, TuConfig.pageNumber).setOrderBy(new OrderBy("createTime").desc())
         );
 
         model.addAttribute("imageSetLists", imageSetListEntities);

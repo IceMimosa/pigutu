@@ -8,11 +8,11 @@ import java.io.IOException;
 
 public class UploadTu {
     private static int start = 1;
-    private static int id = 4972;
+    private static int id = 4973;
     private static String date = "20170919";
     private static ImageSetListEntity imageSetListEntity=new ImageSetListEntity();
     public static void main(String args[]) {
-        upload(id,"微博妹子里穹收费套图嫩的流口水",date+"/"+id+"/17.jpg",593,34,0,"内衣","里穹,嫩,微博",500,0);
+     //   upload(id,"美女木木上演让人欲火焚身的内衣诱惑",date+"/"+id+"/39.jpg",595,39,0,"内衣","木木,尤物馆,美女",500,0);
         //findDirectory();
     }
     private static void upload(int id,String title,String coverUrl,int likeCount,int imgCount,int commentCount,String category,String label,int viewCount,int recommendCount){
