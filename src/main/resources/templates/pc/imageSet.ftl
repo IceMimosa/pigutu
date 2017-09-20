@@ -32,9 +32,9 @@
                 id="like">喜欢(${imageSetListEntity.getLikeCount()})</i><i class="like"
                                                                          onclick="likemm(${id?c},1);">给妹子点赞</i>
         </div>
-        <div class="content" id="content"><#list imageSetLists as imageSet>
+        <div class="content" id="content"><#--<#list imageSetLists as imageSet>
             <a href="/view?imageUrl=${imageSet.getUrl()}" target="_blank"><img
-                    src="http://img.pigutu.com/img/${imageSet.getUrl()}/${style}"></a></#list></div>
+                    src="http://img.pigutu.com/img/${imageSet.getUrl()}/${style}"></a></#list>--></div>
         <div class="other">
             <div class="tags">
             <#list imageSetListEntity.getLabel()?split(",") as label>
@@ -61,6 +61,7 @@
                     onclick="searchpic();"></span></form>
         </div>
         <div class="baidu250" id="baidu250"></div>
+        <div class="styleKey" style="display:none ">${style}</div>
         <dl class="like" style="margin-top: 50px">
             <dt><h3>最新点赞</h3></dt>
         <#list likeRecords as likeRecord>
@@ -93,7 +94,7 @@
         }
         xmlhttp.onreadystatechange = recommendcallback;
         xmlhttp.open('GET', '/myrecommend?number=8', true);
-        xmlhttp.send(null);
+        xmlhttp.send('');
     }
 
     function recommendcallback() {
@@ -112,6 +113,42 @@
             $('.myrecommend').html(html);
         }
     }
+</script>
+<script>
+    var page = 0;
+    var style = $(".styleKey").text();
+    function loadData(){
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+        if ($(document).height() <= totalheight+500) {  // 说明滚动条已达底部
+            page++;
+            /*这里使用Ajax加载更多内容*/
+            var container = $("#content"); // 加载容器
+            jQuery.ajax({
+                type:"GET",
+                url: "/imagewithpage/${id?c}/"+page,
+                dataType: "json",
+                beforeSend: function(XMLHttpRequest){
+                }, success:function(response) {
+                    console.log(response);
+                    if(response.length>0){
+                        for(var i=0, length = response.length; i<length; i++){
+                            var pageHtml = '';
+                            for(var i=0;i<response.length;i++){
+                               pageHtml+='<a href="/view?imageUrl='+response[i].url+'" target="_blank"><img src="http://img.pigutu.com/img/'+response[i].url+'/'+style+'"></a>';
+                           }
+                            container.append(pageHtml);
+                        }
+     }
+    }, error:function(){
+        alert("加载失败");
+    }
+    });
+    }
+    }
+    $(window).scroll( function() {
+        loadData();
+    });
+    loadData();
 </script>
 </body>
 </html>

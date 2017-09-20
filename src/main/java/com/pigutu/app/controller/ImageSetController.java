@@ -6,6 +6,8 @@ import com.pigutu.app.entity.ImageSetListEntity;
 import com.pigutu.app.mapper.CategoryDao;
 import com.pigutu.app.mapper.ImageSetDao;
 import com.pigutu.app.mapper.ImageSetListDao;
+import com.pigutu.app.mapper.mybatis.OrderBy;
+import com.pigutu.app.mapper.mybatis.QueryCondition;
 import com.pigutu.app.utils.TuConfig;
 import com.pigutu.app.utils.TuUtils;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -34,6 +36,12 @@ public class ImageSetController {
     @Autowired
     ImageSetDao imageSetDao;
 
+    @GetMapping("/imagewithpage/{id}/{page}")
+    @ResponseBody
+    public List<ImageSetEntity> findImageByPage(HttpServletRequest request, Model model, @PathVariable(value = "id") int id,@PathVariable(value = "page") int page) {
+        List<ImageSetEntity> imageSetEntities = imageSetDao.selectList(ImmutableMap.of("allImagesId", id),new QueryCondition().setPaging(page,6));
+        return imageSetEntities;
+    }
 
     @GetMapping("/image/{id}")
     public String findImageById(HttpServletRequest request, Model model, @PathVariable(value = "id") int id) {

@@ -49,7 +49,7 @@
     <h1>${imageSetListEntity.getTitle()}</h1>
     <div class="picinfo"><#--<i>${imageSetListEntity.getCreateTime()} 发布</i>--><i>浏览(${(imageSetListEntity.getViewCount()+35298)?c})</i><i id="love">喜欢(${imageSetListEntity.getLikeCount()})</i></div>
 <#list imageSetLists as imageSetList>
-    <li>
+    <li id="content">
     <#--    <div class="pic"><img src="http://img.pigutu.com/img/${imageSetList.getUrl()}/pigutu"></div>-->
         <div><img src="http://img.pigutu.com/img/${imageSetList.getUrl()}/${style}" alt="${imageSetListEntity.getTitle()}" /></div>
     </li>
@@ -62,7 +62,8 @@
     </ul>
     <div style="clear: both;"></div>
 </div>
-
+<div class="styleKey" style="display:none ">${style}</div>
+<div class="titleKey" style="display:none ">${imageSetListEntity.getTitle()}</div>
 <div class="footer">
     <div class="tool"><span><a href="http://www.pigutu.com/">去电脑版</a></span><span class="gotop"><a
             href="#">返回顶部</a></span></div>
@@ -140,6 +141,43 @@
             }
         }
     }
+</script>
+<script>
+    var page = 0;
+    var style = $(".styleKey").text();
+    var titleKey = $("#titleKey").text();
+    function loadData(){
+        totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+        if ($(document).height() <= totalheight+500) {  // 说明滚动条已达底部
+            page++;
+            /*这里使用Ajax加载更多内容*/
+            var container = $("#content"); // 加载容器
+            jQuery.ajax({
+                type:"GET",
+                url: "/imagewithpage/${id?c}/"+page,
+                dataType: "json",
+                beforeSend: function(XMLHttpRequest){
+                }, success:function(response) {
+                    console.log(response);
+                    if(response.length>0){
+                        for(var i=0, length = response.length; i<length; i++){
+                            var pageHtml = '';
+                            for(var i=0;i<response.length;i++){
+                                pageHtml+=' <div><img src="http://img.pigutu.com/img/'+response[i].url+'/'+style+'" alt="'+titleKey+'" /></div>';
+                            }
+                            container.append(pageHtml);
+                        }
+                    }
+                }, error:function(){
+                    alert("加载失败");
+                }
+            });
+        }
+    }
+    $(window).scroll( function() {
+        loadData();
+    });
+    loadData();
 </script>
 </body>
 </html>
