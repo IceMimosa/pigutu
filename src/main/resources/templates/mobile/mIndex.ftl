@@ -40,8 +40,8 @@
 <div>
     <ul class="article" id="article">
     <#list imageSetLists as imageSetList>
-        <li><h2><a href="${mUrl}image/${imageSetList.getId()?c}">${imageSetList.getTitle()}</a></h2>
-            <div class="pic"><a href="${mUrl}image/${imageSetList.getId()?c}"><img
+        <li><h2><a href="${mUrl}image/${imageSetList.getId()?c}/1">${imageSetList.getTitle()}</a></h2>
+            <div class="pic"><a href="${mUrl}image/${imageSetList.getId()?c}/1"><img
                     src="http://img.pigutu.com/img/${imageSetList.getCoverUrl()}/mindex"
                     alt="${imageSetList.getTitle()}"></a></div>
             <div class="info"><span>${imageSetList.getCreateTime()}</span><span

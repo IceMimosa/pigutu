@@ -31,7 +31,7 @@
     </ul>
     <div class="search" id="search">
         <form name="formsearch" id="formsearch" method="get" action="/search/1"><p><span><input
-                type="text" name="searchkey" id="searchkey"><i class="icon" onclick="searchpic();"></i></span></p>
+                type="text" name="searchkey" id="key"><i class="icon" onclick="searchpic();"></i></span></p>
         </form>
     </div>
 </div>

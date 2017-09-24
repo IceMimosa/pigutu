@@ -32,7 +32,7 @@
     </ul>
     <div class="search" id="search">
         <form name="formsearch" id="formsearch" method="get" action="/search/1"><p><span><input
-                type="text" name="searchkey" id="searchkey"><i class="icon" onclick="searchpic();"></i></span></p>
+                type="text" name="key" id="key"><i class="icon" onclick="searchpic();"></i></span></p>
         </form>
     </div>
 </div>
@@ -55,7 +55,11 @@
     </li>
 </#list>
 </div>
+<div class="page">
+
+</div>
 <div class="love"><span id="likemm" onClick="likepic(${id?c},0);">点赞</span></div>
+
 <div class="msg"><i>美图精选</i></div>
 <div>
     <ul class="other">
@@ -71,6 +75,31 @@
 </div>
 <div id="topbtn" onclick="goscrolltop();"></div>
 <script type="text/javascript">
+    var pageObj = $('.page');
+    var html = '';
+    var pageCount = ${pageCount?c};
+    var pageIndex = ${pageIndex?c};
+    var pageNum;
+
+    if (pageCount % 6 == 0) {
+        pageNum = pageCount / 6;
+    } else {
+        pageNum = pageCount / 6 + 1;
+    }
+    pageNum = parseInt(pageNum);
+    if (pageIndex != 1 || pageNum != 1) {
+        html = '<ul>';
+        if (pageIndex == 1) {
+            html += '<li class="pre">上一页</li><li>第${pageIndex?c}页</li><li class="next"><a href="./${(pageIndex+1)?c}">下一页</a></li>';
+        } else if (pageIndex == pageNum) {
+            html +='<li class="pre"><a href="./${(pageIndex-1)?c}">上一页</a></li><li>第${pageIndex?c}页</li><li class="next"><i>下一页</i></li>';
+        }else{
+            html+='<li class="pre"><a href="./${(pageIndex-1)?c}">上一页</a></li><li>第${pageIndex?c}页</li><li class="next"><a href="./${(pageIndex+1)?c}">下一页</a></li>';
+        }
+        html+='</ul>'
+        pageObj.html(html);
+    }
+
     myrecommend();
     //图片点赞
     function myrecommend(){
@@ -92,7 +121,7 @@
             var obj = $.parseJSON(renum);
             var html='';
             for(var i=0;i<4;i++){
-                html+='<li><p><a href="${mUrl}image/'+obj[i].id+'"><img src="http://img.pigutu.com/img/'+obj[i].coverUrl+'/thumb" alt="'+obj[i].title+'" /></a><span>'+obj[i].title+'</span></p></li>';
+                html+='<li><p><a href="${mUrl}image/'+obj[i].id+'/1"><img src="http://img.pigutu.com/img/'+obj[i].coverUrl+'/thumb" alt="'+obj[i].title+'" /></a><span>'+obj[i].title+'</span></p></li>';
             }
             $('.other').html(html);
         }
@@ -142,7 +171,7 @@
         }
     }
 </script>
-<script>
+<#--<script>
     var page = 0;
     var style = $(".styleKey").text();
     var titleKey = $("#titleKey").text();
@@ -178,6 +207,6 @@
         loadData();
     });
     loadData();
-</script>
+</script>-->
 </body>
 </html>

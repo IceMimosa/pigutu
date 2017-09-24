@@ -32,9 +32,10 @@
                 id="like">喜欢(${imageSetListEntity.getLikeCount()})</i><i class="like"
                                                                          onclick="likemm(${id?c},1);">给妹子点赞</i>
         </div>
-        <div class="content" id="content"><#--<#list imageSetLists as imageSet>
+        <div class="content" id="content"><#list imageSetLists as imageSet>
             <a href="/view?imageUrl=${imageSet.getUrl()}" target="_blank"><img
-                    src="http://img.pigutu.com/img/${imageSet.getUrl()}/${style}"></a></#list>--></div>
+                    src="http://img.pigutu.com/img/${imageSet.getUrl()}/${style}"></a></#list></div>
+        <div class="page"></div>
         <div class="other">
             <div class="tags">
             <#list imageSetListEntity.getLabel()?split(",") as label>
@@ -69,7 +70,6 @@
                     href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank">${likeRecord.getTitle()}</a></span></dd>
         </#list>
         </dl>
-
     </div>
     <div class="clearfloat">
         <script type="text/javascript">var picinfo = [2017, 870, 38];</script>
@@ -80,6 +80,101 @@
     <script type="text/javascript" src="http://img.pigutu.com/js/image.js"></script>
 </div>
 <script type="text/javascript">
+    var myobj = $('.page');
+    var pageCount = ${pageCount?c};
+    var pageIndex = ${pageIndex?c};
+    var pageNum;
+    var html = '';
+
+    if (pageCount % 6 == 0) {
+        pageNum = pageCount / 6;
+    } else {
+        pageNum = pageCount / 6 + 1;
+    }
+    pageNum = parseInt(pageNum);
+    if (pageNum > 7) {
+        for (var i = 1; i <= 7; i++) {
+            if (pageIndex <= 3) {
+                if (i == 1 && pageIndex != 1)
+                    html += getPage(1, pageIndex - 1, '${key}');
+                if (pageIndex == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2, i, '${key}');
+                }
+                if (i == 7)
+                    html += getPage(3, (pageIndex + 1), '${key}');
+            } else if (pageIndex >= pageNum - 3) {
+                if (i == 1)
+                    html += getPage(1, (pageIndex - 1), '${key}');
+                if (pageIndex == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2, (pageIndex - i - 1), '${key}');
+                }
+                if (i == 7 && pageIndex != pageNum)
+                    html += getPage(3, (pageIndex + 1), '${key}');
+            } else {
+                if (i == 1)
+                    html += getPage(1, (pageIndex - 1), '${key}');
+                if (4 == i) {
+                    html += '<em>' + pageIndex + '</em>';
+                } else {
+                    html += getPage(2, (pageIndex + i - 4), '${key}');
+                }
+                if (i == 7)
+                    html += getPage(3, (pageIndex + 1), '${key}');
+            }
+        }
+    } else if (pageNum > 0) {
+        for (var n = 1; n <= pageNum; n++) {
+            if (n == 1 && pageIndex != 1) {
+                html += getPage(1, (pageIndex - 1), '${key}');
+            }
+            if (pageIndex == n) {
+                html += '<em>' + pageIndex + '</em>';
+            } else {
+                html += getPage(2, n, '${key}');
+            }
+            if (n == pageNum && pageIndex != pageNum) {
+                html += getPage(3, (pageIndex + 1), '${key}');
+            }
+        }
+    }
+
+    function getPage(mode,page, key) {
+        if (key.length==0) {
+            switch (mode){
+                case 1:
+                    page = '<a href="'+'./' + page + '" class="ch">上一页</a>';
+                    break;
+                case 2:
+                    page = '<a href="'+'./' + page + '">' + page + '</a>';
+                    break;
+                case 3:
+                    page =  '<a href="'+'./' + (pageIndex + 1) + '" class="ch">下一页</a>';;
+                    break;
+            }
+        } else {
+            switch (mode){
+                case 1:
+                    page = '<a href="'+'./' + page + '?key='+key+'" class="ch">上一页</a>';
+                    break;
+                case 2:
+                    page = '<a href="'+'./' + page + '?key='+key+'">' + page + '</a>';
+                    break;
+                case 3:
+                    page = '<a href="'+'./' + page + '?key='+key+'" class="ch">下一页</a>';;
+                    break;
+
+            }
+        }
+        return page;
+    }
+    console.log(html+'aaa')
+    myobj.html(html);
+
+
     myrecommend();
 
     //图片点赞
@@ -104,9 +199,9 @@
             var html = '';
             for (var i = 0; i < 8; i++) {
                 if (i == 0 || i == 4) {
-                    html += '<dd class="left"><a href="${url}image/' + obj[i].id + '" target="_blank"><img src="http://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
+                    html += '<dd class="left"><a href="${url}image/' + obj[i].id + '/1" target="_blank"><img src="http://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
                 } else {
-                    html += '<dd><a href="${url}image/' + obj[i].id + '" target="_blank"><img src="http://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
+                    html += '<dd><a href="${url}image/' + obj[i].id + '/1" target="_blank"><img src="http://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
                 }
             }
             html = '<dt>美图推荐</dt>' + html;
@@ -114,7 +209,7 @@
         }
     }
 </script>
-<script>
+<#--<script>
     var page = 0;
     var style = $(".styleKey").text();
     function loadData(){
@@ -149,6 +244,6 @@
         loadData();
     });
     loadData();
-</script>
+</script>-->
 </body>
 </html>
