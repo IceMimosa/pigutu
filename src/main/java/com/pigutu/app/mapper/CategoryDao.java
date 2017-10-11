@@ -11,5 +11,4 @@ import org.springframework.stereotype.Repository;
 @DBMeta(table = CategoryDao.TABLE)
 public interface CategoryDao extends BaseDao<CategoryEntity> {
     String TABLE = "category";
-
 }

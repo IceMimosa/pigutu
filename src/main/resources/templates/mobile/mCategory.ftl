@@ -13,6 +13,7 @@
     <meta name="keywords" content="屁股图,美女图片,性感美女,pigutu,妹子图">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
     <link href="http://img.pigutu.com/css/mstyle.css" rel="stylesheet" type="text/css">
+    <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
 </head>
 
 <body>

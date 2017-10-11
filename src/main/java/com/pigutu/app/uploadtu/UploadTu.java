@@ -8,11 +8,12 @@ import java.io.IOException;
 
 public class UploadTu {
     private static int start = 1;
-    private static int id = 4977;
-    private static String date = "20170929";
+    private static int id = 4980;
+    private static String date = "20171007";
     private static ImageSetListEntity imageSetListEntity=new ImageSetListEntity();
+    private static int imgStart = start;
     public static void main(String args[]) {
-        upload(id,"美女邹晶晶肌肤白嫩爆乳身材热辣销魂",date+"/"+id+"/4.jpg",611,33,0,"内衣","邹晶晶,秀人网,爆乳",500,0);
+      //  upload(id,"妩媚女神夏茉GIGI床上全裸秀美胸",date+"/"+id+"/1.jpg",615,38,0,"内衣","美媛馆,夏茉,全裸",500,0);
         //findDirectory();
     }
     private static void upload(int id,String title,String coverUrl,int likeCount,int imgCount,int commentCount,String category,String label,int viewCount,int recommendCount){
@@ -58,10 +59,10 @@ public class UploadTu {
                 return;
             } else {
                 for (File file2 : files) {
-                    file2.renameTo(new File(directory+"//"+String.valueOf(start++)+".jpg"));
-                    System.out.println(start);
+                    file2.renameTo(new File(directory+"//"+String.valueOf(imgStart++)+".jpg"));
+                    System.out.println(imgStart);
                 }
-                start=1;
+                imgStart=start;
             }
         } else {
             System.out.println("文件不存在!");
