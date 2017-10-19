@@ -1,6 +1,7 @@
 package com.pigutu.app.mapper.mybatis;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Desc: 基础类
@@ -9,7 +10,8 @@ import javax.validation.constraints.NotNull;
  * Created by IceMimosa
  * Date: 2017/9/12
  */
-public abstract class BaseModel {
+public abstract class BaseModel implements Serializable {
+    private static final long serialVersionUID = 7546099546644277588L;
 
     @NotNull
     private Long id;
