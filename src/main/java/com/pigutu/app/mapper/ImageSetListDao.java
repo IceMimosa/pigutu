@@ -40,11 +40,11 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     /**
      * 热度 采用view——count首页喜欢排行榜
      */
-    default List<ImageSetListEntity> hotRank(int page, int pageNo) {
+    default List<ImageSetListEntity> hotRank(int page, int pageSize) {
         return selectList(
                 Maps.newHashMap(),
                 new QueryCondition()
-                        .setPaging(page, pageNo)
+                        .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("viewCount").desc())
         );
     }
@@ -52,11 +52,11 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     /**
      * 按照喜欢的数量降序
      */
-    default List<ImageSetListEntity> index(int page, int pageNo) {
+    default List<ImageSetListEntity> index(int page, int pageSize) {
         return selectList(
                 Maps.newHashMap(),
                 new QueryCondition()
-                        .setPaging(page, pageNo)
+                        .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("likeCount").desc())
         );
     }
@@ -64,21 +64,21 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     /**
      * 根据类型查询
      */
-    default List<ImageSetListEntity> findByCategory(String category, int page, int pageNo) {
+    default List<ImageSetListEntity> findByCategory(String category, int page, int pageSize) {
         return selectList(
                 ImmutableMap.of("category", category),
                 new QueryCondition()
-                        .setPaging(page, pageNo)
+                        .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("likeCount").desc())
         );
     }
 
     @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},18"})
-    default List<ImageSetListEntity> recommendRank(@Param("page") int page, int pageNo) {
+    default List<ImageSetListEntity> recommendRank(@Param("page") int page, int pageSize) {
         return selectList(
                 Maps.newHashMap(),
                 new QueryCondition()
-                        .setPaging(page, pageNo)
+                        .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("likeCount").desc())
         );
     }
