@@ -16,3 +16,7 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+
+pigutu:
+  url: http://localhost:8080/
+  murl: http://localhost:8080/

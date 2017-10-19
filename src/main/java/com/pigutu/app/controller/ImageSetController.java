@@ -1,6 +1,7 @@
 package com.pigutu.app.controller;
 
 import com.google.common.collect.ImmutableMap;
+import com.pigutu.app.component.CategoryHandler;
 import com.pigutu.app.entity.ImageSetEntity;
 import com.pigutu.app.entity.ImageSetListEntity;
 import com.pigutu.app.mapper.CategoryDao;
@@ -12,7 +13,6 @@ import com.pigutu.app.utils.TuConfig;
 import com.pigutu.app.utils.TuUtils;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +28,15 @@ import java.util.Random;
 @Controller
 public class ImageSetController {
     @Autowired
-    CategoryDao categoryDao;
-
+    private CategoryDao categoryDao;
     @Autowired
-    ImageSetListDao imageSetListDao;
-
+    private ImageSetListDao imageSetListDao;
     @Autowired
-    ImageSetDao imageSetDao;
+    private ImageSetDao imageSetDao;
+    @Autowired
+    private TuConfig tuConfig;
+    @Autowired
+    private CategoryHandler categoryHandler;
 
     @GetMapping("/imagewithpage/{id}/{page}")
     @ResponseBody
@@ -45,7 +47,7 @@ public class ImageSetController {
 
     @GetMapping("/image/{id}/{page}")
     public String findImageById(HttpServletRequest request, Model model, @PathVariable(value = "id") int id, @PathVariable(value = "page") int page) {
-        TuUtils.addCategory(model, categoryDao);
+        categoryHandler.addCategory(model, categoryDao);
         imageSetListDao.addViewCount(id);
         List<ImageSetEntity> imageSetEntities = imageSetDao.selectList(ImmutableMap.of("allImagesId", id), new QueryCondition()
                 .setPaging(page, 6)
@@ -76,7 +78,7 @@ public class ImageSetController {
         if (id == 4969) {
             model.addAttribute("style", "lpigutu");
         }
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mImageSet";
         }
         return "pc/imageSet";

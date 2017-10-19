@@ -1,8 +1,7 @@
 package com.pigutu.app.controller;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.pigutu.app.entity.ImageSetEntity;
+import com.pigutu.app.component.CategoryHandler;
 import com.pigutu.app.entity.ImageSetListEntity;
 import com.pigutu.app.mapper.CategoryDao;
 import com.pigutu.app.mapper.ImageSetDao;
@@ -16,42 +15,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Random;
 
 @Controller
 public class IndexController {
 
     @Autowired
-    CategoryDao categoryDao;
-
+    private CategoryDao categoryDao;
     @Autowired
-    ImageSetListDao imageSetListDao;
-
+    private ImageSetListDao imageSetListDao;
     @Autowired
-    ImageSetDao imageSetDao;
-
+    private ImageSetDao imageSetDao;
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
+    @Autowired
+    private TuConfig tuConfig;
+    @Autowired
+    private CategoryHandler categoryHandler;
 
     @GetMapping("/update/{page}")
     public String all(HttpServletRequest request, Model model, @PathVariable(value = "page") int page) {
-        TuUtils.addCategory(model, categoryDao);
+        categoryHandler.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.selectList(
                 Maps.newHashMap(),
-                new QueryCondition().setPaging(page, TuConfig.pageNumber).setOrderBy(new OrderBy("createTime").desc())
+                new QueryCondition().setPaging(page, tuConfig.getPageNumber()).setOrderBy(new OrderBy("createTime").desc())
         );
 
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url + "update");
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
+        model.addAttribute("pageUrl", tuConfig.getUrl() + "update");
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -59,13 +56,13 @@ public class IndexController {
 
     @GetMapping("/beauty/{category}/{page}")
     public String findByCategory(HttpServletRequest request, Model model, @PathVariable(value = "category") String category, @PathVariable(value = "page") int page) {
-        TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, page);
+        categoryHandler.addCategory(model, categoryDao);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, page, tuConfig.getPageNumber());
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url + "beauty/" + category);
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
+        model.addAttribute("pageUrl", tuConfig.getUrl() + "beauty/" + category);
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -74,13 +71,13 @@ public class IndexController {
 
     @GetMapping("/hot/{page}")
     public String hot(HttpServletRequest request, Model model, @PathVariable("page") int page) {
-        TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.hotRank(page);
+        categoryHandler.addCategory(model, categoryDao);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.hotRank(page, tuConfig.getPageNumber());
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url + "hot");
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
+        model.addAttribute("pageUrl", tuConfig.getUrl() + "hot");
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -88,27 +85,27 @@ public class IndexController {
 
     @GetMapping("/recommend/{page}")
     public String recommend(Model model, @PathVariable("page") int page) {
-        TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(page);
+        categoryHandler.addCategory(model, categoryDao);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(page, tuConfig.getPageNumber());
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url + "recommend");
+        model.addAttribute("pageUrl", tuConfig.getUrl() + "recommend");
         return "pc/index";
     }
 
 
     @GetMapping("/index/{page}")
     public String index(HttpServletRequest request, Model model, @PathVariable("page") int page) {
-        TuUtils.addCategory(model, categoryDao);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.index(page);
+        categoryHandler.addCategory(model, categoryDao);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.index(page, tuConfig.getPageNumber());
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-        model.addAttribute("pageUrl", TuConfig.url + "index");
-        model.addAttribute("mPageUrl", TuConfig.mUrl + "index");
+        model.addAttribute("pageUrl", tuConfig.getUrl() + "index");
+        model.addAttribute("mPageUrl", tuConfig.getUrl() + "index");
         model.addAttribute("key", "");
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
         }
         if (page == 1) {
@@ -119,15 +116,15 @@ public class IndexController {
 
     @GetMapping("/search/{page}")
     public String search(HttpServletRequest request, Model model, String key, @PathVariable("page") int page) {
-        TuUtils.addCategory(model, categoryDao);
+        categoryHandler.addCategory(model, categoryDao);
         key = TuUtils.stringFilter(key);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, (page - 1) * TuConfig.pageNumber);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, (page - 1) * tuConfig.getPageNumber());
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.searchCount(key));
         model.addAttribute("pageIndex", page);
         model.addAttribute("key", key);
-        model.addAttribute("pageUrl", TuConfig.url + "search");
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
+        model.addAttribute("pageUrl", tuConfig.getUrl() + "search");
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -137,7 +134,7 @@ public class IndexController {
 
     @GetMapping("/category")
     public String category(Model model) {
-        TuUtils.addCategory(model, categoryDao);
+        categoryHandler.addCategory(model, categoryDao);
         return "mobile/mCategory";
     }
 

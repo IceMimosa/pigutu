@@ -1,7 +1,9 @@
 package com.pigutu.app;
 
+import com.pigutu.app.utils.TuConfig;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableAutoConfiguration
 @EnableWebMvc
 @ComponentScan({"com.pigutu.app"})
+@EnableConfigurationProperties(TuConfig.class)
 public class PigutuConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean

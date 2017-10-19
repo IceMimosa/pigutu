@@ -1,10 +1,29 @@
 package com.pigutu.app.utils;
 
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+/**
+ * tu 配置选项
+ */
+@Data
+@ConfigurationProperties(prefix = "pigutu")
 public class TuConfig {
-    public final static int pageNumber = 18;
-    public final static String url = "http://www.pigutu.com/";
-    public final static String mUrl = "http://m.pigutu.com/";
-    //public final static String url = "http://localhost:8080/";
-    //  public final static String mUrl = "http://localhost:8080/";
-    public final static boolean mobileDebug = false;
+
+    /**
+     * 默认页数
+     */
+    private int pageNumber = 18;
+
+    /**
+     * 主站url
+     */
+    private String url = "http://www.pigutu.com/";
+
+    /**
+     * 移动端url
+     */
+    private String mUrl = "http://m.pigutu.com/";
+
+    private boolean mobileDebug = false;
 }

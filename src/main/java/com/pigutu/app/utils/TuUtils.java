@@ -1,27 +1,14 @@
 package com.pigutu.app.utils;
 
 
-import com.pigutu.app.entity.CategoryEntity;
-import com.pigutu.app.mapper.CategoryDao;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TuUtils {
-    public static void addCategory(Model model, CategoryDao categoryDao) {
-        List<CategoryEntity> categoryEntities = categoryDao.selectAll();
-        model.addAttribute("categorys", categoryEntities);
-        model.addAttribute("showUrl", TuConfig.url);
-        model.addAttribute("url", TuConfig.url);
-        model.addAttribute("mUrl", TuConfig.mUrl);
-        model.addAttribute("key", "");
-    }
 
     /**
      * 过滤一些特殊字符

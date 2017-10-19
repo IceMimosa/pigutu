@@ -8,8 +8,11 @@ import com.pigutu.app.mapper.mybatis.BaseDao;
 import com.pigutu.app.mapper.mybatis.DBMeta;
 import com.pigutu.app.mapper.mybatis.OrderBy;
 import com.pigutu.app.mapper.mybatis.QueryCondition;
-import com.pigutu.app.utils.TuConfig;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -37,11 +40,11 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     /**
      * 热度 采用view——count首页喜欢排行榜
      */
-    default List<ImageSetListEntity> hotRank(int page) {
+    default List<ImageSetListEntity> hotRank(int page, int pageNo) {
         return selectList(
                 Maps.newHashMap(),
                 new QueryCondition()
-                        .setPaging(page, TuConfig.pageNumber)
+                        .setPaging(page, pageNo)
                         .setOrderBy(new OrderBy("viewCount").desc())
         );
     }
@@ -49,11 +52,11 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     /**
      * 按照喜欢的数量降序
      */
-    default List<ImageSetListEntity> index(int page) {
+    default List<ImageSetListEntity> index(int page, int pageNo) {
         return selectList(
                 Maps.newHashMap(),
                 new QueryCondition()
-                        .setPaging(page, TuConfig.pageNumber)
+                        .setPaging(page, pageNo)
                         .setOrderBy(new OrderBy("likeCount").desc())
         );
     }
@@ -61,21 +64,21 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     /**
      * 根据类型查询
      */
-    default List<ImageSetListEntity> findByCategory(String category, int page) {
+    default List<ImageSetListEntity> findByCategory(String category, int page, int pageNo) {
         return selectList(
                 ImmutableMap.of("category", category),
                 new QueryCondition()
-                        .setPaging(page, TuConfig.pageNumber)
+                        .setPaging(page, pageNo)
                         .setOrderBy(new OrderBy("likeCount").desc())
         );
     }
 
     @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},18"})
-    default List<ImageSetListEntity> recommendRank(@Param("page") int page) {
+    default List<ImageSetListEntity> recommendRank(@Param("page") int page, int pageNo) {
         return selectList(
                 Maps.newHashMap(),
                 new QueryCondition()
-                        .setPaging(page, TuConfig.pageNumber)
+                        .setPaging(page, pageNo)
                         .setOrderBy(new OrderBy("likeCount").desc())
         );
     }
