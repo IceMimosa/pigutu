@@ -4,9 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>${imageSetListEntity.getTitle()}_屁股图</title>
-    <meta name="keywords" content="${imageSetListEntity.getLabel()}">
-    <meta name="description" content="妹子图分享高清美女图片-${imageSetListEntity.getTitle()} www.pigutu.com">
+    <title>${imageSetListEntity.getTitle()}_屁股图高清美女图片</title>
+    <meta name="keywords" content="${imageSetListEntity.getLabel()},高清美女图片">
+    <meta name="description" content="屁股图高清美女图片-${imageSetListEntity.getTitle()} www.pigutu.com">
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com/">
     <link href="http://img.pigutu.com/css/image.css" rel="stylesheet" type="text/css">
     <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
@@ -15,7 +15,7 @@
 
 <body>
 <div class="topbar">
-    <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
+    <div class="header"><h1>屁股图 - 每日高清美女图片</h1></div>
     <div class="nav"><a href="http://www.pigutu.com/">首页</a>
         <a href="http://www.pigutu.com/hot/1" class="hot">浏览排行榜</a>
         <a href="${url}update/1" class="good">最新美图</a>
@@ -70,6 +70,7 @@
                     href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank">${likeRecord.getTitle()}</a></span></dd>
         </#list>
         </dl>
+        <div id="SOHUCS" sid="${imageSetListEntity.getId()}" style="margin-top: 100px;float: right"></div>
     </div>
     <div class="clearfloat">
         <script type="text/javascript">var picinfo = [2017, 870, 38];</script>
@@ -208,6 +209,13 @@
             $('.myrecommend').html(html);
         }
     }
+</script>
+<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: 'cytdA3M0s',
+        conf: 'prod_960907fbd9d3d39b55dd4a1b65e04297'
+    });
 </script>
 <#--<script>
     var page = 0;

@@ -44,13 +44,37 @@
                                                                            onfocus="searchnow();"><span
                     onclick="searchpic();"></span></form>
         </div>
+        <dl class="like" style="margin-top: 50px">
+            <dt><h3>最新点赞</h3></dt>
+        <#list likeRecords as likeRecord>
+            <dd><a href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank"><img
+                    src="http://img.pigutu.com/img/${likeRecord.getCoverUrl()}/like"
+                    alt="${likeRecord.getTitle()}"/></a><span><a
+                    href="${url}image/${likeRecord.getAllImagesId()?c}"
+                    target="_blank">${likeRecord.getTitle()}</a></span></dd>
+        </#list>
+        </dl>
+        <div id="SOHUCS" sid="index"  style="margin-top: 100px;float: right"></div>
     </div>
+
     <div style="clear: both;"></div>
 </div>
 
 
 </div>
+</div>
 
+<div class="friendlink">
+    <dl>
+        <dt><span>友情链接</span></dt>
+        <dd><a href="http://www.pigutu.com">美女图片</a><a href="http://www.pigutu.com/beauty/%E6%98%8E%E6%98%9F/1"
+                                                       target="_blank">明星美女</a><a
+                href="http://www.pigutu.com/beauty/%E6%B8%85%E7%BA%AF/1" target="_blank">清纯美女</a><a
+                href="http://www.pigutu.com/beauty/%E8%BF%90%E5%8A%A8/1"
+                target="_blank">运动美女</a>
+        </dd>
+    </dl>
+</div>
 <div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2017 屁股图 苏ICP备15000307号</span></p>
 </div>
 <div style="display:none;">
@@ -151,5 +175,12 @@
     }
 
     obj.html(html);</script>
+    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+    <script type="text/javascript">
+        window.changyan.api.config({
+            appid: 'cytdA3M0s',
+            conf: 'prod_960907fbd9d3d39b55dd4a1b65e04297'
+        });
+    </script>
 </body>
 </html>
