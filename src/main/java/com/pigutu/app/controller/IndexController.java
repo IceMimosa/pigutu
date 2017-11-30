@@ -47,14 +47,9 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "update");
         if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "update");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
->>>>>>> add index like
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -67,14 +62,9 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "beauty/" + category);
         if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "beauty/" + category);
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
->>>>>>> add index like
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -88,14 +78,9 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "hot");
         if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "hot");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
->>>>>>> add index like
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -108,12 +93,8 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "recommend");
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "recommend");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
->>>>>>> add index like
         return "pc/index";
     }
 
@@ -125,14 +106,9 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "index");
         model.addAttribute("mPageUrl", tuConfig.getUrl() + "index");
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "index");
-        model.addAttribute("mPageUrl", TuConfig.mUrl + "index");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
->>>>>>> add index like
         model.addAttribute("key", "");
         if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
@@ -152,14 +128,9 @@ public class IndexController {
         model.addAttribute("pageCount", imageSetListDao.searchCount(key));
         model.addAttribute("pageIndex", page);
         model.addAttribute("key", key);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "search");
         if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "search");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
->>>>>>> add index like
             return "mobile/mIndex";
         }
         return "pc/index";

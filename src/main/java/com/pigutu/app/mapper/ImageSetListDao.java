@@ -98,7 +98,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     @Select("select * from image_set_list where id = #{id}")
     ImageSetListEntity getLikeRecordCoverUrl(@Param("id") int id);
 
-    @Select("select max(id) as id,ip,title,time,all_images_id,cover_url from like_record group by all_images_id order by id desc limit 0,6")
+    @Select("select max(id) as id, max(ip) as ip, max(title) as title, max(time) as time, all_images_id, max(cover_url) as cover_url from like_record group by all_images_id order by id desc limit 0,6")
     List<LikeRecordEntity> getLikeRecord();
 
     @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},#{pageNumber}"})
