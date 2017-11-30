@@ -63,8 +63,8 @@ public class IndexController {
         model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
         model.addAttribute("pageIndex", page);
         model.addAttribute("pageUrl", tuConfig.getUrl() + "beauty/" + category);
-        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -79,8 +79,8 @@ public class IndexController {
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
         model.addAttribute("pageUrl", tuConfig.getUrl() + "hot");
-        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
         }
         return "pc/index";
@@ -129,8 +129,8 @@ public class IndexController {
         model.addAttribute("pageIndex", page);
         model.addAttribute("key", key);
         model.addAttribute("pageUrl", tuConfig.getUrl() + "search");
-        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
         }
         return "pc/index";
