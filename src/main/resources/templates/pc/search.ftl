@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>屁股图- 每日分享高清美女图片</title>
+    <title>美女图片 - 每日分享高清美女图片 - 屁股图</title>
     <meta name="keywords" content="美女图片,性感美女,妹子图,pigutu">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
     <meta name="mobile-agent" content="format=html5;url=http://m.pigutu.com"/>

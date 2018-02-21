@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>屁股图- 每日分享高清美女图片</title>
+    <title>美女图片 - 每日分享高清美女图片 - 屁股图</title>
     <meta name="keywords" content="美女图片,性感美女,屁股图,pigutu,妹子图">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
     <meta name="mobile-agent" content="format=html5;url=http://m.pigutu.com"/>
@@ -16,7 +16,7 @@
 
 <body>
 <div class="topbar">
-    <div class="header"><h1>屁股图 - 每日分享高清美女图片</h1></div>
+    <div class="header"><h1>美女图片 - 每日分享高清美女图片</h1></div>
     <div class="nav"><a href="${url}">首页</a><a href="${url}hot/1" class="hot">浏览排行榜</a>
         <a href="${url}update/1" class="good">最新美图</a>
         <a href="${url}feedback" class="good">反馈</a>
@@ -54,7 +54,6 @@
                     target="_blank">${likeRecord.getTitle()}</a></span></dd>
         </#list>
         </dl>
-        <div id="SOHUCS" sid="index"  style="margin-top: 100px;float: right"></div>
     </div>
 
     <div style="clear: both;"></div>
@@ -175,12 +174,5 @@
     }
 
     obj.html(html);</script>
-    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
-    <script type="text/javascript">
-        window.changyan.api.config({
-            appid: 'cytdA3M0s',
-            conf: 'prod_960907fbd9d3d39b55dd4a1b65e04297'
-        });
-    </script>
 </body>
 </html>

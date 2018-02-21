@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>美女图片_屁股图</title>
+    <title>美女图片 - 分享高清美女图片 - 屁股图</title>
     <meta name="keywords" content="美女图片,pigutu,屁股图">
     <meta name="description" content="屁股图分享高清美女图片- www.pigutu.com">
     <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com/">

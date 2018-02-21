@@ -70,7 +70,6 @@
                     href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank">${likeRecord.getTitle()}</a></span></dd>
         </#list>
         </dl>
-        <div id="SOHUCS" sid="${imageSetListEntity.getId()}" style="margin-top: 100px;float: right"></div>
     </div>
     <div class="clearfloat">
         <script type="text/javascript">var picinfo = [2017, 870, 38];</script>
@@ -209,13 +208,6 @@
             $('.myrecommend').html(html);
         }
     }
-</script>
-<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: 'cytdA3M0s',
-        conf: 'prod_960907fbd9d3d39b55dd4a1b65e04297'
-    });
 </script>
 <#--<script>
     var page = 0;

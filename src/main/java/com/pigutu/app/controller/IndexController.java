@@ -47,15 +47,14 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "update");
+        model.addAttribute("mPageUrl", tuConfig.getMUrl() + "update");
         if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "update");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
->>>>>>> add index like
             return "mobile/mIndex";
+        }
+        if (page == 1) {
+            return "pc/firstIndex";
         }
         return "pc/index";
     }
@@ -67,15 +66,14 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.categoryCount(category));
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "beauty/" + category);
-        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "beauty/" + category);
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
->>>>>>> add index like
+        model.addAttribute("mPageUrl", tuConfig.getMUrl() + "beauty/"+category);
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
+        }
+        if (page == 1) {
+            return "pc/firstIndex";
         }
         return "pc/index";
     }
@@ -88,32 +86,34 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "hot");
-        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "hot");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
->>>>>>> add index like
+        model.addAttribute("mPageUrl", tuConfig.getMUrl() + "hot");
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
+        }
+        if (page == 1) {
+            return "pc/firstIndex";
         }
         return "pc/index";
     }
 
     @GetMapping("/recommend/{page}")
-    public String recommend(Model model, @PathVariable("page") int page) {
+    public String recommend(HttpServletRequest request,Model model, @PathVariable("page") int page) {
         categoryHandler.addCategory(model, categoryDao);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.recommendRank(page, tuConfig.getPageNumber());
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "recommend");
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "recommend");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
->>>>>>> add index like
+        model.addAttribute("mPageUrl", tuConfig.getMUrl() + "recommend");
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
+            return "mobile/mIndex";
+        }
+        if (page == 1) {
+            return "pc/firstIndex";
+        }
         return "pc/index";
     }
 
@@ -125,14 +125,9 @@ public class IndexController {
         model.addAttribute("imageSetLists", imageSetListEntities);
         model.addAttribute("pageCount", imageSetListDao.count());
         model.addAttribute("pageIndex", page);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "index");
-        model.addAttribute("mPageUrl", tuConfig.getUrl() + "index");
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "index");
-        model.addAttribute("mPageUrl", TuConfig.mUrl + "index");
+        model.addAttribute("mPageUrl", tuConfig.getMUrl() + "index");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
->>>>>>> add index like
         model.addAttribute("key", "");
         if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
@@ -152,15 +147,14 @@ public class IndexController {
         model.addAttribute("pageCount", imageSetListDao.searchCount(key));
         model.addAttribute("pageIndex", page);
         model.addAttribute("key", key);
-<<<<<<< dde03333ed5605e571488e758ae465ec939ae1a5
         model.addAttribute("pageUrl", tuConfig.getUrl() + "search");
-        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-=======
-        model.addAttribute("pageUrl", TuConfig.url + "search");
+        model.addAttribute("mPageUrl", tuConfig.getMUrl() + "search");
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
-        if (request.getServerName().startsWith("m") || TuConfig.mobileDebug) {
->>>>>>> add index like
+        if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
             return "mobile/mIndex";
+        }
+        if (page == 1) {
+            return "pc/firstIndex";
         }
         return "pc/index";
     }
