@@ -15,6 +15,8 @@ public class TuConfig {
      */
     private int pageNumber = 18;
 
+    private int categoryPageNumber = 8;
+    private int categoryViewCountPageNumber = 5;
     /**
      * 主站url
      */

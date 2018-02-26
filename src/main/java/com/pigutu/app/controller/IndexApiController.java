@@ -1,14 +1,8 @@
 package com.pigutu.app.controller;
 
 import com.google.common.collect.Maps;
-import com.pigutu.app.entity.CategoryEntity;
-import com.pigutu.app.entity.ImageSetListEntity;
-import com.pigutu.app.entity.ReturnEntity;
-import com.pigutu.app.entity.UserEntity;
-import com.pigutu.app.mapper.CategoryDao;
-import com.pigutu.app.mapper.ImageSetDao;
-import com.pigutu.app.mapper.ImageSetListDao;
-import com.pigutu.app.mapper.UserDao;
+import com.pigutu.app.entity.*;
+import com.pigutu.app.mapper.*;
 import com.pigutu.app.mapper.mybatis.OrderBy;
 import com.pigutu.app.mapper.mybatis.QueryCondition;
 import com.pigutu.app.utils.TuConfig;
@@ -22,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +38,16 @@ public class IndexApiController {
     UserDao userDao;
 
     @Autowired
+    ApiImageSetListDao apiImageSetListDao;
+
+    @Autowired
     MessageSource messageSource;
 
     @Autowired
     private TuConfig tuConfig;
+
+    @Autowired
+    private ConfigDao configDao;
 
     @GetMapping("/update/{page}")
     @ResponseBody
@@ -81,11 +82,96 @@ public class IndexApiController {
     }
 
 
-    @GetMapping("/index/{page}")
+    @GetMapping("/index")
     @ResponseBody
-    public List<ImageSetListEntity> index(@PathVariable("page") int page) {
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.index(page, tuConfig.getPageNumber());
-        return imageSetListEntities;
+    public ApiIndexEntity index() {
+        int page = 1;
+        ApiIndexEntity apiIndexEntity = new ApiIndexEntity();
+        List<ImageSetListEntity> minxing = apiImageSetListDao.mingxing(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> qincun = apiImageSetListDao.qincun(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> yundong = apiImageSetListDao.yundong(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> dongman = apiImageSetListDao.dongman(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> mote = apiImageSetListDao.mote(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> bijini = apiImageSetListDao.bijini(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> neiyi = apiImageSetListDao.neiyi(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> cosplay = apiImageSetListDao.cosplay(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> minxingViewCount = apiImageSetListDao.mingxingViewCount(page, tuConfig.getCategoryViewCountPageNumber());
+        List<ImageSetListEntity> qincunViewCount = apiImageSetListDao.qincunViewCount(page, tuConfig.getCategoryViewCountPageNumber());
+        List<ImageSetListEntity> yundongViewCount = apiImageSetListDao.yundongViewCount(page, tuConfig.getCategoryViewCountPageNumber());
+        List<ImageSetListEntity> dongmanViewCount = apiImageSetListDao.dongmanViewCount(page, tuConfig.getCategoryViewCountPageNumber());
+        List<ImageSetListEntity> moteViewCount = apiImageSetListDao.moteViewCount(page, tuConfig.getCategoryViewCountPageNumber());
+        List<ImageSetListEntity> bijiniViewCount = apiImageSetListDao.bijiniViewCount(page, tuConfig.getCategoryViewCountPageNumber());
+        List<ImageSetListEntity> neiyiViewCount = apiImageSetListDao.neiyiViewCount(page, tuConfig.getCategoryViewCountPageNumber());
+        List<ImageSetListEntity> cosplayViewCount = apiImageSetListDao.cosplayViewCount(page, tuConfig.getCategoryViewCountPageNumber());
+        List<ApiIndexEntity.Category> categories = new ArrayList<>();
+ /*       apiIndexEntity.setMinxing(minxing);
+        apiIndexEntity.setQincun(qincun);
+        apiIndexEntity.setYundong(yundong);
+        apiIndexEntity.setDongman(dongman);
+        apiIndexEntity.setMote(mote);
+        apiIndexEntity.setBijini(bijini);
+        apiIndexEntity.setNeiyi(neiyi);
+        apiIndexEntity.setCosplay(cosplay);*/
+        categories.add(new ApiIndexEntity.Category("明星",minxing,minxingViewCount));
+        categories.add(new ApiIndexEntity.Category("清纯",qincun,qincunViewCount));
+        categories.add(new ApiIndexEntity.Category("运动",yundong,yundongViewCount));
+        categories.add(new ApiIndexEntity.Category("动漫",dongman,dongmanViewCount));
+        categories.add(new ApiIndexEntity.Category("模特",mote,moteViewCount));
+        categories.add(new ApiIndexEntity.Category("比基尼",bijini,bijiniViewCount));
+        categories.add(new ApiIndexEntity.Category("内衣",neiyi,neiyiViewCount));
+        categories.add(new ApiIndexEntity.Category("cosplay",cosplay,cosplayViewCount));
+
+        apiIndexEntity.setCategories(categories);
+
+/*        apiIndexEntity.setMinxingViewCount(minxingViewCount);
+        apiIndexEntity.setQincunViewCount(qincunViewCount);
+        apiIndexEntity.setYundongViewCount(yundongViewCount);
+        apiIndexEntity.setDongmanViewCount(dongmanViewCount);
+        apiIndexEntity.setMoteViewCount(moteViewCount);
+        apiIndexEntity.setBijiniViewCount(bijiniViewCount);
+        apiIndexEntity.setNeiyiViewCount(neiyiViewCount);
+        apiIndexEntity.setCosplayViewCount(cosplayViewCount);*/
+        List<ConfigEntity> configEntities = configDao.getConfig();
+        List<ImageSetListEntity> carousel = new ArrayList<>();
+        List<ImageSetListEntity> hot = new ArrayList<>();
+        for(ConfigEntity configEntity:configEntities){
+            if(configEntity.getKey().equals("c1")){
+                carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("c2")){
+                carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("c3")){
+                carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("c4")){
+                carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("c4")){
+                carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("hot1")){
+                hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("hot2")){
+                hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("hot3")){
+                hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("hot4")){
+                hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("hot5")){
+                hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+            if(configEntity.getKey().equals("hot6")){
+                hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
+            }
+        }
+        apiIndexEntity.setCarousel(carousel);
+        apiIndexEntity.setHot(hot);
+        return apiIndexEntity;
     }
 
     @GetMapping("/search/{page}")
@@ -109,13 +195,13 @@ public class IndexApiController {
     public ReturnEntity register(Model model, UserEntity userEntity) {
         userDao.insert(userEntity);
         ReturnEntity returnEntity = new ReturnEntity();
-        if(userDao.insert(userEntity)>=0){
-            Map<String,String> map = new HashMap<>();
-            map.put("token","12");
+        if (userDao.insert(userEntity) >= 0) {
+            Map<String, String> map = new HashMap<>();
+            map.put("token", "12");
             returnEntity.setData(map);
             returnEntity.setMsg("success");
             returnEntity.setReturnCode(0);
-        }else{
+        } else {
             returnEntity.setData("");
             returnEntity.setMsg("fail");
             returnEntity.setReturnCode(-1);
@@ -128,11 +214,11 @@ public class IndexApiController {
     public ReturnEntity login(Model model, UserEntity userEntity) {
         userDao.insert(userEntity);
         ReturnEntity returnEntity = new ReturnEntity();
-        if(userDao.insert(userEntity)>=0){
+        if (userDao.insert(userEntity) >= 0) {
             returnEntity.setData("");
             returnEntity.setMsg("success");
             returnEntity.setReturnCode(0);
-        }else{
+        } else {
             returnEntity.setData("");
             returnEntity.setMsg("fail");
             returnEntity.setReturnCode(-1);
