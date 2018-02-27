@@ -102,14 +102,7 @@ public class IndexApiController {
         List<ImageSetListEntity> neiyiViewCount = apiImageSetListDao.neiyiViewCount(page, tuConfig.getCategoryViewCountPageNumber());
         List<ImageSetListEntity> cosplayViewCount = apiImageSetListDao.cosplayViewCount(page, tuConfig.getCategoryViewCountPageNumber());
         List<ApiIndexEntity.Category> categories = new ArrayList<>();
- /*       apiIndexEntity.setMinxing(minxing);
-        apiIndexEntity.setQincun(qincun);
-        apiIndexEntity.setYundong(yundong);
-        apiIndexEntity.setDongman(dongman);
-        apiIndexEntity.setMote(mote);
-        apiIndexEntity.setBijini(bijini);
-        apiIndexEntity.setNeiyi(neiyi);
-        apiIndexEntity.setCosplay(cosplay);*/
+
         categories.add(new ApiIndexEntity.Category("明星", minxing, minxingViewCount));
         categories.add(new ApiIndexEntity.Category("清纯", qincun, qincunViewCount));
         categories.add(new ApiIndexEntity.Category("运动", yundong, yundongViewCount));
@@ -121,14 +114,6 @@ public class IndexApiController {
 
         apiIndexEntity.setCategories(categories);
 
-/*        apiIndexEntity.setMinxingViewCount(minxingViewCount);
-        apiIndexEntity.setQincunViewCount(qincunViewCount);
-        apiIndexEntity.setYundongViewCount(yundongViewCount);
-        apiIndexEntity.setDongmanViewCount(dongmanViewCount);
-        apiIndexEntity.setMoteViewCount(moteViewCount);
-        apiIndexEntity.setBijiniViewCount(bijiniViewCount);
-        apiIndexEntity.setNeiyiViewCount(neiyiViewCount);
-        apiIndexEntity.setCosplayViewCount(cosplayViewCount);*/
         List<ConfigEntity> configEntities = configDao.getConfig();
         List<ImageSetListEntity> carousel = new ArrayList<>();
         List<ImageSetListEntity> hot = new ArrayList<>();
@@ -183,6 +168,7 @@ public class IndexApiController {
         List<LikeRecordEntity> likes = imageSetListDao.getLikeRecord();
         apiDetailEntity.setLikes(likes);
         List<ImageSetEntity> details = imageSetDao.selectList(ImmutableMap.of("allImagesId", id), new QueryCondition());
+        apiDetailEntity.setImageDetail(imageSetListDao.selectOne(ImmutableMap.of("id",id)));
         apiDetailEntity.setDetails(details);
         return apiDetailEntity;
     }
@@ -195,6 +181,12 @@ public class IndexApiController {
         return imageSetListEntities;
     }
 
+    @GetMapping("/category/{category}/{page}")
+    @ResponseBody
+    public List<ImageSetListEntity> categoryImageSetList(@PathVariable("category") String category,@PathVariable("page") int page) {
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory("明星", page, 20);
+        return imageSetListEntities;
+    }
 
     @GetMapping("/category")
     @ResponseBody
