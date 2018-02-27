@@ -1,5 +1,6 @@
 package com.pigutu.app.controller;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.pigutu.app.entity.*;
 import com.pigutu.app.mapper.*;
@@ -16,10 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/api")
@@ -112,14 +110,14 @@ public class IndexApiController {
         apiIndexEntity.setBijini(bijini);
         apiIndexEntity.setNeiyi(neiyi);
         apiIndexEntity.setCosplay(cosplay);*/
-        categories.add(new ApiIndexEntity.Category("明星",minxing,minxingViewCount));
-        categories.add(new ApiIndexEntity.Category("清纯",qincun,qincunViewCount));
-        categories.add(new ApiIndexEntity.Category("运动",yundong,yundongViewCount));
-        categories.add(new ApiIndexEntity.Category("动漫",dongman,dongmanViewCount));
-        categories.add(new ApiIndexEntity.Category("模特",mote,moteViewCount));
-        categories.add(new ApiIndexEntity.Category("比基尼",bijini,bijiniViewCount));
-        categories.add(new ApiIndexEntity.Category("内衣",neiyi,neiyiViewCount));
-        categories.add(new ApiIndexEntity.Category("cosplay",cosplay,cosplayViewCount));
+        categories.add(new ApiIndexEntity.Category("明星", minxing, minxingViewCount));
+        categories.add(new ApiIndexEntity.Category("清纯", qincun, qincunViewCount));
+        categories.add(new ApiIndexEntity.Category("运动", yundong, yundongViewCount));
+        categories.add(new ApiIndexEntity.Category("动漫", dongman, dongmanViewCount));
+        categories.add(new ApiIndexEntity.Category("模特", mote, moteViewCount));
+        categories.add(new ApiIndexEntity.Category("比基尼", bijini, bijiniViewCount));
+        categories.add(new ApiIndexEntity.Category("内衣", neiyi, neiyiViewCount));
+        categories.add(new ApiIndexEntity.Category("cosplay", cosplay, cosplayViewCount));
 
         apiIndexEntity.setCategories(categories);
 
@@ -134,44 +132,59 @@ public class IndexApiController {
         List<ConfigEntity> configEntities = configDao.getConfig();
         List<ImageSetListEntity> carousel = new ArrayList<>();
         List<ImageSetListEntity> hot = new ArrayList<>();
-        for(ConfigEntity configEntity:configEntities){
-            if(configEntity.getKey().equals("c1")){
+        for (ConfigEntity configEntity : configEntities) {
+            if (configEntity.getKey().equals("c1")) {
                 carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("c2")){
+            if (configEntity.getKey().equals("c2")) {
                 carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("c3")){
+            if (configEntity.getKey().equals("c3")) {
                 carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("c4")){
+            if (configEntity.getKey().equals("c4")) {
                 carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("c4")){
+            if (configEntity.getKey().equals("c4")) {
                 carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("hot1")){
+            if (configEntity.getKey().equals("hot1")) {
                 hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("hot2")){
+            if (configEntity.getKey().equals("hot2")) {
                 hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("hot3")){
+            if (configEntity.getKey().equals("hot3")) {
                 hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("hot4")){
+            if (configEntity.getKey().equals("hot4")) {
                 hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("hot5")){
+            if (configEntity.getKey().equals("hot5")) {
                 hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if(configEntity.getKey().equals("hot6")){
+            if (configEntity.getKey().equals("hot6")) {
                 hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
         }
         apiIndexEntity.setCarousel(carousel);
         apiIndexEntity.setHot(hot);
         return apiIndexEntity;
+    }
+
+    @GetMapping("/detail/{id}")
+    @ResponseBody
+    public ApiDetailEntity detail(@PathVariable("id") int id) {
+        ApiDetailEntity apiDetailEntity = new ApiDetailEntity();
+        Random random = new Random();
+        int page = random.nextInt(100);
+        List<ImageSetListEntity> recommends = imageSetListDao.myRecommend(page * 6, 6);
+        apiDetailEntity.setRecommends(recommends);
+        List<LikeRecordEntity> likes = imageSetListDao.getLikeRecord();
+        apiDetailEntity.setLikes(likes);
+        List<ImageSetEntity> details = imageSetDao.selectList(ImmutableMap.of("allImagesId", id), new QueryCondition());
+        apiDetailEntity.setDetails(details);
+        return apiDetailEntity;
     }
 
     @GetMapping("/search/{page}")
