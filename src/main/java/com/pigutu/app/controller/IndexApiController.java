@@ -181,14 +181,14 @@ public class IndexApiController {
         return imageSetListEntities;
     }
 
-    @GetMapping("/category/{category}/{page}")
+    @GetMapping("/category/{category}")
     @ResponseBody
-    public List<ImageSetListEntity> categoryImageSetList(@PathVariable("category") String category,@PathVariable("page") int page) {
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory("明星", page, 20);
+    public List<ImageSetListEntity> categoryImageSetList(int pageNo,@PathVariable("category") int category) {
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(categoryDao.selectOne(ImmutableMap.of("id",category)).getParameter(), pageNo, 20);
         return imageSetListEntities;
     }
 
-    @GetMapping("/category")
+    @GetMapping("/category12")
     @ResponseBody
     public List<CategoryEntity> category(Model model) {
         List<CategoryEntity> categoryEntities = categoryDao.selectAll();
