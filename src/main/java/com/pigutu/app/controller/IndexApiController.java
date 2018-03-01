@@ -173,18 +173,18 @@ public class IndexApiController {
         return apiDetailEntity;
     }
 
-    @GetMapping("/search/{page}")
+    @GetMapping("/search")
     @ResponseBody
-    public List<ImageSetListEntity> search(String key, @PathVariable("page") int page) {
+    public List<ImageSetListEntity> search(String key, int pageNo) {
         key = TuUtils.stringFilter(key);
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, (page - 1) * tuConfig.getPageNumber());
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, (pageNo - 1) * 20);
         return imageSetListEntities;
     }
 
     @GetMapping("/category/{category}")
     @ResponseBody
-    public List<ImageSetListEntity> categoryImageSetList(int pageNo,@PathVariable("category") int category) {
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(categoryDao.selectOne(ImmutableMap.of("id",category)).getParameter(), pageNo, 20);
+    public List<ImageSetListEntity> categoryImageSetList(int pageNo,@PathVariable("category") String category) {
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, pageNo, 20);
         return imageSetListEntities;
     }
 
