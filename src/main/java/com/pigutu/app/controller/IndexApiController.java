@@ -79,6 +79,33 @@ public class IndexApiController {
         return imageSetListEntities;
     }
 
+    /**
+     * 推荐，目标智能推荐，现在随机前100页
+     *
+     * @return
+     */
+    @GetMapping("/randomRecommend")
+    @ResponseBody
+    public List<ImageSetListEntity> randomRommend() {
+        Random random = new Random();
+        int page = random.nextInt(100);
+        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.myRecommend(page * tuConfig.getRandomRecommend(), tuConfig.getRandomRecommend());
+        return imageSetListEntities;
+    }
+
+    /**
+     * 更新
+     *
+     * @return
+     */
+    @GetMapping("/updateImg")
+    @ResponseBody
+    public PageEntity<ImageSetListEntity> updateImg(int pageNo) {
+        PageEntity<ImageSetListEntity> pageEntity = imageSetListDao.pageUpdateImg(pageNo,20);
+        pageEntity.setPageNo(pageNo);
+        return pageEntity;
+    }
+
 
     @GetMapping("/index")
     @ResponseBody
@@ -163,7 +190,7 @@ public class IndexApiController {
         ApiDetailEntity apiDetailEntity = new ApiDetailEntity();
         Random random = new Random();
         int page = random.nextInt(100);
-        List<ImageSetListEntity> recommends = imageSetListDao.myRecommend(page * 6, 6);
+        List<ImageSetListEntity> recommends = imageSetListDao.myRecommend(page * tuConfig.getRandomRecommend(), tuConfig.getRandomRecommend());
         apiDetailEntity.setRecommends(recommends);
         List<LikeRecordEntity> likes = imageSetListDao.getLikeRecord();
         apiDetailEntity.setLikes(likes);
@@ -175,17 +202,23 @@ public class IndexApiController {
 
     @GetMapping("/search")
     @ResponseBody
-    public List<ImageSetListEntity> search(String key, int pageNo) {
+    public PageEntity<ImageSetListEntity> search(String key, int pageNo) {
         key = TuUtils.stringFilter(key);
         List<ImageSetListEntity> imageSetListEntities = imageSetListDao.search(key, (pageNo - 1) * 20);
-        return imageSetListEntities;
+        PageEntity<ImageSetListEntity> page = new PageEntity<>();
+        int total = imageSetListDao.searchCount(key);
+        page.setData(imageSetListEntities);
+        page.setTotal(total);
+        page.setPageNo(pageNo);
+        return page;
     }
 
     @GetMapping("/category/{category}")
     @ResponseBody
-    public List<ImageSetListEntity> categoryImageSetList(int pageNo,@PathVariable("category") String category) {
-        List<ImageSetListEntity> imageSetListEntities = imageSetListDao.findByCategory(category, pageNo, 20);
-        return imageSetListEntities;
+    public PageEntity<ImageSetListEntity> categoryImageSetList(int pageNo,@PathVariable("category") String category) {
+        PageEntity<ImageSetListEntity> pageEntity = imageSetListDao.pageCategory(category, pageNo, 20);
+        pageEntity.setPageNo(pageNo);
+        return pageEntity;
     }
 
     @GetMapping("/category12")

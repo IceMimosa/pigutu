@@ -5,6 +5,7 @@ import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.pigutu.app.entity.PageEntity;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
@@ -94,6 +95,14 @@ public interface BaseDao<T extends BaseModel> {
      */
     default List<T> selectList(Map<String, Object> queries, QueryCondition condition) {
         return _selectList(queries, condition, this);
+    }
+
+    default PageEntity<T> paging(Map<String, Object> queries, QueryCondition condition) {
+        int total = count(queries);
+        PageEntity<T> pageEntity = new PageEntity<>();
+        pageEntity.setData(_selectList(queries, condition, this));
+        pageEntity.setTotal(total);
+        return pageEntity;
     }
 
     /**

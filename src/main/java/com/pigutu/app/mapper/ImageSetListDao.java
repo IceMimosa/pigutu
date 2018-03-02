@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.pigutu.app.entity.ImageSetListEntity;
 import com.pigutu.app.entity.LikeRecordEntity;
+import com.pigutu.app.entity.PageEntity;
 import com.pigutu.app.mapper.mybatis.BaseDao;
 import com.pigutu.app.mapper.mybatis.DBMeta;
 import com.pigutu.app.mapper.mybatis.OrderBy;
@@ -34,6 +35,18 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     @Select({"SELECT * FROM image_set_list where title like '%${keyword}%' or label like '%${keyword}%' order by like_count desc limit  #{page},18"})
     List<ImageSetListEntity> search(@Param("keyword") String keyword, @Param("page") int page);
 
+    /**
+     * 根据类型查询分页
+     */
+ /*   default PageEntity<ImageSetListEntity> pageSearch(String keyword, int page, int pageSize) {
+        return paging(
+                ImmutableMap.of("keyword", keyword),
+                new QueryCondition()
+                        .setPaging(page, pageSize)
+                        .setOrderBy(new OrderBy("likeCount").desc())
+        );
+    }
+*/
     @Select({"SELECT count(*) FROM image_set_list where title like '%${keyword}%' or label like '%${keyword}%'"})
     int searchCount(@Param("keyword") String keyword);
 
@@ -70,6 +83,30 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
                 new QueryCondition()
                         .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("likeCount").desc())
+        );
+    }
+
+    /**
+     * 根据类型查询分页
+     */
+    default PageEntity<ImageSetListEntity> pageCategory(String category, int page, int pageSize) {
+        return paging(
+                ImmutableMap.of("category", category),
+                new QueryCondition()
+                        .setPaging(page, pageSize)
+                        .setOrderBy(new OrderBy("likeCount").desc())
+        );
+    }
+
+    /**
+     * 根据时间查询
+     */
+    default PageEntity<ImageSetListEntity> pageUpdateImg(int page, int pageSize) {
+        return paging(
+                Maps.newHashMap(),
+                new QueryCondition()
+                        .setPaging(page, pageSize)
+                        .setOrderBy(new OrderBy("createTime").desc())
         );
     }
 
