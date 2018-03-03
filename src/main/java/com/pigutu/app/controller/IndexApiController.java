@@ -102,7 +102,6 @@ public class IndexApiController {
     @ResponseBody
     public PageEntity<ImageSetListEntity> updateImg(int pageNo) {
         PageEntity<ImageSetListEntity> pageEntity = imageSetListDao.pageUpdateImg(pageNo,20);
-        pageEntity.setPageNo(pageNo);
         return pageEntity;
     }
 
@@ -157,9 +156,6 @@ public class IndexApiController {
             if (configEntity.getKey().equals("c4")) {
                 carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
-            if (configEntity.getKey().equals("c4")) {
-                carousel.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
-            }
             if (configEntity.getKey().equals("hot1")) {
                 hot.add(apiImageSetListDao.selectImageList(Integer.valueOf(configEntity.getValue())));
             }
@@ -209,7 +205,6 @@ public class IndexApiController {
         int total = imageSetListDao.searchCount(key);
         page.setData(imageSetListEntities);
         page.setTotal(total);
-        page.setPageNo(pageNo);
         return page;
     }
 
@@ -217,7 +212,6 @@ public class IndexApiController {
     @ResponseBody
     public PageEntity<ImageSetListEntity> categoryImageSetList(int pageNo,@PathVariable("category") String category) {
         PageEntity<ImageSetListEntity> pageEntity = imageSetListDao.pageCategory(category, pageNo, 20);
-        pageEntity.setPageNo(pageNo);
         return pageEntity;
     }
 

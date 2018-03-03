@@ -12,6 +12,5 @@ import java.util.List;
 @Data
 public class PageEntity<T> {
     private int total;
-    private int pageNo;
     private List<T> data;
 }

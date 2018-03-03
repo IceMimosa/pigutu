@@ -32,7 +32,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     /**
      * 搜索排行暂时决定用like_count排序
      */
-    @Select({"SELECT * FROM image_set_list where title like '%${keyword}%' or label like '%${keyword}%' order by like_count desc limit  #{page},18"})
+    @Select({"SELECT * FROM image_set_list where title like '%${keyword}%' or label like '%${keyword}%' order by like_count desc limit  #{page},20"})
     List<ImageSetListEntity> search(@Param("keyword") String keyword, @Param("page") int page);
 
     /**
