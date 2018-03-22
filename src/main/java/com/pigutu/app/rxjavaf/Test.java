@@ -9,6 +9,7 @@ public class Test {
             public void call(Subscriber<? super Integer> subscriber) {
                 for(int i=0;i<20;i++){
                     subscriber.onNext(i);
+                    System.out.println("name2 = "+Thread.currentThread().getName());
                 }
             }
         }).map(new Transformer<Integer, String>() {
@@ -16,7 +17,7 @@ public class Test {
             public String call(Integer from) {
                 return from+",";
             }
-        }).subscriber(new Subscriber<String>() {
+        }).observeOn(Schedulers.io()).subscriber(new Subscriber<String>() {
             @Override
             public void onCompleted() {
 
@@ -29,6 +30,7 @@ public class Test {
 
             @Override
             public void onNext(String next) {
+                System.out.println("name = "+Thread.currentThread().getName());
                 System.out.println(next);
             }
         });
