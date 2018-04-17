@@ -32,7 +32,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     /**
      * 搜索排行暂时决定用like_count排序
      */
-    @Select({"SELECT * FROM image_set_list where title like '%${keyword}%' or label like '%${keyword}%' order by like_count desc limit  #{page},20"})
+    @Select({"SELECT * FROM image_set_list where (title like '%${keyword}%' or label like '%${keyword}%') and hide=0 order by like_count desc limit  #{page},20"})
     List<ImageSetListEntity> search(@Param("keyword") String keyword, @Param("page") int page);
 
     /**
@@ -47,7 +47,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
         );
     }
 */
-    @Select({"SELECT count(*) FROM image_set_list where title like '%${keyword}%' or label like '%${keyword}%'"})
+    @Select({"SELECT count(*) FROM image_set_list where (title like '%${keyword}%' or label like '%${keyword}%') and hide=0"})
     int searchCount(@Param("keyword") String keyword);
 
     /**
@@ -55,7 +55,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
      */
     default List<ImageSetListEntity> hotRank(int page, int pageSize) {
         return selectList(
-                Maps.newHashMap(),
+                ImmutableMap.of("hide",0),
                 new QueryCondition()
                         .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("viewCount").desc())
@@ -67,7 +67,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
      */
     default List<ImageSetListEntity> index(int page, int pageSize) {
         return selectList(
-                Maps.newHashMap(),
+                ImmutableMap.of("hide",0),
                 new QueryCondition()
                         .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("likeCount").desc())
@@ -79,7 +79,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
      */
     default List<ImageSetListEntity> findByCategory(String category, int page, int pageSize) {
         return selectList(
-                ImmutableMap.of("category", category),
+                ImmutableMap.of("category", category,"hide",0),
                 new QueryCondition()
                         .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("likeCount").desc())
@@ -91,7 +91,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
      */
     default PageEntity<ImageSetListEntity> pageCategory(String category, int page, int pageSize) {
         return paging(
-                ImmutableMap.of("category", category),
+                ImmutableMap.of("category", category,"hide",0),
                 new QueryCondition()
                         .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("likeCount").desc())
@@ -103,14 +103,14 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
      */
     default PageEntity<ImageSetListEntity> pageUpdateImg(int page, int pageSize) {
         return paging(
-                Maps.newHashMap(),
+                ImmutableMap.of("hide",0),
                 new QueryCondition()
                         .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("createTime").desc())
         );
     }
 
-    @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},18"})
+    @Select({"SELECT * FROM image_set_list where hide=0 order by like_count desc limit  #{page},18"})
     default List<ImageSetListEntity> recommendRank(@Param("page") int page, int pageSize) {
         return selectList(
                 Maps.newHashMap(),
@@ -138,7 +138,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     @Select("select max(id) as id, max(ip) as ip, max(title) as title, max(time) as time, all_images_id, max(cover_url) as cover_url from like_record group by all_images_id order by id desc limit 0,6")
     List<LikeRecordEntity> getLikeRecord();
 
-    @Select({"SELECT * FROM image_set_list order by like_count desc limit  #{page},#{pageNumber}"})
+    @Select({"SELECT * FROM image_set_list where hide=0 order by like_count desc limit  #{page},#{pageNumber}"})
     List<ImageSetListEntity> myRecommend(@Param("page") int pageStart,@Param("pageNumber")int pageNumber);
 
     @Insert("INSERT INTO image_set_list (`category`, `comment_count`, `cover_url`, `create_time`, `img_count`, `label`, `like_count`, `title`, `view_count`, `recommend_count`) VALUES (#{category},#{comment_count},#{cover_url},now(),#{img_count},#{label},#{like_count},#{title},#{view_count},#{recommend_count})")
