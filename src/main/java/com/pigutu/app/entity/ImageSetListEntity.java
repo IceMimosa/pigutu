@@ -24,4 +24,5 @@ public class ImageSetListEntity extends BaseModel {
     private String createTime;
     private int viewCount;
     private int recommendCount;
+    private int hide;
 }

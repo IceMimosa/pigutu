@@ -24,6 +24,11 @@ import java.util.List;
 public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
     String TABLE = "image_set_list";
 
+    @Override
+    default ImageSetListEntity select(Long id) {
+        return _select(id, this);
+    }
+
     // 根据category查询数量
     default int categoryCount(String category) {
         return this.count(ImmutableMap.of("category", category));

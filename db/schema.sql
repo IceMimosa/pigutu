@@ -79,6 +79,7 @@ CREATE TABLE `image_set_list` (
   `title` varchar(100) DEFAULT NULL,
   `view_count` int(11) DEFAULT '0',
   `recommend_count` int(11) DEFAULT '0',
+  `hide` int(2) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
