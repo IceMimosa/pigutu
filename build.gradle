@@ -39,6 +39,8 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.10.3'
 	compileOnly "org.projectlombok:lombok:1.16.16"
+
+	compile 'io.reactivex:rxandroid:1.0.1'
 }
 
 bootRepackage {

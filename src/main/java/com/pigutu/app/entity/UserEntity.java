@@ -12,5 +12,7 @@ import lombok.EqualsAndHashCode;
 public class UserEntity extends BaseModel{
     private String userIcon;
     private String passWord;
-    private String name;
+    private String userName;
+    private String point;//积分
+    private int vip;//积分
 }
