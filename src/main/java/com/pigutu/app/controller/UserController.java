@@ -39,7 +39,7 @@ public class UserController {
         CommentEntity commentEntity = new CommentEntity();
         commentEntity.setFromUser(fromUser);
         commentEntity.setToUser(toUser);
-        commentEntity.setContent(content);
+        commentEntity.setImageId(Integer.valueOf(imageId));
         commentEntity.setContent(content);
         commentDao.insert(commentEntity);
     }

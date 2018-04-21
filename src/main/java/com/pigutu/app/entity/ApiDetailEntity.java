@@ -15,5 +15,6 @@ public class ApiDetailEntity {
     private List<ImageSetEntity> details;
     private List<ImageSetListEntity> recommends;
     private List<LikeRecordEntity> likes;
+    private List<CommentEntity> comments;
     private ImageSetListEntity imageDetail;
 }

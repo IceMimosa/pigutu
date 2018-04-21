@@ -47,6 +47,9 @@ public class IndexApiController {
     @Autowired
     private ConfigDao configDao;
 
+    @Autowired
+    CommentDao commentDao;
+
     @GetMapping("/update/{page}")
     @ResponseBody
     public List<ImageSetListEntity> all(@PathVariable(value = "page") int page) {
@@ -193,6 +196,7 @@ public class IndexApiController {
         List<ImageSetEntity> details = imageSetDao.selectList(ImmutableMap.of("allImagesId", id), new QueryCondition());
         apiDetailEntity.setImageDetail(imageSetListDao.selectOne(ImmutableMap.of("id",id)));
         apiDetailEntity.setDetails(details);
+        apiDetailEntity.setComments(commentDao.selectList(ImmutableMap.of("imageId",id),new QueryCondition()));
         return apiDetailEntity;
     }
 
