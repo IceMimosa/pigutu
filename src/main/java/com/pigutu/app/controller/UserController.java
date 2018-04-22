@@ -3,6 +3,7 @@ package com.pigutu.app.controller;
 import com.google.common.collect.ImmutableMap;
 import com.pigutu.app.entity.CommentEntity;
 import com.pigutu.app.mapper.CommentDao;
+import com.pigutu.app.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ public class UserController {
         commentEntity.setToUser(toUser);
         commentEntity.setImageId(Integer.valueOf(imageId));
         commentEntity.setContent(content);
+        commentEntity.setTime(TimeUtils.Companion.getNowTime());
         commentDao.insert(commentEntity);
     }
 
