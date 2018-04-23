@@ -226,40 +226,4 @@ public class IndexApiController {
         return categoryEntities;
     }
 
-    @GetMapping("/register")
-    @ResponseBody
-    public ReturnEntity register(Model model, UserEntity userEntity) {
-        userDao.insert(userEntity);
-        ReturnEntity returnEntity = new ReturnEntity();
-        if (userDao.insert(userEntity) >= 0) {
-            Map<String, String> map = new HashMap<>();
-            map.put("token", "12");
-            returnEntity.setData(map);
-            returnEntity.setMsg("success");
-            returnEntity.setReturnCode(0);
-        } else {
-            returnEntity.setData("");
-            returnEntity.setMsg("fail");
-            returnEntity.setReturnCode(-1);
-        }
-        return returnEntity;
-    }
-
-    @GetMapping("/login")
-    @ResponseBody
-    public ReturnEntity login(Model model, UserEntity userEntity) {
-        userDao.insert(userEntity);
-        ReturnEntity returnEntity = new ReturnEntity();
-        if (userDao.insert(userEntity) >= 0) {
-            returnEntity.setData("");
-            returnEntity.setMsg("success");
-            returnEntity.setReturnCode(0);
-        } else {
-            returnEntity.setData("");
-            returnEntity.setMsg("fail");
-            returnEntity.setReturnCode(-1);
-        }
-        return returnEntity;
-    }
-
 }

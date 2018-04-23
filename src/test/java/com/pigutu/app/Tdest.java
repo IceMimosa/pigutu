@@ -1,22 +1,14 @@
 package com.pigutu.app;
 
+import com.pigutu.app.utils.JwtHelper;
+
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Tdest {
     public static void main(String args[]) {
-        /*int max=20;
-        int min=10;
-        Random random = new Random();
-
-        int s = random.nextInt(max)%(max-min+1) + min;
-        System.out.println(s);*/
-        int a[] = {1, 2, 5, 4, 3, 9, 8, 78, 65, 57};
-        sort(a,0,9);
-        for(int i:a){
-            System.out.println(i);
-        }
+       System.out.println(JwtHelper.createJWT("aa"));
     }
 
     public static int partition(int []array,int lo,int hi){
