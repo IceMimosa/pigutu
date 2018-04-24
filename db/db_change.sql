@@ -6,3 +6,12 @@ CREATE TABLE `me`.`comment` (
   `time` DATETIME NULL,
   `content` MEDIUMTEXT NULL,
   PRIMARY KEY (`id`));
+
+
+CREATE TABLE `me`.`user` (
+  `id` INT ZEROFILL NOT NULL AUTO_INCREMENT,
+  `icon` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `point` INT(10) ZEROFILL NULL,
+  `vip` INT(5) ZEROFILL NULL,
+  PRIMARY KEY (`id`));

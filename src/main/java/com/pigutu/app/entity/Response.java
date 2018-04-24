@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * Created by me675 on 2018/2/17.
+ * 响应类
  */
 @Data
 public class Response {

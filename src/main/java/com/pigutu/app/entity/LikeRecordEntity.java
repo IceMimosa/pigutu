@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
  * Desc:
  * Created by xuxinwei
  * Date: 2017/9/14
+ * 喜欢类（可用作收藏）
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

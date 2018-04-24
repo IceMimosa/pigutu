@@ -1,31 +1,49 @@
 package com.pigutu.app.entity;
 
-import com.pigutu.app.mapper.mybatis.BaseModel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by me675 on 2018/2/17.
- * 用户类
- */
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class UserEntity extends BaseModel implements UserDetails{
-    private String icon;
-    private String pwd;
-    private String name;
-    private int point;//积分
-    private int vip;//积分
+@Entity
+public class SysUser implements UserDetails {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String username;
+    private String password;
 
+    @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
     private List<SysRole> roles;
-    private List<? extends GrantedAuthority> authorities;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<SysRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -39,12 +57,12 @@ public class UserEntity extends BaseModel implements UserDetails{
 
     @Override
     public String getPassword() {
-        return this.pwd;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return this.name;
+        return this.username;
     }
 
     @Override
