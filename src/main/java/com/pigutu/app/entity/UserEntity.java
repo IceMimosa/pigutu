@@ -24,14 +24,14 @@ public class UserEntity extends BaseModel implements UserDetails{
     private int point;//积分
     private int vip;//积分
 
-    private List<SysRole> roles;
+    private List<RoleEntity> roles;
     private List<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> auths = new ArrayList<>();
-        List<SysRole> roles = this.getRoles();
-        for (SysRole role : roles) {
+        List<RoleEntity> roles = this.getRoles();
+        for (RoleEntity role : roles) {
             auths.add(new SimpleGrantedAuthority(role.getName()));
         }
         return auths;
