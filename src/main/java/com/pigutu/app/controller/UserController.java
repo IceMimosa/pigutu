@@ -7,6 +7,7 @@ import com.pigutu.app.mapper.CollectDao;
 import com.pigutu.app.mapper.CommentDao;
 import com.pigutu.app.mapper.ImageSetListDao;
 import com.pigutu.app.mapper.UserDao;
+import com.pigutu.app.shiro.JWTUtil;
 import com.pigutu.app.utils.JwtHelper;
 import com.pigutu.app.utils.RedisTokenHelper;
 import com.pigutu.app.utils.TimeUtils;
@@ -68,8 +69,13 @@ public class UserController {
     public Response login(String userId, String pwd) {
         UserEntity userEntity = userDao.selectOne(ImmutableMap.of("id", userId));
         if (userEntity == null || !userEntity.getPwd().equals(pwd)) {
-            return Response.error(ErrorCode.HAS_REGISTER);
+            return Response.error(ErrorCode.PWD_ERROR);
         }
+        UserResponse userResponse = new UserResponse();
+        userResponse.setIcon(userEntity.getIcon());
+        userResponse.setName(userEntity.getName());
+        userResponse.setToken(JWTUtil.sign(userId, pwd));
+        userResponse.setUserId(userEntity.getId());
         return Response.success(userEntity);
     }
 
@@ -92,6 +98,7 @@ public class UserController {
 
     @PostMapping("/removeCollect")
     @ResponseBody
+    @RequiresAuthentication
     public void removeCollect(String userId, String imageId) {
         CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("userId",userId,"imageId",imageId));
         if(collectEntity==null){

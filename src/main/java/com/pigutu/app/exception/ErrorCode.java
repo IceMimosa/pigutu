@@ -7,6 +7,7 @@ public class ErrorCode {
     public static int PWD_SHORT = 20002;
     public static int HAS_COLLECT = 20003;
     public static int NO_COLLECT = 20004;//移除收藏图片时如果没有被收藏
+    public static int PWD_ERROR = 20005;
 
     private static HashMap<Integer, String> message = new HashMap<>();
 
@@ -15,6 +16,7 @@ public class ErrorCode {
         message.put(PWD_SHORT, "密码太短");
         message.put(HAS_COLLECT, "该图片已被您收藏");
         message.put(NO_COLLECT, "该图片还未被您收藏");
+        message.put(PWD_ERROR, "账号或密码错误");
     }
 
     public static String getMsg(int code) {

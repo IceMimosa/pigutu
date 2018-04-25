@@ -7,5 +7,5 @@ public class UserResponse {
     private String name;
     private String icon;
     private String token;
-    private String userId;
+    private long userId;
 }

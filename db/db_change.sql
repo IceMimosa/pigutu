@@ -22,3 +22,13 @@ CREATE TABLE `me`.`role` (
   `uid` INT NULL,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+
+-- 用户表
+ALTER TABLE `me`.`user`
+CHANGE COLUMN `username` `name` VARCHAR(100) NOT NULL ,
+CHANGE COLUMN `password` `password` VARCHAR(100) NOT NULL ,
+ADD COLUMN `point` INT(45) NULL AFTER `password`,
+ADD COLUMN `vip` INT(45) NULL AFTER `point`,
+ADD COLUMN `permission` VARCHAR(45) NULL AFTER `vip`,
+ADD COLUMN `role` VARCHAR(45) NULL AFTER `permission`;
+
