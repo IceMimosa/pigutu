@@ -10,7 +10,7 @@ public class UserService {
     @Autowired
     UserDao userDao;
     public UserEntity getUser(String name) {
-        UserEntity userEntity = userDao.selectOne(ImmutableMap.of("name",name));
+        UserEntity userEntity = userDao.selectOne(ImmutableMap.of("id",name));
         return userEntity;
     }
 }

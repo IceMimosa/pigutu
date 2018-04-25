@@ -76,10 +76,10 @@ public class UserController {
         userResponse.setName(userEntity.getName());
         userResponse.setToken(JWTUtil.sign(userId, pwd));
         userResponse.setUserId(userEntity.getId());
-        return Response.success(userEntity);
+        return Response.success(userResponse);
     }
 
-    @PostMapping("/getCollect")
+    @GetMapping("/getCollect")
     @ResponseBody
     @RequiresAuthentication
     public void collect(String userId, String imageId) {
@@ -100,7 +100,7 @@ public class UserController {
     @ResponseBody
     @RequiresAuthentication
     public void removeCollect(String userId, String imageId) {
-        CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("userId",userId,"imageId",imageId));
+        CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("userId",userId,"imageSetId",imageId));
         if(collectEntity==null){
             Response.error(ErrorCode.NO_COLLECT);
         }else{
@@ -109,6 +109,7 @@ public class UserController {
         }
     }
 
+/*
     @GetMapping("/getCollect")
     @ResponseBody
     public Response getCollect(String userId) {
@@ -119,6 +120,7 @@ public class UserController {
         }
         return Response.success(imageSetListDao.selectList(longs));
     }
+*/
 
     @PostMapping("/postComment")
     @ResponseBody
