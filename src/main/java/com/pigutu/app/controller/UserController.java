@@ -10,8 +10,8 @@ import com.pigutu.app.mapper.UserDao;
 import com.pigutu.app.utils.JwtHelper;
 import com.pigutu.app.utils.RedisTokenHelper;
 import com.pigutu.app.utils.TimeUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api1")
+@RequestMapping("/account")
 public class UserController {
     @Autowired
     CommentDao commentDao;
@@ -75,6 +75,7 @@ public class UserController {
 
     @PostMapping("/getCollect")
     @ResponseBody
+    @RequiresAuthentication
     public void collect(String userId, String imageId) {
         CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("userId",userId,"imageId",imageId));
         if(collectEntity==null){
