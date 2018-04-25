@@ -16,7 +16,7 @@ CREATE TABLE `me`.`user` (
   `vip` INT(5) ZEROFILL NULL,
   PRIMARY KEY (`id`));
 
-//新建权限表
+-- 新建权限表
 CREATE TABLE `me`.`role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `uid` INT NULL,
