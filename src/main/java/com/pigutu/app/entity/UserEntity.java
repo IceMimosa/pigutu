@@ -17,53 +17,10 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserEntity extends BaseModel implements UserDetails{
+public class UserEntity extends BaseModel{
     private String icon;
     private String pwd;
     private String name;
     private int point;//积分
     private int vip;//积分
-
-    private List<RoleEntity> roles;
-    private List<? extends GrantedAuthority> authorities;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> auths = new ArrayList<>();
-        List<RoleEntity> roles = this.getRoles();
-        for (RoleEntity role : roles) {
-            auths.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return auths;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.pwd;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.name;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

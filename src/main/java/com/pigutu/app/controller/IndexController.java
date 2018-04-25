@@ -13,10 +13,12 @@ import com.pigutu.app.utils.TuUtils;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -77,7 +79,6 @@ public class IndexController {
         }
         return "pc/index";
     }
-
 
     @GetMapping("/hot/{page}")
     public String hot(HttpServletRequest request, Model model, @PathVariable("page") int page) {

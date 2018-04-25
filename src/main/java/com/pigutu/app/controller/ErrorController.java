@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class ErrorController {
-    @GetMapping("/401")
+   /* @GetMapping("/401")
     public String a401() {
         return "redirect:http://img.pigutu.com/error.html";
     }
@@ -19,5 +19,5 @@ public class ErrorController {
     @GetMapping("/500")
     public String a500() {
         return "redirect:http://img.pigutu.com/error.html";
-    }
+    }*/
 }

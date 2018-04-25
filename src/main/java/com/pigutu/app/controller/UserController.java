@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api1")
 public class UserController {
     @Autowired
     CommentDao commentDao;
@@ -41,12 +41,6 @@ public class UserController {
 
     @Resource
     private RedisTokenHelper redisTokenHelper;
-
-    @RequestMapping("/hello")
-    @ResponseBody
-    public String hello(){
-        return "hello";
-    }
 
 
     @PostMapping("/register")
@@ -81,7 +75,6 @@ public class UserController {
 
     @PostMapping("/getCollect")
     @ResponseBody
-    @PreAuthorize("hasRole('USER')")
     public void collect(String userId, String imageId) {
         CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("userId",userId,"imageId",imageId));
         if(collectEntity==null){
