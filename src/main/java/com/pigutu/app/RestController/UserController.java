@@ -1,4 +1,4 @@
-package com.pigutu.app.controller;
+package com.pigutu.app.RestController;
 
 import com.google.common.collect.ImmutableMap;
 import com.pigutu.app.entity.*;
@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/account")
@@ -79,7 +80,7 @@ public class UserController {
         return Response.success(userResponse);
     }
 
-    @GetMapping("/getCollect")
+    @GetMapping("/collect")
     @ResponseBody
     @RequiresAuthentication
     public void collect(String userId, String imageId) {
@@ -109,7 +110,7 @@ public class UserController {
         }
     }
 
-/*
+
     @GetMapping("/getCollect")
     @ResponseBody
     public Response getCollect(String userId) {
@@ -120,15 +121,15 @@ public class UserController {
         }
         return Response.success(imageSetListDao.selectList(longs));
     }
-*/
+
 
     @PostMapping("/postComment")
     @ResponseBody
-    public void comment(String fromUser, String toUser, String imageId, String content) {
+    public void comment(int fromUserId, int toUserId, int imageId, String content) {
         CommentEntity commentEntity = new CommentEntity();
-        commentEntity.setFromUser(fromUser);
-        commentEntity.setToUser(toUser);
-        commentEntity.setImageId(Integer.valueOf(imageId));
+        commentEntity.setFromUser(userDao.selectOne(ImmutableMap.of("id",fromUserId)).getName());
+        commentEntity.setToUser(userDao.selectOne(ImmutableMap.of("id",toUserId)).getName());
+        commentEntity.setImageId(imageId);
         commentEntity.setContent(content);
         commentEntity.setTime(TimeUtils.Companion.getNowTime());
         commentDao.insert(commentEntity);

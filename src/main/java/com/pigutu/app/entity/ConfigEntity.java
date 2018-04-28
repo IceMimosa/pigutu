@@ -7,6 +7,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ConfigEntity extends BaseModel {
-    private String key;
-    private String value;
+    public String key;
+    public String value;
 }

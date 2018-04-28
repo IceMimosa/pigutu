@@ -79,6 +79,15 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
         );
     }
 
+    default List<ImageSetListEntity> timeDesc(int page, int pageSize) {
+        return selectList(
+                ImmutableMap.of("hide",0),
+                new QueryCondition()
+                        .setPaging(page, pageSize)
+                        .setOrderBy(new OrderBy("createTime").desc())
+        );
+    }
+
     /**
      * 根据类型查询
      */
