@@ -5,6 +5,7 @@ import com.pigutu.app.mapper.mybatis.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Data
@@ -15,6 +16,6 @@ public class CommentEntity extends BaseModel {
     private String fromUser;
     private String toUser;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Timestamp time;
+    private Date time;
     private String content;
 }

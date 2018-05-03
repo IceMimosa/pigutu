@@ -1,7 +1,7 @@
 package com.pigutu.app.utils
 
-import java.sql.Timestamp
-import java.util.*
+import java.sql.Date
+
 
 /**
  * Desc:
@@ -12,8 +12,8 @@ import java.util.*
 class TimeUtils {
     companion object {
         //获取当前系统时间
-        fun getNowTime(): Timestamp {
-            return Timestamp(System.currentTimeMillis())
+        fun getNowTime(): Date {
+            return java.sql.Date(System.currentTimeMillis())
         }
     }
 }
