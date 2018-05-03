@@ -9,7 +9,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/me?useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false
+    url: jdbc:mysql://localhost:3306/me?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: Xuxinwei1234.
 
@@ -18,5 +18,5 @@ mybatis:
     map-underscore-to-camel-case: true
 
 pigutu:
-  url: http://localhost:8080/
-  murl: http://localhost:8080/
+  url: http://www.pigutu.com:8080/
+  murl: http://m.pitutu.com/
