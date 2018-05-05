@@ -7,6 +7,7 @@ import com.pigutu.app.mapper.CollectDao;
 import com.pigutu.app.mapper.CommentDao;
 import com.pigutu.app.mapper.ImageSetListDao;
 import com.pigutu.app.mapper.UserDao;
+import com.pigutu.app.mapper.mybatis.QueryCondition;
 import com.pigutu.app.shiro.JWTUtil;
 import com.pigutu.app.utils.JwtHelper;
 import com.pigutu.app.utils.RedisTokenHelper;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +43,6 @@ public class UserController {
     @Autowired
     CollectDao collectDao;
 
-    @Resource
-    private RedisTokenHelper redisTokenHelper;
-
 
     @PostMapping("/register")
     @ResponseBody
@@ -60,36 +59,34 @@ public class UserController {
         insertUser.setPoint(0);
         insertUser.setVip(0);
         userDao.select(userDao.insert(insertUser)).getId();
-        redisTokenHelper.getObject(RedisTokenHelper.KEY_USER);
-        redisTokenHelper.save(RedisTokenHelper.KEY_USER, JwtHelper.createJWT(name));
         return Response.success(null);
     }
 
     @PostMapping("/login")
     @ResponseBody
-    public Response login(String userId, String pwd) {
-        UserEntity userEntity = userDao.selectOne(ImmutableMap.of("id", userId));
+    public Response login(String name, String pwd) {
+        UserEntity userEntity = userDao.selectOne(ImmutableMap.of("name", name));
         if (userEntity == null || !userEntity.getPwd().equals(pwd)) {
             return Response.error(ErrorCode.PWD_ERROR);
         }
         UserResponse userResponse = new UserResponse();
         userResponse.setIcon(userEntity.getIcon());
         userResponse.setName(userEntity.getName());
-        userResponse.setToken(JWTUtil.sign(userId, pwd));
+        userResponse.setToken(JWTUtil.sign(String.valueOf(userEntity.getId()), pwd));
         userResponse.setUserId(userEntity.getId());
         return Response.success(userResponse);
     }
 
-    @GetMapping("/collect")
+    @PostMapping("/collect")
     @ResponseBody
     @RequiresAuthentication
-    public void collect(String userId, String imageId) {
-        CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("userId",userId,"imageId",imageId));
+    public void collect(Long userId, Long imageId) {
+        CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("user_id",userId,"image_id",imageId));
         if(collectEntity==null){
             collectEntity = new CollectEntity();
             collectEntity.setUserId(userId);
             collectEntity.setImageId(imageId);
-            collectEntity.setTime(new Timestamp(System.currentTimeMillis()));
+            collectEntity.setTime(new Date(System.currentTimeMillis()));
             collectDao.insert(collectEntity);
             Response.success(null);
         }else{
@@ -113,11 +110,11 @@ public class UserController {
 
     @GetMapping("/getCollect")
     @ResponseBody
-    public Response getCollect(String userId) {
-        List<CollectEntity> collectEntities = collectDao.selectList(ImmutableMap.of("userId",userId));
+    public Response getCollect(String userId,int page) {
+        List<CollectEntity> collectEntities = collectDao.selectList(ImmutableMap.of("userId",userId),new QueryCondition().setPaging(page,60));
         List<Long> longs = new ArrayList<>();
         for(CollectEntity collectEntity:collectEntities){
-            longs.add(collectEntity.getId());
+            longs.add(collectEntity.getImageId());
         }
         return Response.success(imageSetListDao.selectList(longs));
     }

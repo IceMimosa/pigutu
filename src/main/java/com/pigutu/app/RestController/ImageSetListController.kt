@@ -54,6 +54,7 @@ class ImageSetListController {
     @GetMapping("/detail")
     @ResponseBody
     fun detail(id:Int):Response{
+        imageSetListDao?.addLikeCount(id)
         return Response.success(imageSetDao?.selectList(ImmutableMap.of("allImagesId",id) as Map<String, Any>?))
     }
 }

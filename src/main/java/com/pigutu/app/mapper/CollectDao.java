@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-@DBMeta(table = FeedBackDao.TABLE)
+@DBMeta(table = CollectDao.TABLE)
 public interface CollectDao extends BaseDao<CollectEntity> {
-
+    String TABLE = "collect";
 }
