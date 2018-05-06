@@ -7,21 +7,21 @@
     <title>${imageSetListEntity.getTitle()}_屁股图高清美女图片</title>
     <meta name="keywords" content="${imageSetListEntity.getLabel()},高清美女图片">
     <meta name="description" content="屁股图高清美女图片-${imageSetListEntity.getTitle()} www.pigutu.com">
-    <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com/">
-    <link href="http://img.pigutu.com/css/image.css" rel="stylesheet" type="text/css">
-    <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
+    <link rel="alternate" media="only screen and(max-width: 640px)" href="//m.pigutu.com/">
+    <link href="//img.pigutu.com/css/image.css" rel="stylesheet" type="text/css">
+    <link href="//img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <body>
 <div class="topbar">
     <div class="header"><h1>屁股图 - 每日高清美女图片</h1></div>
-    <div class="nav"><a href="http://www.pigutu.com/">首页</a>
-        <a href="http://www.pigutu.com/hot/1" class="hot">浏览排行榜</a>
+    <div class="nav"><a href="//www.pigutu.com/">首页</a>
+        <a href="//www.pigutu.com/hot/1" class="hot">浏览排行榜</a>
         <a href="${url}update/1" class="good">最新美图</a>
         <a href="${url}feedback" class="good">反馈</a>
         <i>手机看美女图片可通过m.pigutu.com访问本站</i></div>
-    <div class="subnav"><a href="http://www.pigutu.com/">所有</a><#list categorys as category><a
+    <div class="subnav"><a href="//www.pigutu.com/">所有</a><#list categorys as category><a
             href="/beauty/${category.getParameter()}/1">${category.getTitle()}</a></#list></div>
 </div>
 <div class="main">
@@ -34,7 +34,7 @@
         </div>
         <div class="content" id="content"><#list imageSetLists as imageSet>
             <a href="/view?imageUrl=${imageSet.getUrl()}" target="_blank"><img
-                    src="http://img.pigutu.com/img/${imageSet.getUrl()}/${style}"></a></#list></div>
+                    src="//img.pigutu.com/img/${imageSet.getUrl()}/${style}"></a></#list></div>
         <div class="page"></div>
         <div class="other">
             <div class="tags">
@@ -66,7 +66,7 @@
         <dl class="like" style="margin-top: 50px">
             <dt><h3>最新点赞</h3></dt>
         <#list likeRecords as likeRecord>
-            <dd><a href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank"><img src="http://img.pigutu.com/img/${likeRecord.getCoverUrl()}/like" alt="${likeRecord.getTitle()}"/></a><span><a
+            <dd><a href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank"><img src="//img.pigutu.com/img/${likeRecord.getCoverUrl()}/like" alt="${likeRecord.getTitle()}"/></a><span><a
                     href="${url}image/${likeRecord.getAllImagesId()?c}" target="_blank">${likeRecord.getTitle()}</a></span></dd>
         </#list>
         </dl>
@@ -77,7 +77,7 @@
 </div>
 <div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br>Copyright © 屁股图 苏ICP备15000307号</span></p></div>
 <div style="display:none;">
-    <script type="text/javascript" src="http://img.pigutu.com/js/image.js"></script>
+    <script type="text/javascript" src="//img.pigutu.com/js/image.js"></script>
 </div>
 <script type="text/javascript">
     var myobj = $('.page');
@@ -199,9 +199,9 @@
             var html = '';
             for (var i = 0; i < 8; i++) {
                 if (i == 0 || i == 4) {
-                    html += '<dd class="left"><a href="${url}image/' + obj[i].id + '/1" target="_blank"><img src="http://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
+                    html += '<dd class="left"><a href="${url}image/' + obj[i].id + '/1" target="_blank"><img src="https://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
                 } else {
-                    html += '<dd><a href="${url}image/' + obj[i].id + '/1" target="_blank"><img src="http://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
+                    html += '<dd><a href="${url}image/' + obj[i].id + '/1" target="_blank"><img src="https://img.pigutu.com/img/' + obj[i].coverUrl + '/thumb" width="182" height="277" alt="' + obj[i].title + '" />' + obj[i].title + '</a></dd>';
                 }
             }
             html = '<dt>美图推荐</dt>' + html;

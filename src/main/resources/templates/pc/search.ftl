@@ -6,17 +6,17 @@
     <title>美女图片 - 每日分享高清美女图片 - 屁股图</title>
     <meta name="keywords" content="美女图片,性感美女,妹子图,pigutu">
     <meta name="description" content="屁股图(www.pigutu.com)每日分享最好看的性感美女图片、高清美女写真，做最好的美女网站！">
-    <meta name="mobile-agent" content="format=html5;url=http://m.pigutu.com"/>
-    <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com">
-    <link href="http://hellohappy.oss-cn-shanghai.aliyuncs.com/css/style.css" rel="stylesheet" type="text/css"/>
+    <meta name="mobile-agent" content="format=html5;url=https://m.pigutu.com"/>
+    <link rel="alternate" media="only screen and(max-width: 640px)" href="//m.pigutu.com">
+    <link href="//img.pigutu.com/css/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         var ubr = navigator.userAgent.toLowerCase();
         if (ubr.indexOf('mobile') > -1) {
-            top.location.href = 'http://m.pigutu.com';
+            top.location.href = '//m.pigutu.com';
         }
     </script>
     <script type="text/javascript"
-            src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/js/PagingManage.js?version=3"></script>
+            src="//img.pigutu.com/js/PagingManage.js?version=3"></script>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
@@ -34,7 +34,7 @@
         <ul>
         <#list imageSetLists as imageSetList>
             <li><a href="${url}image/${imageSetList.getId()?c}" target="_blank"><img
-                    src="http://hellohappy.oss-cn-shanghai.aliyuncs.com/img/${imageSetList.getCoverUrl()}/thumb"
+                    src="//img.pigutu.com/img/${imageSetList.getCoverUrl()}/thumb"
                     width="220" height="330"
                     alt="${imageSetList.getTitle()}"/></a><span
                     class="title"><a href="${url}image/${imageSetList.getId()?c}"
@@ -58,7 +58,7 @@
 <div class="footer"><p><span>最好看的美女图片就在屁股图，记住我们的网址 pigutu.com<br/>Copyright &copy; 2016 屁股图 湘ICP3</span></p>
 </div>
 <div style="display:none;">
-    <script type="text/javascript" src="http://img.pigutu.com/js/image.js"></script>
+    <script type="text/javascript" src="//img.pigutu.com/js/image.js"></script>
 </div>
 <script type="text/javascript">
     var obj = $('.page');

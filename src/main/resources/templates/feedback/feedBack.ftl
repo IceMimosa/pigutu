@@ -7,9 +7,9 @@
     <title>美女图片_屁股图</title>
     <meta name="keywords" content="美女图片,pigutu,屁股图">
     <meta name="description" content="屁股图分享高清美女图片- www.pigutu.com">
-    <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.pigutu.com/">
-    <link href="http://img.pigutu.com/css/image.css" rel="stylesheet" type="text/css">
-    <link href="http://img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
+    <link rel="alternate" media="only screen and(max-width: 640px)" href="//m.pigutu.com/">
+    <link href="img.pigutu.com/css/image.css" rel="stylesheet" type="text/css">
+    <link href="img.pigutu.com/css/favicon.ico" rel="shortcut icon"/>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
