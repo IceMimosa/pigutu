@@ -24,7 +24,8 @@ public class OssHelper {
             e.printStackTrace();
         }
         String time = String.valueOf(System.currentTimeMillis());
-        ossClient.putObject("hellohappy", folder+"/"+time.substring(time.length()-3,time.length())+imageIndex+".jpg", inputStream);
+        //todo 这里需要imagesetdao上报
+        ossClient.putObject("hellohappy", folder+"/"+imageIndex+".jpg", inputStream);
 // 关闭client
         ossClient.shutdown();
     }
