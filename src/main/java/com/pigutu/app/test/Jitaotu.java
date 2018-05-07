@@ -12,6 +12,8 @@ public class Jitaotu {
     public static void main(String args[]){
         ArrayList<String> imgList = new ArrayList<>();
         ArrayList<String> tagList = new ArrayList<>();
+        String trueTitle;
+        int imgCount;
         String title;
         try {
             System.out.println("start");
@@ -27,9 +29,12 @@ public class Jitaotu {
                 tagList.add(element.text().trim());
             }
             title = document.select("h1").text().trim();
+            title = title.substring(0,title.length()-1);
+            trueTitle = title.split("\\(")[0];
+            imgCount = Integer.valueOf(title.split("\\(")[1].substring(0,title.split("\\(")[1].length()-1));
             //移除最后一个公众号广告
             imgList.remove(imgList.size()-1);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
