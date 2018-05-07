@@ -1,7 +1,6 @@
-package com.pigutu.app.test;
+package com.pigutu.app.utils;
 
-import com.pigutu.app.utils.JitaotuHelper;
-import com.pigutu.app.utils.OssHelper;
+import com.pigutu.app.mapper.ImageSetListDao;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,16 +9,15 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Jitaotu {
-    public static void main(String args[]){
-        //JitaotuHelper.getImageSetList();
-       // OssHelper.uploadImageUrl("https://www.baidu.com/img/bd_logo1.png","background/446","1");
+public class JitaotuHelper {
+    public static void getImageSetList(ImageSetListDao imageSetListDao,String url){
         ArrayList<String> imgList = new ArrayList<>();
         ArrayList<String> tagList = new ArrayList<>();
         String title;
         try {
             System.out.println("start jitaotu");
-            Document document = Jsoup.connect("http://www.jitaotu.com/xinggan/66048-all.html").userAgent("Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.75 Safari/535.7")
+            //http://www.jitaotu.com/xinggan/66048-all.html
+            Document document = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.75 Safari/535.7")
                     .timeout(10*1000).get();
             Elements elements = document.body().getElementsByClass("picsbox picsboxcenter");
             Elements tagElements = document.body().getElementsByClass("pleft").select("span").select("a");
@@ -33,6 +31,7 @@ public class Jitaotu {
             title = document.select("h1").text().trim();
             //移除最后一个公众号广告
             imgList.remove(imgList.size()-1);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

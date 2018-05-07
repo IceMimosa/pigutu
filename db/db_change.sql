@@ -32,3 +32,11 @@ ADD COLUMN `vip` INT(45) NULL AFTER `point`,
 ADD COLUMN `permission` VARCHAR(45) NULL AFTER `vip`,
 ADD COLUMN `role` VARCHAR(45) NULL AFTER `permission`;
 
+-- 更新表
+CREATE TABLE `me`.`upgrade` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `version_name` VARCHAR(45) NULL,
+  `info` VARCHAR(200) NULL,
+  `apk_url` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
