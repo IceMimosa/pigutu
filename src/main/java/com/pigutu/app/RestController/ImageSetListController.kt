@@ -63,9 +63,9 @@ class ImageSetListController {
     //查询更新
     @GetMapping("/upgrade")
     @ResponseBody
-    fun upgrade(id: Int): Response {
+    fun upgrade(): Response {
         var upgradeList = upgradeDao!!.selectAll()
-        if (upgradeList.size == 0) return Response.success(null)
+        if (upgradeList == null || upgradeList.size == 0) return Response.success(null)
         return Response.success(upgradeList[upgradeList.size - 1])
     }
 }
