@@ -1,9 +1,12 @@
 package com.pigutu.app.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pigutu.app.mapper.mybatis.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.sql.Date;
 
 /**
  * Created by me on 2016/6/24.
@@ -21,7 +24,8 @@ public class ImageSetListEntity extends BaseModel {
     private int commentCount;
     private String category;
     private String label;
-    private String createTime;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
     private int viewCount;
     private int recommendCount;
     private int hide;

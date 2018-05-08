@@ -114,6 +114,7 @@ public class IndexApiController {
     public ApiIndexEntity index() {
         int page = 1;
         ApiIndexEntity apiIndexEntity = new ApiIndexEntity();
+        List<ImageSetListEntity> last = imageSetListDao.selectList(ImmutableMap.of("hide",0),new QueryCondition().setPaging(page,  tuConfig.getCategoryPageNumber()).setOrderBy(new OrderBy("create_time").desc()));
         List<ImageSetListEntity> minxing = apiImageSetListDao.mingxing(page, tuConfig.getCategoryPageNumber());
         List<ImageSetListEntity> qincun = apiImageSetListDao.qincun(page, tuConfig.getCategoryPageNumber());
         List<ImageSetListEntity> yundong = apiImageSetListDao.yundong(page, tuConfig.getCategoryPageNumber());
@@ -122,6 +123,7 @@ public class IndexApiController {
         List<ImageSetListEntity> bijini = apiImageSetListDao.bijini(page, tuConfig.getCategoryPageNumber());
         List<ImageSetListEntity> neiyi = apiImageSetListDao.neiyi(page, tuConfig.getCategoryPageNumber());
         List<ImageSetListEntity> cosplay = apiImageSetListDao.cosplay(page, tuConfig.getCategoryPageNumber());
+        List<ImageSetListEntity> lastCount = imageSetListDao.selectList(ImmutableMap.of("hide", 0), new QueryCondition().setPaging(page, tuConfig.getCategoryViewCountPageNumber()).setOrderBy(new OrderBy("viewCount").desc()));
         List<ImageSetListEntity> minxingViewCount = apiImageSetListDao.mingxingViewCount(page, tuConfig.getCategoryViewCountPageNumber());
         List<ImageSetListEntity> qincunViewCount = apiImageSetListDao.qincunViewCount(page, tuConfig.getCategoryViewCountPageNumber());
         List<ImageSetListEntity> yundongViewCount = apiImageSetListDao.yundongViewCount(page, tuConfig.getCategoryViewCountPageNumber());
@@ -132,6 +134,7 @@ public class IndexApiController {
         List<ImageSetListEntity> cosplayViewCount = apiImageSetListDao.cosplayViewCount(page, tuConfig.getCategoryViewCountPageNumber());
         List<ApiIndexEntity.Category> categories = new ArrayList<>();
 
+        categories.add(new ApiIndexEntity.Category("最近更新", last, lastCount));
         categories.add(new ApiIndexEntity.Category("明星", minxing, minxingViewCount));
         categories.add(new ApiIndexEntity.Category("清纯", qincun, qincunViewCount));
         categories.add(new ApiIndexEntity.Category("运动", yundong, yundongViewCount));

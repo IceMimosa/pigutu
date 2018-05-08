@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/me?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: 123456
+    password: Xuxinwei1234.
 
 mybatis:
   configuration:
@@ -19,4 +19,4 @@ mybatis:
 
 pigutu:
   url: https://www.pigutu.com:8080/
-  murl: https://m.pitutu.com/
+  murl: http://m.pitutu.com/

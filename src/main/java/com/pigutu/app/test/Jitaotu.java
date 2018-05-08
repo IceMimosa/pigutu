@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Jitaotu {
     public static void main(String args[]) {
-        ArrayList<ArrayList<String>> data = JitaotuHelper.getTitleAndIndex("http://www.jitaotu.com/xinggan/");
+        ArrayList<ArrayList<String>> data = JitaotuHelper.getIndexAndTitle("http://www.jitaotu.com/xinggan/");
         for (int i = 0; i < 1; i++) {
             JitaotuHelper.Taotu taotu = JitaotuHelper.getImageSetList("http://www.jitaotu.com/xinggan/" + data.get(0).get(i) + "-all.html");
             for (int index = 0; index < taotu.getImgList().size(); index++) {

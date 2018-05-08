@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JitaotuHelper {
-    public static ArrayList<ArrayList<String>> getTitleAndIndex(String indexUrl){
+    public static ArrayList<ArrayList<String>> getIndexAndTitle(String indexUrl){
         ArrayList<ArrayList<String>> data = new ArrayList<>();
         ArrayList<String> indexList = new ArrayList<>();
         ArrayList<String> titleList = new ArrayList<>();

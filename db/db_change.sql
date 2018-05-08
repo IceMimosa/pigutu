@@ -40,3 +40,12 @@ CREATE TABLE `me`.`upgrade` (
   `apk_url` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
 
+-- 默认值改 0
+ALTER TABLE `me`.`image_set_list`
+CHANGE COLUMN `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE COLUMN `comment_count` `comment_count` INT(11) ZEROFILL NULL DEFAULT NULL ,
+CHANGE COLUMN `img_count` `img_count` INT(11) ZEROFILL NULL ,
+CHANGE COLUMN `like_count` `like_count` INT(11) ZEROFILL NULL DEFAULT NULL ,
+CHANGE COLUMN `view_count` `view_count` INT(11) ZEROFILL NULL DEFAULT '0' ,
+CHANGE COLUMN `recommend_count` `recommend_count` INT(11) ZEROFILL NULL DEFAULT '0' ,
+CHANGE COLUMN `hide` `hide` INT(2) ZEROFILL NULL DEFAULT '0' ;
