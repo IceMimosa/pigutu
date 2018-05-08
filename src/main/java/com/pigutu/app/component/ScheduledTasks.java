@@ -1,6 +1,7 @@
 package com.pigutu.app.component;
 
 import com.google.common.collect.ImmutableMap;
+import com.pigutu.app.entity.ImageSetEntity;
 import com.pigutu.app.entity.ImageSetListEntity;
 import com.pigutu.app.mapper.ConfigDao;
 import com.pigutu.app.mapper.ImageSetDao;
@@ -47,10 +48,7 @@ public class ScheduledTasks {
         //0 index 1 title
         ArrayList<ArrayList<String>> data = JitaotuHelper.getIndexAndTitle("http://www.jitaotu.com/xinggan/");
         for (int i = 0; i < data.get(0).size(); i++) {
-            //根据title检测是否存在图片集,如果存在即证明上传完毕了，全部暂停
-            if(imageSetListDao.selectOne(ImmutableMap.of("title",data.get(1).get(i)))!=null){
-                break;
-            }
+
             log.debug("开始上传图集->"+data.get(0).get(i)+",title="+data.get(1).get(i));
             JitaotuHelper.Taotu taotu = JitaotuHelper.getImageSetList("http://www.jitaotu.com/xinggan/" + data.get(0).get(i) + "-all.html");
             ImageSetListEntity imageSetListEntity = new ImageSetListEntity();
@@ -59,7 +57,13 @@ public class ScheduledTasks {
             imageSetListEntity.setImgCount(taotu.getImgCount());
             imageSetListEntity.setLabel(taotu.getTag());
             imageSetListEntity.setTitle(taotu.getTitle());
-            long id = imageSetListDao.insert(imageSetListEntity);
+            long id = 0l;
+            ImageSetListEntity imageSetListEntity22 = imageSetListDao.selectOne(ImmutableMap.of("title",data.get(1).get(i)));
+            if(imageSetListEntity22==null){
+                id = imageSetListDao.insert(imageSetListEntity);
+            }else{
+                id = imageSetListEntity22.getId();
+            }
             SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
             for (int index = 0; index < taotu.getImgList().size(); index++) {
                 String time = String.valueOf(System.currentTimeMillis());
@@ -68,6 +72,10 @@ public class ScheduledTasks {
                     imageSetListDao.update(id,ImmutableMap.of("cover_url",df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg"));
                 }
                 OssHelper.uploadImageUrl(taotu.getImgList().get(index), "img/"+df.format(System.currentTimeMillis())+"/"+id, time);
+                ImageSetEntity imageSetEntity = new ImageSetEntity();
+                imageSetEntity.setAllImagesId((int)id);
+                imageSetEntity.setUrl(df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg");
+                imageSetDao.insert(imageSetEntity);
             }
         }
     }
