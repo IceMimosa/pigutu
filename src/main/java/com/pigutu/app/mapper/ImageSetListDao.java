@@ -104,6 +104,14 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
      * 根据类型查询分页
      */
     default PageEntity<ImageSetListEntity> pageCategory(String category, int page, int pageSize) {
+        if(category.equals("最近更新")) {
+            return paging(
+                    ImmutableMap.of("hide",0),
+                    new QueryCondition()
+                            .setPaging(page, pageSize)
+                            .setOrderBy(new OrderBy("createTime").desc())
+            );
+        }
         return paging(
                 ImmutableMap.of("category", category,"hide",0),
                 new QueryCondition()

@@ -68,13 +68,14 @@ public class ScheduledTasks {
             for (int index = 0; index < taotu.getImgList().size(); index++) {
                 String time = String.valueOf(System.currentTimeMillis());
                 if(index == 0){
-                   // log.debug("cover_url"+df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg");
+                    log.debug("cover_url"+df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg");
                     imageSetListDao.update(id,ImmutableMap.of("cover_url",df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg"));
                 }
                 OssHelper.uploadImageUrl(taotu.getImgList().get(index), "img/"+df.format(System.currentTimeMillis())+"/"+id, time);
                 ImageSetEntity imageSetEntity = new ImageSetEntity();
                 imageSetEntity.setAllImagesId((int)id);
                 imageSetEntity.setUrl(df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg");
+                log.debug("upload image image = "+time);
                 imageSetDao.insert(imageSetEntity);
             }
         }
