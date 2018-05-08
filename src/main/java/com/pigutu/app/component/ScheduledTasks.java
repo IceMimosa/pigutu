@@ -79,5 +79,6 @@ public class ScheduledTasks {
                 imageSetDao.insert(imageSetEntity);
             }
         }
+        log.debug("jitaotu end");
     }
 }
