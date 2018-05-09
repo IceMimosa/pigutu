@@ -18,5 +18,5 @@ mybatis:
     map-underscore-to-camel-case: true
 
 pigutu:
-  url: https://www.pigutu.com:8080/
+  url: http://www.pigutu.com:8080/
   murl: http://m.pitutu.com/
