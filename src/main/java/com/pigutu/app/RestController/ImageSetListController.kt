@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
-@RequestMapping("/rest")
+@RequestMapping("/v1/rest")
 class ImageSetListController {
     @Autowired
     private val categoryDao: CategoryDao? = null

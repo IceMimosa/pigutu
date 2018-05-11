@@ -3,10 +3,7 @@ package com.pigutu.app.RestController;
 import com.google.common.collect.ImmutableMap;
 import com.pigutu.app.entity.*;
 import com.pigutu.app.exception.ErrorCode;
-import com.pigutu.app.mapper.CollectDao;
-import com.pigutu.app.mapper.CommentDao;
-import com.pigutu.app.mapper.ImageSetListDao;
-import com.pigutu.app.mapper.UserDao;
+import com.pigutu.app.mapper.*;
 import com.pigutu.app.mapper.mybatis.QueryCondition;
 import com.pigutu.app.shiro.JWTUtil;
 import com.pigutu.app.utils.JwtHelper;
@@ -29,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/v1/account")
 public class UserController {
     @Autowired
     CommentDao commentDao;
@@ -42,6 +39,9 @@ public class UserController {
 
     @Autowired
     CollectDao collectDao;
+
+    @Autowired
+    ConfigDao configDao;
 
 
     @PostMapping("/register")
@@ -137,4 +137,5 @@ public class UserController {
     public List<CommentEntity> getComment(String imageId) {
         return commentDao.selectList(ImmutableMap.of("imageId", imageId));
     }
+
 }
