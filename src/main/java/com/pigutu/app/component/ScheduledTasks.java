@@ -45,40 +45,20 @@ public class ScheduledTasks {
     //一天抓一次jitaotu
     @Scheduled(fixedRate = 1000*60*60*24)
     public void jsoupJitaotu(){
-        //0 index 1 title
-        ArrayList<ArrayList<String>> data = JitaotuHelper.getIndexAndTitle("http://www.jitaotu.com/xinggan/");
-        for (int i = 0; i < data.get(0).size(); i++) {
-
-            log.debug("开始上传图集->"+data.get(0).get(i)+",title="+data.get(1).get(i));
-            JitaotuHelper.Taotu taotu = JitaotuHelper.getImageSetList("http://www.jitaotu.com/xinggan/" + data.get(0).get(i) + "-all.html");
-            ImageSetListEntity imageSetListEntity = new ImageSetListEntity();
-            imageSetListEntity.setCreateTime(new Date(System.currentTimeMillis()));
-            imageSetListEntity.setCategory("内衣");
-            imageSetListEntity.setImgCount(taotu.getImgCount());
-            imageSetListEntity.setLabel(taotu.getTag());
-            imageSetListEntity.setTitle(taotu.getTitle());
-            long id = 0l;
-            ImageSetListEntity imageSetListEntity22 = imageSetListDao.selectOne(ImmutableMap.of("title",data.get(1).get(i)));
-            if(imageSetListEntity22==null){
-                id = imageSetListDao.insert(imageSetListEntity);
-            }else{
-                id = imageSetListEntity22.getId();
-            }
-            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-            for (int index = 0; index < taotu.getImgList().size(); index++) {
-                String time = String.valueOf(System.currentTimeMillis());
-                if(index == 0){
-                    log.debug("cover_url"+df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg");
-                    imageSetListDao.update(id,ImmutableMap.of("cover_url",df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg"));
-                }
-                OssHelper.uploadImageUrl(taotu.getImgList().get(index), "img/"+df.format(System.currentTimeMillis())+"/"+id, time);
-                ImageSetEntity imageSetEntity = new ImageSetEntity();
-                imageSetEntity.setAllImagesId((int)id);
-                imageSetEntity.setUrl(df.format(System.currentTimeMillis())+"/"+id+"/"+time+".jpg");
-                log.debug("upload image image = "+time);
-                imageSetDao.insert(imageSetEntity);
-            }
+        Random random = new Random();
+        int minute = random.nextInt(60);
+        //延迟一定分钟，避免太规律
+        try {
+            Thread.sleep(minute*60*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        log.debug("jitaotu end");
+        JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/xinggan/","xinggan","内衣");
+        JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/qingchun/","qingchun","清纯");
+        JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/mote/","mote","内衣");
+        JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/xiaohua/","xiaohua","清纯");
+        JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/mingxing/","mingxing","明星");
+        JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/cosplay/","cosplay","Cosplay");
+        JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/qipao/","qipao","内衣");
     }
 }
