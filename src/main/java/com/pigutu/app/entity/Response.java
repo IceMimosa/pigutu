@@ -1,6 +1,8 @@
 package com.pigutu.app.entity;
 
 import com.pigutu.app.exception.ErrorCode;
+import com.pigutu.app.utils.AESUtil;
+import com.pigutu.app.utils.GsonHelper;
 import lombok.Data;
 
 /**
@@ -20,7 +22,7 @@ public class Response {
     }
 
     public static Response success(Object data) {
-        return new Response(0,"success",data);
+        return new Response(0,"success", AESUtil.encrypt(GsonHelper.INSTANCE.getGson().toJson(data),"p112g"));
     }
 
     public static Response error(int code) {

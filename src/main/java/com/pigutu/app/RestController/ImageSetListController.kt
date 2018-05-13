@@ -60,12 +60,5 @@ class ImageSetListController {
         return Response.success(imageSetDao?.selectList(ImmutableMap.of("allImagesId", id) as Map<String, Any>?))
     }
 
-    //查询更新
-    @GetMapping("/upgrade")
-    @ResponseBody
-    fun upgrade(): Response {
-        var upgradeList = upgradeDao!!.selectAll()
-        if (upgradeList == null || upgradeList.size == 0) return Response.success(null)
-        return Response.success(upgradeList[upgradeList.size - 1])
-    }
+
 }
