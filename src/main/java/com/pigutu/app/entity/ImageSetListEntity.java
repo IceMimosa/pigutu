@@ -29,4 +29,6 @@ public class ImageSetListEntity extends BaseModel {
     private int viewCount;
     private int recommendCount;
     private int hide;
+
+    private int isLike=0;
 }

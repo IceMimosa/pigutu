@@ -47,13 +47,6 @@ class BasicController {
         return ResponseReturn.success(mapList)
     }
 
-    //查询关键词
-    @GetMapping("/getKeyword")
-    @ResponseBody
-    fun getKeyword(page:Int): ResponseReturn {
-        return ResponseReturn.success(keywordDao!!.selectList(Maps.newHashMap(), QueryCondition().setPaging(page,20).setOrderBy(OrderBy("count").desc())))
-    }
-
     //查询更新
     @GetMapping("/upgrade")
     @ResponseBody
@@ -61,24 +54,5 @@ class BasicController {
         var upgradeList = upgradeDao!!.selectAll()
         if (upgradeList == null || upgradeList.size == 0) return ResponseReturn.success(null)
         return ResponseReturn.success(upgradeList[upgradeList.size - 1])
-    }
-
-    //搜索
-    @GetMapping("/search")
-    @ResponseBody
-    fun search(keyword:String,page:Int): ResponseReturn {
-        var keywordEntity = keywordDao!!.selectOne(ImmutableMap.of("name",keyword) as Map<String,Object>)
-        //增加或加1 热门搜索
-        if(keywordEntity==null){
-            var insertKey = KeywordEntity()
-            insertKey.count = 1
-            insertKey.name = keyword
-            keywordDao.insert(insertKey)
-        }else{
-            keywordEntity.count = keywordEntity.count!!.plus(1)
-            keywordDao.update(keywordEntity)
-        }
-        var searchImg = imageSetListDao!!.search(keyword,page)
-        return ResponseReturn.success(searchImg)
     }
 }
