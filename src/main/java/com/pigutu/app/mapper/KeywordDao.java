@@ -15,6 +15,6 @@ import java.util.List;
 @Repository
 @DBMeta(table = KeywordDao.TABLE)
 public interface KeywordDao extends BaseDao<KeywordEntity> {
-    String TABLE = "keyword";
+    String TABLE = "hot_keyword";
 
 }

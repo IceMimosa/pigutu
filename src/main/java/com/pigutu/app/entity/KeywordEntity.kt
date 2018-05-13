@@ -12,6 +12,6 @@ import lombok.EqualsAndHashCode
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class KeywordEntity : BaseModel() {
-    var keyword:String?=null
+    var name:String?=null
     var count:Int?=null
 }
