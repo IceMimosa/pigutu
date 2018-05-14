@@ -6,6 +6,7 @@ import com.pigutu.app.mapper.mybatis.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Transient;
 import java.sql.Date;
 
 /**
@@ -17,18 +18,18 @@ import java.sql.Date;
 public class ImageSetListEntity extends BaseModel {
     private static final long serialVersionUID = -5015945832815071384L;
 
-    private String title;
-    private String coverUrl;
-    private int likeCount;
-    private int imgCount;
-    private int commentCount;
-    private String category;
-    private String label;
+    public String title;
+    public String coverUrl;
+    public int likeCount;
+    public int imgCount;
+    public int commentCount;
+    public String category;
+    public String label;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
-    private int viewCount;
-    private int recommendCount;
-    private int hide;
-
-    private int isLike=0;
+    public Date createTime;
+    public int viewCount;
+    public int recommendCount;
+    public int hide;
+    @Transient
+    public int isLike=0;
 }
