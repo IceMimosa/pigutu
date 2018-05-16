@@ -19,7 +19,7 @@ public class Jitaotu {
         try {
             String a= "aaaaaaaaaaaaaaaaadfdfdaaaaaaaaaasfddfdfeaaaaadfefsdfddfssssssssssss";
             System.out.println(a.length());
-            System.out.println(AESUtil.encrypt(a, Base64.encode("p112g".getBytes("utf-8"))+Base64.encode("p112g".getBytes("utf-8"))).length());
+            System.out.println(Base64.encode("p112g".getBytes("utf-8"))+Base64.encode("p112g".getBytes("utf-8")));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
