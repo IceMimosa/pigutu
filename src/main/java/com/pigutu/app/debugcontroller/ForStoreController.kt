@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest
 
 @Controller
 @RequestMapping("/de/image")
-class ImageSetListController {
+class ForStoreController {
     @Autowired
     private val categoryDao: CategoryDao? = null
     @Autowired
@@ -44,7 +44,7 @@ class ImageSetListController {
     fun lastImage(page: Int): ResponseReturn {
         var map: HashMap<String, List<ImageSetListEntity>> = HashMap()
         var imageList = ArrayList<ImageSetListEntity>()
-        imageList.add(imageSetListDao!!.selectOne(ImmutableMap.of("id", 5067) as Map<String, Any>?))
+        imageList.add(imageSetListDao!!.selectOne(ImmutableMap.of("id", 2708) as Map<String, Any>?))
         imageList.add(imageSetListDao!!.selectOne(ImmutableMap.of("id", 102) as Map<String, Any>?))
         imageList.add(imageSetListDao!!.selectOne(ImmutableMap.of("id", 3205) as Map<String, Any>?))
         imageList.add(imageSetListDao!!.selectOne(ImmutableMap.of("id", 3348) as Map<String, Any>?))
@@ -52,14 +52,14 @@ class ImageSetListController {
         imageList.add(imageSetListDao!!.selectOne(ImmutableMap.of("id", 3078) as Map<String, Any>?))
         map.put("carousel", imageList)
         var imageSetList = imageSetListDao!!.selectList(
-                ImmutableMap.of<String, Any>("category", "明星", "category", "清纯", "hide", 0),
+                ImmutableMap.of<String, Any>("category", "明星",  "hide", 0),
                 QueryCondition()
                         .setPaging(page, 20)
                         .setOrderBy(OrderBy("createTime").desc()))
         var userId = request!!.getHeader("userId")
         if (!TextUtils.isEmpty(userId)) {
             for ((index, imageSet) in imageSetList.withIndex()) {
-                if (collectDao!!.selectOne(ImmutableMap.of("category", "明星", "category", "清纯", "userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
+                if (collectDao!!.selectOne(ImmutableMap.of( "userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
                     imageSet.isLike = 1
                     imageSetList[index] = imageSet
                 }
@@ -73,7 +73,7 @@ class ImageSetListController {
     @GetMapping("/allCategory")
     @ResponseBody
     fun allCategory(): ResponseReturn {
-        return ResponseReturn.success(categoryDao?.selectAll())
+        return ResponseReturn.success(categoryDao?.selectList(ImmutableMap.of("category", "明星") as Map<String, Object>))
     }
 
     //分类
@@ -84,7 +84,7 @@ class ImageSetListController {
         var imageSetList = imageSetListDao?.findByCategory(category, page, 20)
         if (!TextUtils.isEmpty(userId)) {
             for ((index, imageSet) in imageSetList!!.withIndex()) {
-                if (collectDao!!.selectOne(ImmutableMap.of("category", "明星", "category", "清纯", "userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
+                if (collectDao!!.selectOne(ImmutableMap.of("userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
                     imageSet.isLike = 1
                     imageSetList[index] = imageSet
                 }
@@ -123,7 +123,7 @@ class ImageSetListController {
         var userId = request!!.getHeader("userId")
         if (!TextUtils.isEmpty(userId)) {
             for ((index, imageSet) in imageSetList.withIndex()) {
-                if (collectDao!!.selectOne(ImmutableMap.of("category","明星","category","清纯","userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
+                if (collectDao!!.selectOne(ImmutableMap.of("userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
                     imageSet.isLike = 1
                     imageSetList[index] = imageSet
                 }
@@ -139,43 +139,83 @@ class ImageSetListController {
         var keyList = ArrayList<KeywordEntity>()
         var key1 = KeywordEntity()
         key1.id=1;
-        key1.name=""
+        key1.name="明星"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="美女"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="高挑"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="性感"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="可爱"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="萝莉"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="妖娆"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="罗尼"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="图片"
         key1.count=100
         keyList.add(key1)
         key1.id=1;
-        key1.name=""
+        key1.name="美图"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="美女图"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="美"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="图"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="感"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="青春"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="清纯"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="清"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="少女"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="风度"
+        key1.count=100
+        keyList.add(key1)
+        key1.id=1;
+        key1.name="秋色"
         key1.count=100
         keyList.add(key1)
         return ResponseReturn.success(keyList)
