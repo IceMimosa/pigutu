@@ -47,7 +47,7 @@ public class ScheduledTasks {
     public void jsoupJitaotu(){
         Random random = new Random();
         int minute = random.nextInt(60);
-        //延迟一定分钟，避免太规律
+        //延迟一定分钟，避免太规律,而且防止每次调试就抓
         try {
             Thread.sleep(minute*60*1000);
         } catch (InterruptedException e) {
