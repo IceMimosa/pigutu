@@ -73,8 +73,7 @@ public class UserController {
 
     @PostMapping("/collect")
     @ResponseBody
-    @RequiresAuthentication
-    public void collect(Long userId, Long imageId) {
+    public ResponseReturn collect(Long userId, Long imageId) {
         CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("user_id",userId,"image_id",imageId));
         if(collectEntity==null){
             collectEntity = new CollectEntity();
@@ -82,22 +81,22 @@ public class UserController {
             collectEntity.setImageId(imageId);
             collectEntity.setTime(new Date(System.currentTimeMillis()));
             collectDao.insert(collectEntity);
-            ResponseReturn.success(null);
+            return ResponseReturn.success(null);
         }else{
-            ResponseReturn.error(ErrorCode.HAS_COLLECT);
+            return ResponseReturn.error(ErrorCode.HAS_COLLECT);
         }
     }
 
     @PostMapping("/removeCollect")
     @ResponseBody
     @RequiresAuthentication
-    public void removeCollect(String userId, String imageId) {
+    public ResponseReturn removeCollect(String userId, String imageId) {
         CollectEntity collectEntity = collectDao.selectOne(ImmutableMap.of("userId",userId,"imageSetId",imageId));
         if(collectEntity==null){
-            ResponseReturn.error(ErrorCode.NO_COLLECT);
+            return ResponseReturn.error(ErrorCode.NO_COLLECT);
         }else{
             collectDao.delete(collectEntity.getId());
-            ResponseReturn.success(null);
+            return ResponseReturn.success(null);
         }
     }
 
@@ -116,7 +115,7 @@ public class UserController {
 
     @PostMapping("/postComment")
     @ResponseBody
-    public void comment(int fromUserId, int toUserId, int imageId, String content) {
+    public ResponseReturn comment(int fromUserId, int toUserId, int imageId, String content) {
         CommentEntity commentEntity = new CommentEntity();
         commentEntity.setFromUser(userDao.selectOne(ImmutableMap.of("id",fromUserId)).getName());
         commentEntity.setToUser(userDao.selectOne(ImmutableMap.of("id",toUserId)).getName());
@@ -124,12 +123,13 @@ public class UserController {
         commentEntity.setContent(content);
         commentEntity.setTime(TimeUtils.Companion.getNowTime());
         commentDao.insert(commentEntity);
+        return ResponseReturn.success(null);
     }
 
     @GetMapping("/getComment")
     @ResponseBody
-    public List<CommentEntity> getComment(String imageId) {
-        return commentDao.selectList(ImmutableMap.of("imageId", imageId));
+    public ResponseReturn getComment(String imageId) {
+        return ResponseReturn.success(commentDao.selectList(ImmutableMap.of("imageId", imageId)));
     }
 
 }
