@@ -1,4 +1,4 @@
-CREATE TABLE `me`.`comment` (
+CREATE TABLE `comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `image_id` INT(15) NULL,
   `from_user` VARCHAR(45) NULL,
@@ -8,7 +8,7 @@ CREATE TABLE `me`.`comment` (
   PRIMARY KEY (`id`));
 
 
-CREATE TABLE `me`.`user` (
+CREATE TABLE `user` (
   `id` INT ZEROFILL NOT NULL AUTO_INCREMENT,
   `icon` VARCHAR(45) NULL,
   `name` VARCHAR(45) NULL,
@@ -17,14 +17,14 @@ CREATE TABLE `me`.`user` (
   PRIMARY KEY (`id`));
 
 -- 新建权限表
-CREATE TABLE `me`.`role` (
+CREATE TABLE `role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `uid` INT NULL,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
 
 -- 用户表
-ALTER TABLE `me`.`user`
+ALTER TABLE `user`
 CHANGE COLUMN `username` `name` VARCHAR(100) NOT NULL ,
 CHANGE COLUMN `password` `password` VARCHAR(100) NOT NULL ,
 ADD COLUMN `point` INT(45) NULL AFTER `password`,
@@ -33,7 +33,7 @@ ADD COLUMN `permission` VARCHAR(45) NULL AFTER `vip`,
 ADD COLUMN `role` VARCHAR(45) NULL AFTER `permission`;
 
 -- 更新表
-CREATE TABLE `me`.`upgrade` (
+CREATE TABLE `upgrade` (
   `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `version_name` VARCHAR(45) NULL,
   `info` VARCHAR(200) NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `me`.`upgrade` (
   PRIMARY KEY (`id`));
 
 -- 默认值改 0
-ALTER TABLE `me`.`image_set_list`
+ALTER TABLE `image_set_list`
 CHANGE COLUMN `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
 CHANGE COLUMN `comment_count` `comment_count` INT(11) ZEROFILL NULL DEFAULT NULL ,
 CHANGE COLUMN `img_count` `img_count` INT(11) ZEROFILL NULL ,
