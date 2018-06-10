@@ -64,7 +64,7 @@ public class JitaotuHelper {
         log.debug("jitaotu end");
     }
 
-    private static ArrayList<ArrayList<String>> getIndexAndTitle(String indexUrl) {
+    public static ArrayList<ArrayList<String>> getIndexAndTitle(String indexUrl) {
         ArrayList<ArrayList<String>> data = new ArrayList<>();
         ArrayList<String> indexList = new ArrayList<>();
         ArrayList<String> titleList = new ArrayList<>();
@@ -91,7 +91,7 @@ public class JitaotuHelper {
         return data;
     }
 
-    private static Taotu getImageSetList(String url) {
+    public static Taotu getImageSetList(String url) {
         Taotu taotu = new Taotu();
         ArrayList<String> imgList = new ArrayList<>();
         ArrayList<String> tagList = new ArrayList<>();

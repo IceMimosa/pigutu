@@ -1,5 +1,7 @@
 package com.pigutu.app.exception;
 
+import org.apache.http.util.TextUtils;
+
 import java.util.HashMap;
 
 public class ErrorCode {
@@ -20,6 +22,6 @@ public class ErrorCode {
     }
 
     public static String getMsg(int code) {
-        return message.get(code) == null ? "" : message.get(code);
+        return TextUtils.isEmpty(message.get(code)) ? "未知错误" : message.get(code);
     }
 }
