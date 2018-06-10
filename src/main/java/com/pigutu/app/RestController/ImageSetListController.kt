@@ -91,9 +91,6 @@ class ImageSetListController {
     @ResponseBody
     fun detail(id: Int): ResponseReturn {
         imageSetListDao?.addLikeCount(id)
-        var map:HashMap<String,Object>?=null
-        map!!.put("detail",imageSetListDao!!.selectOne(ImmutableMap.of("id",id) as Map<String,Object>) as Object)
-        map!!.put("images",imageSetDao?.selectList(ImmutableMap.of("allImagesId", id) as Map<String, Any>?) as Object)
         return ResponseReturn.success(imageSetDao?.selectList(ImmutableMap.of("allImagesId", id) as Map<String, Any>?))
     }
 
