@@ -164,4 +164,10 @@ public class UserController {
         return ResponseReturn.success(commentDao.selectList(ImmutableMap.of("imageId", imageId)));
     }
 
+    @PostMapping("/changePwd")
+    @ResponseBody
+    public ResponseReturn changePwd(String userId,String oldPwd,String newPwd) {
+        return ResponseReturn.success(commentDao.selectList(ImmutableMap.of("imageId", imageId)));
+    }
+
 }
