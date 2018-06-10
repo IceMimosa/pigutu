@@ -19,6 +19,9 @@ public class ErrorCode {
         message.put(HAS_COLLECT, "该图片已被您收藏");
         message.put(NO_COLLECT, "该图片还未被您收藏");
         message.put(PWD_ERROR, "账号或密码错误");
+        message.put(401, "请先登录");
+        message.put(404, "服务异常");
+        message.put(500, "服务异常");
     }
 
     public static String getMsg(int code) {
