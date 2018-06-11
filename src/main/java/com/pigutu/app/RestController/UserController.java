@@ -166,8 +166,19 @@ public class UserController {
 
     @PostMapping("/changePwd")
     @ResponseBody
-    public ResponseReturn changePwd(String userId,String oldPwd,String newPwd) {
-        return ResponseReturn.success(commentDao.selectList(ImmutableMap.of("imageId", imageId)));
+    public ResponseReturn changePwd(HttpServletRequest request,String userId,String oldPwd,String newPwd) {
+        String token = request.getHeader("token");
+        log.debug("token="+token+",username="+JWTUtil.getUsername(token));
+        if (token == null || !JWTUtil.getUsername(token).equals(userId)) {
+            return ResponseReturn.error(401);
+        }
+        UserEntity userEntity = userDao.selectOne(ImmutableMap.of("userId", userId));
+        if(userEntity.getPwd().equals(oldPwd)){
+            userDao.update(Long.valueOf(userId),ImmutableMap.of("pwd", newPwd));
+        }else{
+            ResponseReturn.error(ErrorCode.OLD_PWD_ERROR);
+        }
+        return ResponseReturn.success(null);
     }
 
 }
