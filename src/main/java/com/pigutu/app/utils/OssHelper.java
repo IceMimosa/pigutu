@@ -1,5 +1,6 @@
 package com.pigutu.app.utils;
 
+import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.OSSClient;
 
 import java.io.ByteArrayInputStream;
@@ -10,7 +11,7 @@ import java.net.URL;
 public class OssHelper {
     public static void uploadImageUrl(String url,String folder,String imageIndex){
         // endpoint以杭州为例，其它region请按实际情况填写
-        String endpoint = "http://img.pigutu.com";
+        String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
 // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号
         String accessKeyId = "LTAIt7bz9idw4Rmp";
         String accessKeySecret = "OhzLNYoiWpkbHLhwikjPErzOL6HJx8";

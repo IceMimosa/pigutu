@@ -75,7 +75,7 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
                 ImmutableMap.of("hide",0),
                 new QueryCondition()
                         .setPaging(page, pageSize)
-                        .setOrderBy(new OrderBy("likeCount").desc())
+                        .setOrderBy(new OrderBy("createTime").desc())
         );
     }
 

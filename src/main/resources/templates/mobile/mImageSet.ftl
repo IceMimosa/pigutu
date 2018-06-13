@@ -122,7 +122,7 @@
             var obj = $.parseJSON(renum);
             var html='';
             for(var i=0;i<4;i++){
-                html+='<li><p><a href="${mUrl}image/'+obj[i].id+'/1"><img src="https://img.pigutu.com/img/'+obj[i].coverUrl+'/thumb" alt="'+obj[i].title+'" /></a><span>'+obj[i].title+'</span></p></li>';
+                html+='<li><p><a href="${mUrl}image/'+obj[i].id+'/1"><img src="http://img.pigutu.com/img/'+obj[i].coverUrl+'/thumb" alt="'+obj[i].title+'" /></a><span>'+obj[i].title+'</span></p></li>';
             }
             $('.other').html(html);
         }
@@ -171,6 +171,27 @@
             }
         }
     }
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?cc77122375a80acf05c0f78f84deb59a";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
 </script>
 <#--<script>
     var page = 0;

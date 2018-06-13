@@ -39,12 +39,11 @@ class BasicController {
     @ResponseBody
     fun queryConfig(): ResponseReturn {
         var configList = configDao!!.selectAll()
-        var mapList:ArrayList<ImmutableMap<String,String>> = ArrayList()
+        var map = HashMap<String,String>()
         for(config in configList){
-            var map = ImmutableMap.of(config.key,config.value)
-            mapList.add(map)
+            map.put(config.key,config.value)
         }
-        return ResponseReturn.success(mapList)
+        return ResponseReturn.success(map)
     }
 
     //查询更新

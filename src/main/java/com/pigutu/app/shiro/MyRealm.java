@@ -16,10 +16,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-@Service
-public class MyRealm extends AuthorizingRealm {
+//@Service
+public class MyRealm/* extends AuthorizingRealm */{
 
-    private static final Logger LOGGER = LogManager.getLogger(MyRealm.class);
+   /* private static final Logger LOGGER = LogManager.getLogger(MyRealm.class);
 
     private UserService userService;
 
@@ -28,17 +28,17 @@ public class MyRealm extends AuthorizingRealm {
         this.userService = userService;
     }
 
-    /**
+    *//**
      * 大坑！，必须重写此方法，不然Shiro会报错
-     */
+     *//*
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof JWTToken;
     }
 
-    /**
+    *//**
      * 只有当需要检测用户权限的时候才会调用此方法，例如checkRole,checkPermission之类的
-     */
+     *//*
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = JWTUtil.getUsername(principals.toString());
@@ -50,9 +50,9 @@ public class MyRealm extends AuthorizingRealm {
         return simpleAuthorizationInfo;
     }
 
-    /**
+    *//**
      * 默认使用此方法进行用户名正确与否验证，错误抛出异常即可。
-     */
+     *//*
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
         String token = (String) auth.getCredentials();
@@ -71,5 +71,5 @@ public class MyRealm extends AuthorizingRealm {
             throw new AuthenticationException("Username or password error");
         }
         return new SimpleAuthenticationInfo(token, token, "my_realm");
-    }
+    }*/
 }

@@ -16,19 +16,24 @@ import java.util.ArrayList;
 
 public class Jitaotu {
     public static void main(String args[]) {
-        try {
+      /*  try {
             String a= "aaaaaaaaaaaaaaaaadfdfdaaaaaaaaaasfddfdfeaaaaadfefsdfddfssssssssssss";
             System.out.println(a.length());
             System.out.println(Base64.encode("p112g".getBytes("utf-8"))+Base64.encode("p112g".getBytes("utf-8")));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }
-        /*ArrayList<ArrayList<String>> data = JitaotuHelper.getIndexAndTitle("http://www.jitaotu.com/xinggan/");
+        }*/
+       /* ArrayList<ArrayList<String>> data = JitaotuHelper.getIndexAndTitle("http://www.jitaotu.com/xinggan/");
         for (int i = 0; i < 1; i++) {
             JitaotuHelper.Taotu taotu = JitaotuHelper.getImageSetList("http://www.jitaotu.com/xinggan/" + data.get(0).get(i) + "-all.html");
             for (int index = 0; index < taotu.getImgList().size(); index++) {
-                OssHelper.uploadImageUrl(taotu.getImgList().get(0), "img/12212", String.valueOf(index));
+                OssHelper.uploadImageUrl(taotu.getImgList().get(0), "img1/12212", String.valueOf(index));
             }
         }*/
+        JitaotuHelper.Taotu taotu = JitaotuHelper.getImageSetList("http://www.jitaotu.com/xinggan/68379-all.html");
+        for (int index = 0; index < taotu.getImgList().size(); index++) {
+            System.out.println(">>>"+taotu.getImgList().get(index));
+            OssHelper.uploadImageUrl(taotu.getImgList().get(index), "img1/12214", String.valueOf(index));
+        }
     }
 }

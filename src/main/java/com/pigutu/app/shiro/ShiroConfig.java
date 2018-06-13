@@ -15,19 +15,19 @@ import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class ShiroConfig {
-
+/*
     @Bean("securityManager")
     public DefaultWebSecurityManager getManager(MyRealm realm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         // 使用自己的realm
         manager.setRealm(realm);
 
-        /*
+        *//*
          * 关闭shiro自带的session，详情见文档
          * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
-         */
+         *//*
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
@@ -49,22 +49,26 @@ public class ShiroConfig {
         factoryBean.setSecurityManager(securityManager);
         factoryBean.setUnauthorizedUrl("/401");
 
-        /*
+        *//*
          * 自定义url规则
          * http://shiro.apache.org/web.html#urls-
-         */
+         *//*
         Map<String, String> filterRuleMap = new HashMap<>();
         // 所有请求通过我们自己的JWT Filter
         filterRuleMap.put("/**", "jwt");
         // 访问401和404页面不通过我们的Filter
         filterRuleMap.put("/401", "anon");
+        filterRuleMap.put("/v1/image/**", "anon");
+        filterRuleMap.put("/v1/basic/**", "anon");
+        filterRuleMap.put("/v1/account/register", "anon");
+        filterRuleMap.put("/v1/account/login", "anon");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }
 
-    /**
+    *//**
      * 下面的代码是添加注解支持
-     */
+     *//*
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
@@ -85,5 +89,5 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
         return advisor;
-    }
+    }*/
 }

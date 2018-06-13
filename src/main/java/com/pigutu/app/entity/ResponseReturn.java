@@ -28,10 +28,8 @@ public class ResponseReturn {
         String base64Str = Base64.encode("p112g".getBytes());
         base64Str = base64Str+base64Str;
         log.debug(base64Str);
-        if(data==null){
-            data = "";
-        }
-        return new ResponseReturn(0,"success", AESUtil.encrypt(GsonHelper.INSTANCE.getGson().toJson(data), base64Str));
+       // return new ResponseReturn(0,"success", AESUtil.encrypt(GsonHelper.INSTANCE.getGson().toJson(data), base64Str));
+        return new ResponseReturn(0,"success", data);
     }
 
     public static ResponseReturn error(int code) {

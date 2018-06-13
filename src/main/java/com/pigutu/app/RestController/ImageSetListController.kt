@@ -3,6 +3,7 @@ package com.pigutu.app.RestController
 import com.google.common.collect.ImmutableMap
 import com.google.common.collect.Maps
 import com.pigutu.app.entity.ImageSetListEntity
+import com.pigutu.app.entity.ImageSetResponse
 import com.pigutu.app.entity.KeywordEntity
 import com.pigutu.app.entity.ResponseReturn
 import com.pigutu.app.mapper.*
@@ -58,7 +59,7 @@ class ImageSetListController {
                 }
             }
         }
-        map.put("last", imageSetListDao!!.timeDesc(page, 20))
+        map.put("last", imageSetList)
         return ResponseReturn.success(map)
     }
 
@@ -91,7 +92,12 @@ class ImageSetListController {
     @ResponseBody
     fun detail(id: Int): ResponseReturn {
         imageSetListDao?.addLikeCount(id)
-        return ResponseReturn.success(imageSetDao?.selectList(ImmutableMap.of("allImagesId", id) as Map<String, Any>?))
+        var userId = request!!.getHeader("userId")
+        var imageSet = imageSetListDao!!.selectOne(ImmutableMap.of("id", id) as MutableMap<String, Any>)
+        if (collectDao!!.selectOne(ImmutableMap.of("userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
+            imageSet.isLike = 1
+        }
+        return ResponseReturn.success(ImageSetResponse(imageSet,imageSetDao?.selectList(ImmutableMap.of("allImagesId", id)  as MutableMap<String, Any>)))
     }
 
     //搜索
