@@ -25,9 +25,9 @@ public class ResponseReturn {
     }
 
     public static ResponseReturn success(Object data) {
-        String base64Str = Base64.encode("p112g".getBytes());
+      /*  String base64Str = Base64.encode("p112g".getBytes());
         base64Str = base64Str+base64Str;
-        log.debug(base64Str);
+        log.debug(base64Str);*/
        // return new ResponseReturn(0,"success", AESUtil.encrypt(GsonHelper.INSTANCE.getGson().toJson(data), base64Str));
         return new ResponseReturn(0,"success", data);
     }

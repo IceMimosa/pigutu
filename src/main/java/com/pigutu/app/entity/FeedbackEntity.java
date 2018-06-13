@@ -9,8 +9,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class FeedBackEntity extends BaseModel {
+public class FeedbackEntity extends BaseModel {
     private static final long serialVersionUID = -3582883097958858604L;
-
-    private String content;
+    public String userId;
+    public String contact;
+    public String content;
 }
