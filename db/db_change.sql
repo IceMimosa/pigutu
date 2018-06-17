@@ -1,3 +1,11 @@
+-- 新建反馈表
+CREATE TABLE `me`.`feedback` (
+  `id` INT ZEROFILL NOT NULL AUTO_INCREMENT,
+  `content` LONGTEXT NULL,
+  `contact` VARCHAR(45) NULL,
+  `user_id` INT NULL,
+  PRIMARY KEY (`id`));
+
 CREATE TABLE `comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `image_id` INT(15) NULL,
