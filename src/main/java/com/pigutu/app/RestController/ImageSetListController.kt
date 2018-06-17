@@ -94,8 +94,10 @@ class ImageSetListController {
         imageSetListDao?.addLikeCount(id)
         var userId = request!!.getHeader("userId")
         var imageSet = imageSetListDao!!.selectOne(ImmutableMap.of("id", id) as MutableMap<String, Any>)
-        if (collectDao!!.selectOne(ImmutableMap.of("userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
-            imageSet.isLike = 1
+        if(!TextUtils.isEmpty(userId)){
+            if (collectDao!!.selectOne(ImmutableMap.of("userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
+                imageSet.isLike = 1
+            }
         }
         return ResponseReturn.success(ImageSetResponse(imageSet,imageSetDao?.selectList(ImmutableMap.of("allImagesId", id)  as MutableMap<String, Any>)))
     }
