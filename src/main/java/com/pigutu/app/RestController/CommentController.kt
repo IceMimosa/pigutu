@@ -55,13 +55,13 @@ class CommentController {
     @ResponseBody
     fun postComment(fromUserId: Int, toUserName: String, imageId: Int, content: String): ResponseReturn {
         if (fromUserId < 0) {
-            ResponseReturn.error(ErrorCode.NO_USER)
+            return ResponseReturn.error(ErrorCode.NO_USER)
         }
         if (imageId < 0) {
-            ResponseReturn.error(ErrorCode.NO_IMAGE_ID)
+            return ResponseReturn.error(ErrorCode.NO_IMAGE_ID)
         }
         if (TextUtils.isEmpty(content)) {
-            ResponseReturn.error(ErrorCode.NO_CONTENT)
+            return ResponseReturn.error(ErrorCode.NO_CONTENT)
         }
         var commentEntity = CommentEntity()
         commentEntity.toUser = fromUserId
@@ -72,6 +72,18 @@ class CommentController {
         commentEntity.imageId = imageId
         commentEntity.content = content
         commentEntity.time = Date(System.currentTimeMillis())
+        return ResponseReturn.success(null)
+    }
+
+    //删除评论
+    @PostMapping("/deleteComment")
+    @ResponseBody
+    fun deleteComment(commentId:Int): ResponseReturn {
+        var userId = commentDao!!.selectOne(ImmutableMap.of("id",commentId) as MutableMap<String, Any>).fromUser
+        if(request!!.getHeader("userId")!=userId.toString()){
+            return ResponseReturn.error(ErrorCode.TOKEN_FAIL)
+        }
+        commentDao.delete(commentId as Long)
         return ResponseReturn.success(null)
     }
 

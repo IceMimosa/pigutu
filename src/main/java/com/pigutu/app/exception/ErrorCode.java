@@ -14,6 +14,7 @@ public class ErrorCode {
     public static int NO_USER = 20007;
     public static int NO_IMAGE_ID = 20008;
     public static int NO_CONTENT = 20009;
+    public static int TOKEN_FAIL = 20010;
 
     private static HashMap<Integer, String> message = new HashMap<>();
 
@@ -27,6 +28,7 @@ public class ErrorCode {
         message.put(NO_USER, "用户信息异常");
         message.put(NO_IMAGE_ID, "没有该图片");
         message.put(NO_CONTENT, "没有内容");
+        message.put(TOKEN_FAIL, "用户token验证失败");
         message.put(401, "请先登录");
         message.put(404, "服务异常");
         message.put(500, "服务异常");
