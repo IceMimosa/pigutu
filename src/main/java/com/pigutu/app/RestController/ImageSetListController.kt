@@ -2,10 +2,7 @@ package com.pigutu.app.RestController
 
 import com.google.common.collect.ImmutableMap
 import com.google.common.collect.Maps
-import com.pigutu.app.entity.ImageSetListEntity
-import com.pigutu.app.entity.ImageSetResponse
-import com.pigutu.app.entity.KeywordEntity
-import com.pigutu.app.entity.ResponseReturn
+import com.pigutu.app.entity.*
 import com.pigutu.app.mapper.*
 import com.pigutu.app.mapper.mybatis.OrderBy
 import com.pigutu.app.mapper.mybatis.QueryCondition
@@ -35,7 +32,11 @@ class ImageSetListController {
     @Autowired
     private val keywordDao: KeywordDao? = null
     @Autowired
+    private val commentDao: CommentDao? = null
+    @Autowired
     private val collectDao: CollectDao? = null
+    @Autowired
+    private val userDao: UserDao? = null
     @Autowired
     private val request:HttpServletRequest?=null
 
@@ -87,7 +88,7 @@ class ImageSetListController {
         return ResponseReturn.success(imageSetList)
     }
 
-    //图集详细
+    //图集详细,评论数据库存id，用转名字
     @GetMapping("/detail")
     @ResponseBody
     fun detail(id: Int): ResponseReturn {
@@ -99,7 +100,18 @@ class ImageSetListController {
                 imageSet.isLike = 1
             }
         }
-        return ResponseReturn.success(ImageSetResponse(imageSet,imageSetDao?.selectList(ImmutableMap.of("allImagesId", id)  as MutableMap<String, Any>)))
+        var commentList = commentDao!!.selectList(ImmutableMap.of("imageId",id) as MutableMap<String, Any>, QueryCondition().setPaging(1, 20).setOrderBy(OrderBy("id").desc()))
+        for((index,comment) in commentList.withIndex()){
+            var userEntity = userDao!!.selectOne(ImmutableMap.of("id",comment.fromUser) as MutableMap<String, Any>)
+            comment.fromUserString = userEntity.name
+            comment.icon = userEntity.icon
+            if(comment.toUser !=0){
+                var toUserEntity = userDao!!.selectOne(ImmutableMap.of("id",comment.toUser) as MutableMap<String, Any>)
+                comment.toUserString = toUserEntity.name
+            }
+            commentList[index] = comment
+        }
+        return ResponseReturn.success(ImageSetResponse(imageSet,imageSetDao?.selectList(ImmutableMap.of("allImagesId", id)  as MutableMap<String, Any>),commentList))
     }
 
     //搜索

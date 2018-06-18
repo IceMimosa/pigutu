@@ -1,3 +1,11 @@
+-- 评论表存用户id，省的改名字
+ALTER TABLE `me`.`comment`
+CHANGE COLUMN `id` `id` INT(11) NOT NULL ,
+CHANGE COLUMN `from_user` `from_user` INT(11) NULL ,
+CHANGE COLUMN `to_user` `to_user` INT(11) NULL DEFAULT NULL ;
+-- 评论表增加likeCount
+ALTER TABLE `me`.`comment`
+ADD COLUMN `like_count` INT(11) NULL DEFAULT 0 AFTER `content`;
 -- 新建反馈表
 CREATE TABLE `me`.`feedback` (
   `id` INT ZEROFILL NOT NULL AUTO_INCREMENT,
