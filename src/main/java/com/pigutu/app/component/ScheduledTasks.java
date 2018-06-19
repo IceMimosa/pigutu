@@ -43,7 +43,7 @@ public class ScheduledTasks {
     }
 
     //一天抓一次jitaotu
-    @Scheduled(fixedRate = 1000*60*60*24)
+    @Scheduled(cron = "0 28 12 ? * *")
     public void jsoupJitaotu(){
         Random random = new Random();
         int minute = random.nextInt(60);

@@ -18,8 +18,8 @@ import java.sql.Timestamp;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class CollectEntity extends BaseModel{
-    private Long userId;
-    private Long imageId;
+    public Long userId;
+    public Long imageId;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date time;
+    public Date time;
 }
