@@ -12,18 +12,18 @@ import java.sql.Timestamp;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class CommentEntity extends BaseModel {
-    private int imageId;
-   // private int orderId; 需要增加排名，每次返回十条
-    private int fromUser;
-    private int toUser;
+    public int imageId;
+    // private int orderId; 需要增加排名，每次返回十条
+    public Long fromUser;
+    public Long toUser;
     @Transient
-    private String fromUserString;
+    public String fromUserString;
     @Transient
-    private String toUserString;
+    public String toUserString;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date time;
-    private String content;
-    private int likeCount;
+    public Date time;
+    public String content;
+    public int likeCount;
     @Transient
-    private String icon;
+    public String icon;
 }

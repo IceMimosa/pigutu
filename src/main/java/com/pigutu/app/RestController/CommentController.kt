@@ -7,6 +7,7 @@ import com.pigutu.app.exception.ErrorCode
 import com.pigutu.app.mapper.*
 import com.pigutu.app.mapper.mybatis.OrderBy
 import com.pigutu.app.mapper.mybatis.QueryCondition
+import com.pigutu.app.shiro.JWTUtil
 import org.apache.http.HttpRequest
 import org.apache.http.util.TextUtils
 import org.omg.CORBA.Object
@@ -23,25 +24,25 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("/v1/comment")
 class CommentController {
     @Autowired
-    private val categoryDao: CategoryDao? = null
+    private lateinit var categoryDao: CategoryDao
     @Autowired
-    private val imageSetListDao: ImageSetListDao? = null
+    private lateinit var imageSetListDao: ImageSetListDao
     @Autowired
-    private val imageSetDao: ImageSetDao? = null
+    private lateinit var imageSetDao: ImageSetDao
     @Autowired
-    private val configDao: ConfigDao? = null
+    private lateinit var configDao: ConfigDao
     @Autowired
-    private val upgradeDao: UpgradeDao? = null
+    private lateinit var upgradeDao: UpgradeDao
     @Autowired
-    private val keywordDao: KeywordDao? = null
+    private lateinit var keywordDao: KeywordDao
     @Autowired
-    private val commentDao: CommentDao? = null
+    private lateinit var commentDao: CommentDao
     @Autowired
-    private val collectDao: CollectDao? = null
+    private lateinit var collectDao: CollectDao
     @Autowired
-    private val userDao: UserDao? = null
+    private lateinit var userDao: UserDao
     @Autowired
-    private val request: HttpServletRequest? = null
+    private  lateinit var request: HttpServletRequest
 
     //最新评论,一般第二页开始，因为第一页默认图片详情带了
     @GetMapping("/getComment")
@@ -63,27 +64,36 @@ class CommentController {
         if (TextUtils.isEmpty(content)) {
             return ResponseReturn.error(ErrorCode.NO_CONTENT)
         }
+        var userId = JWTUtil.getUsername(request!!.getHeader("token"))
         var commentEntity = CommentEntity()
-        commentEntity.toUser = fromUserId
+        commentEntity.fromUser = fromUserId.toLong()
+        if(TextUtils.isEmpty(userId)){
+            commentEntity.toUser = 0
+        }else{
+            if(userId!=fromUserId.toString()){
+                return ResponseReturn.error(401)
+            }
+        }
         if (!TextUtils.isEmpty(toUserName)) {
             var userEntity = userDao!!.selectOne(ImmutableMap.of("name", toUserName) as MutableMap<String, Any>)
-            commentEntity.toUser = userEntity.id as Int
+            commentEntity.toUser = userEntity.id
         }
         commentEntity.imageId = imageId
         commentEntity.content = content
         commentEntity.time = Date(System.currentTimeMillis())
+        commentDao.insert(commentEntity)
         return ResponseReturn.success(null)
     }
 
     //删除评论
     @PostMapping("/deleteComment")
     @ResponseBody
-    fun deleteComment(commentId:Int): ResponseReturn {
+    fun deleteComment(commentId:Long): ResponseReturn {
         var userId = commentDao!!.selectOne(ImmutableMap.of("id",commentId) as MutableMap<String, Any>).fromUser
-        if(request!!.getHeader("userId")!=userId.toString()){
+        if(JWTUtil.getUsername(request!!.getHeader("token"))!=userId.toString()){
             return ResponseReturn.error(ErrorCode.TOKEN_FAIL)
         }
-        commentDao.delete(commentId as Long)
+        commentDao.delete(commentId)
         return ResponseReturn.success(null)
     }
 

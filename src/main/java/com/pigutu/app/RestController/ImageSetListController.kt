@@ -89,6 +89,7 @@ class ImageSetListController {
     }
 
     //图集详细,评论数据库存id，用转名字
+    //todo 遗留问题，游客0 代表不是回复的，游客是否可以被回复？？？回复了，游客也收不到，但是显示不好看
     @GetMapping("/detail")
     @ResponseBody
     fun detail(id: Int): ResponseReturn {
@@ -102,10 +103,14 @@ class ImageSetListController {
         }
         var commentList = commentDao!!.selectList(ImmutableMap.of("imageId",id) as MutableMap<String, Any>, QueryCondition().setPaging(1, 20).setOrderBy(OrderBy("id").desc()))
         for((index,comment) in commentList.withIndex()){
-            var userEntity = userDao!!.selectOne(ImmutableMap.of("id",comment.fromUser) as MutableMap<String, Any>)
-            comment.fromUserString = userEntity.name
-            comment.icon = userEntity.icon
-            if(comment.toUser !=0){
+            if(comment.fromUser==0L||comment.fromUser==null){
+                comment.fromUserString="游客"
+            }else{
+                var userEntity = userDao!!.selectOne(ImmutableMap.of("id",comment.fromUser) as MutableMap<String, Any>)
+                comment.fromUserString = userEntity.name
+                comment.icon = userEntity.icon
+            }
+            if(comment.toUser !=0L && comment.toUser != null){
                 var toUserEntity = userDao!!.selectOne(ImmutableMap.of("id",comment.toUser) as MutableMap<String, Any>)
                 comment.toUserString = toUserEntity.name
             }

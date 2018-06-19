@@ -1,3 +1,10 @@
+ALTER TABLE `me`.`comment`
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `me`.`comment`
+CHANGE COLUMN `image_id` `image_id` INT(15) NULL DEFAULT 0 ,
+CHANGE COLUMN `from_user` `from_user` INT(11) NULL DEFAULT 0 ,
+CHANGE COLUMN `to_user` `to_user` INT(11) NULL DEFAULT 0 ;
 -- 评论表存用户id，省的改名字
 ALTER TABLE `me`.`comment`
 CHANGE COLUMN `id` `id` INT(11) NOT NULL ,
