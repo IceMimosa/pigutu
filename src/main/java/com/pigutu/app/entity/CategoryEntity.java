@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
 public class CategoryEntity extends BaseModel {
     private static final long serialVersionUID = -2295402283392233693L;
 
-    private String path;
-    private String title;
-    private String parameter;
+    public String path;
+    public String title;
+    public String parameter;
 
 }

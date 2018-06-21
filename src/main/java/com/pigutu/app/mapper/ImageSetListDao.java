@@ -16,6 +16,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -38,7 +39,10 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
      * 搜索排行暂时决定用like_count排序
      */
     @Select({"SELECT * FROM image_set_list where (title like '%${keyword}%' or label like '%${keyword}%') and hide=0 order by like_count desc limit  #{page},20"})
-    List<ImageSetListEntity> search(@Param("keyword") String keyword, @Param("page") int page);
+    ArrayList<ImageSetListEntity> search(@Param("keyword") String keyword, @Param("page") int page);
+
+    @Select({"SELECT * FROM image_set_list where (title like '%${keyword}%' or label like '%${keyword}%') and hide=0 and (category='清纯' or category='明星') order by like_count desc limit  #{page},20"})
+    ArrayList<ImageSetListEntity> searchForChannel(@Param("keyword") String keyword, @Param("page") int page);
 
     /**
      * 根据类型查询分页
@@ -87,6 +91,9 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
                         .setOrderBy(new OrderBy("createTime").desc())
         );
     }
+
+    @Select({"select * from image_set_list where (category = #{category1} or category = #{category2}) and hide = 0 order by create_time desc limit #{page},20"})
+    List<ImageSetListEntity> getForChannelLastList(@Param("category1") String category1,@Param("category2") String category2,@Param("page") int page);
 
     /**
      * 根据类型查询
