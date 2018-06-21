@@ -63,6 +63,7 @@ class ImageSetListController {
         var imageSetList: List<ImageSetListEntity>
         if (forChannel == "1") {
             imageSetList = imageSetListDao.getForChannelLastList("明星", "清纯", page - 1)
+            map.put("carousel", imageSetList.asReversed())
         } else {
             imageSetList = imageSetListDao.timeDesc(page, 20)
         }

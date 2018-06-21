@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class ScheduledTasks {
     ConfigDao configDao;
     @Autowired
     ImageSetDao imageSetDao;
+    @Autowired
+    HttpServletRequest request;
     //10分钟更新一次推荐
     @Scheduled(fixedRate = 1000*60*10)
     public void changeRecommend(){
