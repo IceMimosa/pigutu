@@ -68,7 +68,7 @@ class CommentController {
         var commentEntity = CommentEntity()
         commentEntity.fromUser = fromUserId.toLong()
         if(TextUtils.isEmpty(userId)){
-            commentEntity.toUser = 0
+            commentEntity.fromUser = 0
         }else{
             if(userId!=fromUserId.toString()){
                 return ResponseReturn.error(401)
