@@ -92,18 +92,36 @@ public interface ImageSetListDao extends BaseDao<ImageSetListEntity> {
         );
     }
 
+    default List<ImageSetListEntity> likeCountDesc(int page, int pageSize) {
+        return selectList(
+                ImmutableMap.of("hide",0),
+                new QueryCondition()
+                        .setPaging(page, pageSize)
+                        .setOrderBy(new OrderBy("likeCount").desc())
+        );
+    }
+
     @Select({"select * from image_set_list where (category = #{category1} or category = #{category2}) and hide = 0 order by create_time desc limit #{page},20"})
     List<ImageSetListEntity> getForChannelLastList(@Param("category1") String category1,@Param("category2") String category2,@Param("page") int page);
 
     /**
      * 根据类型查询
      */
-    default List<ImageSetListEntity> findByCategory(String category, int page, int pageSize) {
+    default List<ImageSetListEntity> findByCategoryByLikeCount(String category, int page, int pageSize) {
         return selectList(
                 ImmutableMap.of("category", category,"hide",0),
                 new QueryCondition()
                         .setPaging(page, pageSize)
                         .setOrderBy(new OrderBy("likeCount").desc())
+        );
+    }
+
+    default List<ImageSetListEntity> findByCategory(String category, int page, int pageSize) {
+        return selectList(
+                ImmutableMap.of("category", category,"hide",0),
+                new QueryCondition()
+                        .setPaging(page, pageSize)
+                        .setOrderBy(new OrderBy("createTime").desc())
         );
     }
 
