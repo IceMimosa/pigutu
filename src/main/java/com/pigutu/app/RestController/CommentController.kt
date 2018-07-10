@@ -48,7 +48,22 @@ class CommentController {
     @GetMapping("/getComment")
     @ResponseBody
     fun getComment(imageId: Int,page:Int): ResponseReturn {
-        return ResponseReturn.success(commentDao!!.selectList(ImmutableMap.of("imageId", imageId) as MutableMap<String, Any>, QueryCondition().setPaging(page, 20).setOrderBy(OrderBy("id").desc())))
+        var commentList = commentDao!!.selectList(ImmutableMap.of("imageId", imageId) as MutableMap<String, Any>, QueryCondition().setPaging(page, 20).setOrderBy(OrderBy("id").desc()))
+        for ((index, comment) in commentList.withIndex()) {
+            if (comment.fromUser == 0L || comment.fromUser == null) {
+                comment.fromUserString = "游客"
+            } else {
+                var userEntity = userDao!!.selectOne(ImmutableMap.of("id", comment.fromUser) as MutableMap<String, Any>)
+                comment.fromUserString = userEntity.name
+                comment.icon = userEntity.icon
+            }
+            if (comment.toUser != 0L && comment.toUser != null) {
+                var toUserEntity = userDao!!.selectOne(ImmutableMap.of("id", comment.toUser) as MutableMap<String, Any>)
+                comment.toUserString = toUserEntity.name
+            }
+            commentList[index] = comment
+        }
+        return ResponseReturn.success(commentList)
     }
 
     //发送评论
@@ -64,7 +79,11 @@ class CommentController {
         if (TextUtils.isEmpty(content)) {
             return ResponseReturn.error(ErrorCode.NO_CONTENT)
         }
-        var userId = JWTUtil.getUsername(request!!.getHeader("token"))
+        var token = request!!.getHeader("token")
+        var userId = ""
+        if(token != null){
+            userId = JWTUtil.getUsername(token)
+        }
         var commentEntity = CommentEntity()
         commentEntity.fromUser = fromUserId.toLong()
         if(TextUtils.isEmpty(userId)){
@@ -77,6 +96,8 @@ class CommentController {
         if (!TextUtils.isEmpty(toUserName)) {
             var userEntity = userDao!!.selectOne(ImmutableMap.of("name", toUserName) as MutableMap<String, Any>)
             commentEntity.toUser = userEntity.id
+        }else{
+            commentEntity.toUser = 0
         }
         commentEntity.imageId = imageId
         commentEntity.content = content

@@ -48,14 +48,14 @@ public class ScheduledTasks {
     //一天抓一次jitaotu
     @Scheduled(cron = "0 28 12 ? * *")
     public void jsoupJitaotu(){
-        Random random = new Random();
+        /*Random random = new Random();
         int minute = random.nextInt(60);
         //延迟一定分钟，避免太规律,而且防止每次调试就抓
         try {
             Thread.sleep(minute*60*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/xinggan/","xinggan","内衣");
         JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/qingchun/","qingchun","清纯");
         JitaotuHelper.getJitaotu(imageSetListDao,imageSetDao,"http://www.jitaotu.com/mote/","mote","内衣");

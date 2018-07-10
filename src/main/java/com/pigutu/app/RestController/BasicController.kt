@@ -1,5 +1,6 @@
 package com.pigutu.app.RestController
 
+import com.pigutu.app.config.GlobalConfig
 import com.pigutu.app.entity.FeedbackEntity
 import com.pigutu.app.entity.ResponseReturn
 import com.pigutu.app.mapper.*
@@ -31,17 +32,21 @@ class BasicController {
     @Autowired
     private val feedbackDao: FeedbackDao? = null
     @Autowired
-    private val request: HttpServletRequest?=null
+    private lateinit var request: HttpServletRequest
     //查询更新
     @GetMapping("/queryConfig")
     @ResponseBody
     fun queryConfig(): ResponseReturn {
         var configList = configDao!!.selectAll()
         var map = HashMap<String,String>()
+        var channel =request.getHeader("channel")
         for(config in configList){
-            map.put(config.key,config.value)
+            map[config.key] = config.value
+            if(config.key == channel){
+                GlobalConfig.channelValue = config.value
+            }
         }
-        return ResponseReturn.success(map)
+        return ResponseReturn.successBase64(map)
     }
 
     //查询更新
