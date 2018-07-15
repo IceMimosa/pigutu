@@ -120,6 +120,24 @@ class ImageSetListController {
         return ResponseReturn.success(imageSetList)
     }
 
+    //分类
+    @GetMapping("/categoryByLikeCount")
+    @ResponseBody
+    fun categoryByLikeCount(category: String, page: Int): ResponseReturn {
+        var userId = request!!.getHeader("userId")
+        var imageSetList = imageSetListDao?.findByCategoryByLikeCount(category, page, 20)
+        if (!TextUtils.isEmpty(userId)) {
+            for ((index, imageSet) in imageSetList!!.withIndex()) {
+                if (collectDao!!.selectOne(ImmutableMap.of("userId", userId, "imageId", imageSet.id) as Map<String, Object>) != null) {
+                    imageSet.isLike = 1
+                    imageSetList[index] = imageSet
+                }
+            }
+        }
+        return ResponseReturn.success(imageSetList)
+    }
+
+
     //图集详细,评论数据库存id，用转名字
     //todo 遗留问题，游客0 代表不是回复的，游客是否可以被回复？？？回复了，游客也收不到，但是显示不好看
     @GetMapping("/detail")

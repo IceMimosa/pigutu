@@ -130,7 +130,7 @@ public class IndexController {
         model.addAttribute("likeRecords", imageSetListDao.getLikeRecord());
         model.addAttribute("key", "");
         if (request.getServerName().startsWith("m") || tuConfig.isMobileDebug()) {
-            return "mobile/mIndex";
+            return "mobile/mIndex1";
         }
         if (page == 1) {
             return "pc/firstIndex";
