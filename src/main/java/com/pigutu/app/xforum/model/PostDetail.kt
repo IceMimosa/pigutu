@@ -1,10 +1,11 @@
 package com.xforum.library.model
 
+import com.pigutu.app.mapper.mybatis.BaseModel
+
 /**
  *
  */
-data class PostDetail (val post_id: String,
-                  val title: String,
+data class PostDetail (val title: String,
                   val user:User,
                   val publish_time: String,//发布时间
                   val status: Int, //帖子状态 0正常 1 封禁
@@ -16,4 +17,4 @@ data class PostDetail (val post_id: String,
                   val content: String,//内容
                   val last_update_time: String, //最后更新时间
                   val image_list: ArrayList<String>//显示的图片，最多9张，暂定
-)
+): BaseModel()
