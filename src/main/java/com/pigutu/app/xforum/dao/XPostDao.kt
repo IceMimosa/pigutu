@@ -2,12 +2,13 @@ package com.pigutu.app.xforum.dao
 
 import com.pigutu.app.mapper.mybatis.BaseDao
 import com.pigutu.app.mapper.mybatis.DBMeta
-import com.xforum.library.model.Comment
+import com.pigutu.app.xforum.model.Post
 import org.apache.ibatis.annotations.Mapper
 import org.springframework.stereotype.Repository
 
+
 @Mapper
 @Repository
-@DBMeta(table = "x_comment")
-interface CommentDao: BaseDao<Comment> {
+@DBMeta(table = "x_post")
+interface XPostDao :BaseDao<Post>{
 }

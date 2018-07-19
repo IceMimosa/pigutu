@@ -72,3 +72,16 @@ CHANGE COLUMN `like_count` `like_count` INT(11) ZEROFILL NULL DEFAULT NULL ,
 CHANGE COLUMN `view_count` `view_count` INT(11) ZEROFILL NULL DEFAULT '0' ,
 CHANGE COLUMN `recommend_count` `recommend_count` INT(11) ZEROFILL NULL DEFAULT '0' ,
 CHANGE COLUMN `hide` `hide` INT(2) ZEROFILL NULL DEFAULT '0' ;
+
+
+CREATE TABLE `me`.`x_reply` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `content` MEDIUMTEXT NULL,
+  `image_list` VARCHAR(200) NULL,
+  `user_id` INT NULL DEFAULT 0,
+  `publish_time` DATETIME NULL,
+  `count_like` INT NULL DEFAULT 0,
+  `reply_user_id` INT NULL DEFAULT 0,
+  `comment_id` INT NULL DEFAULT 0,
+  PRIMARY KEY (`id`));
+
