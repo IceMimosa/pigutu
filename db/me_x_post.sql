@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: me
+-- Host: localhost    Database: me
 -- ------------------------------------------------------
--- Server version	5.7.11-log
+-- Server version	5.7.19-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `x_post` (
   `image_list` text,
   `bar_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `x_post` (
 
 LOCK TABLES `x_post` WRITE;
 /*!40000 ALTER TABLE `x_post` DISABLE KEYS */;
+INSERT INTO `x_post` VALUES (1,0,'2018-07-19 00:00:00',0,0,0,0,0,'','2018-07-19 00:00:00','aa',0),(2,0,'2018-07-19 00:00:00',0,0,0,0,0,'','2018-07-19 00:00:00','aa',0),(3,0,'2018-07-19 00:00:00',0,0,0,0,0,'','2018-07-19 00:00:00','aa',0),(4,0,'2018-07-19 00:00:00',0,0,0,0,0,'','2018-07-19 00:00:00','[\"[\\\"aa\\\"\",\"\\\"bb\\\"]\"]',0);
 /*!40000 ALTER TABLE `x_post` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-19  0:49:07
+-- Dump completed on 2018-07-20 17:59:14

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: me
+-- Host: localhost    Database: me
 -- ------------------------------------------------------
--- Server version	5.7.11-log
+-- Server version	5.7.19-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,20 +23,16 @@ DROP TABLE IF EXISTS `x_comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `x_comment` (
-  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` int(2) DEFAULT '0',
   `content` mediumtext,
-  `image_list` text,
+  `image_list` varchar(200) DEFAULT NULL,
   `user_id` int(11) DEFAULT '0',
   `publish_time` datetime DEFAULT NULL,
   `count_like` int(11) DEFAULT '0',
   `count_reply` int(11) DEFAULT '0',
-  `is_starter` int(2) DEFAULT '0',
-  `parent_user_id` int(11) DEFAULT '0',
-  `parent_id` int(11) DEFAULT '0',
-  `is_official` int(2) DEFAULT '0',
-  `is_top` int(2) DEFAULT '0',
-  PRIMARY KEY (`comment_id`)
+  `post_id` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-19  0:49:07
+-- Dump completed on 2018-07-20 17:59:13
