@@ -12,7 +12,6 @@ import javax.persistence.Transient
 data class Comment(var status: Int,//状态，是否封禁等
                    var content: String,
                    var image_list: ArrayList<String>,
-                   @Column(name = "user_id")
                    var user: User,//用户
                    var publish_time: String,
                    var count_like: Int,

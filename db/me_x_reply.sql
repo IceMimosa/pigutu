@@ -26,10 +26,10 @@ CREATE TABLE `x_reply` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` mediumtext,
   `image_list` varchar(200) DEFAULT NULL,
-  `user_id` int(11) DEFAULT '0',
+  `user` int(11) DEFAULT '0',
   `publish_time` datetime DEFAULT NULL,
   `count_like` int(11) DEFAULT '0',
-  `reply_user_id` int(11) DEFAULT '0',
+  `reply_user` int(11) DEFAULT '0',
   `comment_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

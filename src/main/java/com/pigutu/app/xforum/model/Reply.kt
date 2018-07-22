@@ -8,11 +8,9 @@ import javax.persistence.Transient
 data class Reply(var status: Int=0,//状态，是否封禁等
                  var content: String="",
                  var image_list: ArrayList<String> = ArrayList(),
-                 @Column(name = "user_id")
                  var user: User,//用户
                  var publish_time: String,
                  var count_like: Int,
-                 @Column(name = "reply_user_id")
                  var reply_user: User,//被回复者
                  var comment_id: String//被回复者comment_id
 ) : BaseModel()

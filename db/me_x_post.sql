@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `x_post`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `x_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT '0',
+  `user` int(11) DEFAULT '0',
   `publish_time` datetime DEFAULT NULL,
   `status` int(2) DEFAULT '0',
   `count_read` int(11) DEFAULT '0',

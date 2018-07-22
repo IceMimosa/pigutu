@@ -27,7 +27,7 @@ CREATE TABLE `x_comment` (
   `status` int(2) DEFAULT '0',
   `content` mediumtext,
   `image_list` varchar(200) DEFAULT NULL,
-  `user_id` int(11) DEFAULT '0',
+  `user` int(11) DEFAULT '0',
   `publish_time` datetime DEFAULT NULL,
   `count_like` int(11) DEFAULT '0',
   `count_reply` int(11) DEFAULT '0',

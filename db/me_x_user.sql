@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `x_user`;
 CREATE TABLE `x_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_nickname` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
   `head_pic` varchar(45) DEFAULT NULL,
   `count_follow` int(11) DEFAULT '0',
   `count_fans` int(11) DEFAULT '0',

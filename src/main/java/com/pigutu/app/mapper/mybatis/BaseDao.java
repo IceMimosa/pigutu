@@ -37,6 +37,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 插入一条记录
+     *
      * @param record 记录
      * @return id值
      */
@@ -54,6 +55,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 查询所有数据
+     *
      * @return 查询结果列表，不会为 null
      */
     default List<T> selectAll() {
@@ -62,6 +64,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 使用复合条件查询单条记录
+     *
      * @param queries Map，key 为字段名，value 为字段值
      * @return 查询结果记录，可能为 null
      */
@@ -71,6 +74,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 使用 id 列表查询多条记录
+     *
      * @param ids ids
      * @return 查询结果列表，不会为 null
      */
@@ -80,6 +84,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 使用复合条件查询多条记录
+     *
      * @param queries Map，key 为字段名，value 为字段值
      * @return 查询结果列表，不会为 null
      */
@@ -89,7 +94,8 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 使用复合条件并带额外条件（分页、排序）进行查询
-     * @param queries Map，key 为字段名，value 为字段值
+     *
+     * @param queries   Map，key 为字段名，value 为字段值
      * @param condition {@link QueryCondition}
      * @return 查询结果列表，不会为 null
      */
@@ -107,6 +113,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * count
+     *
      * @return 数量
      */
     @SuppressWarnings("unchecked")
@@ -116,6 +123,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 使用复合条件 count
+     *
      * @param queries Map，key 为字段名，value 为字段值
      * @return 数量
      */
@@ -132,6 +140,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 按 id 更新记录
+     *
      * @param record 待更新记录
      */
     default void update(T record) {
@@ -140,7 +149,8 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 按 id 更新记录的部分字段
-     * @param id id
+     *
+     * @param id     id
      * @param fields Map，key 为字段名，value 为字段值
      */
     default void update(Long id, Map<String, Object> fields) {
@@ -149,6 +159,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 按 id 删除记录
+     *
      * @param id id
      */
     default void delete(Long id) {
@@ -157,6 +168,7 @@ public interface BaseDao<T extends BaseModel> {
 
     /**
      * 按复合条件删除记录
+     *
      * @param queries Map，key 为字段名，value 为字段值
      */
     default void delete(Map<String, Object> queries) {
@@ -302,10 +314,12 @@ public interface BaseDao<T extends BaseModel> {
         private MetaInfo getMetaInfo(Map<String, Object> params) {
             return metaInfoCache.get(params.get("self").getClass());
         }
+
         // 将java的字段转化成数据库列名
         private static String convertFieldName(String field) {
             return "`" + CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field) + "`";
         }
+
         // 转换查询参数
         private String buildWhereClause(String key, Object v) {
             if (v == null) {

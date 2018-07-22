@@ -1,11 +1,13 @@
 package com.pigutu.app.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 
 import java.util.List;
 
 @Data
 public class ApiIndexEntity {
+    @Transient
     private List<ImageSetListEntity> carousel;
     private List<ImageSetListEntity> hot;
 

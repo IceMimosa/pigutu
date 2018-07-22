@@ -14,7 +14,7 @@ public abstract class BaseModel implements Serializable {
     private static final long serialVersionUID = 7546099546644277588L;
 
     @NotNull
-    private Long id;
+    private Long id = 0l;
     // @NotNull
     // private Date createdAt;
     // @Nullable
