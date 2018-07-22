@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -16,6 +19,7 @@ import java.sql.SQLException;
 
 
 @Slf4j
+@Service
 public class UserTypeHandler extends BaseTypeHandler<User> {
     @Autowired
     XUserDao xUserDao;
@@ -27,7 +31,8 @@ public class UserTypeHandler extends BaseTypeHandler<User> {
     @Override
     public User getNullableResult(ResultSet resultSet, String s) throws SQLException {
         log.debug("index ="+s+resultSet.getInt(s));
-        return xUserDao.selectOne(ImmutableMap.of("id",resultSet.getInt(s)));
+        log.debug("data ="+xUserDao.selectOne(ImmutableMap.of("id",resultSet.getLong(s))));
+        return xUserDao.selectOne(ImmutableMap.of("id",resultSet.getLong(s)));
     }
 
     @Override

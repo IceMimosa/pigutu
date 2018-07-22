@@ -20,9 +20,9 @@ public class ErrorController {
     public ResponseReturn a404() {
         return ResponseReturn.error(404);
     }
-    @GetMapping("/500")
+  /*  @GetMapping("/500")
     @ResponseBody
     public ResponseReturn a500() {
         return ResponseReturn.error(500);
-    }
+    }*/
 }
