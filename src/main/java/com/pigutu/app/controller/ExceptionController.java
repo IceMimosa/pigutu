@@ -1,7 +1,9 @@
 package com.pigutu.app.controller;
 
+import com.google.common.base.Throwables;
 import com.pigutu.app.entity.ResponseReturn;
 import com.pigutu.app.exception.UnauthorizedException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.servlet.http.HttpServletRequest;
 
 @RestControllerAdvice
+@Slf4j
 public class ExceptionController {
 
     // 捕捉shiro的异常
@@ -31,6 +34,7 @@ public class ExceptionController {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseReturn globalException(HttpServletRequest request, Throwable ex) {
+        log.error(Throwables.getStackTraceAsString(ex));
         return new ResponseReturn(getStatus(request).value(), ex.getMessage(), null);
     }
 
