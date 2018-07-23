@@ -1,6 +1,5 @@
 package com.pigutu.app.mapper;
 
-import com.pigutu.app.entity.CategoryEntity;
 import com.pigutu.app.entity.UserEntity;
 import com.pigutu.app.mapper.mybatis.BaseDao;
 import com.pigutu.app.mapper.mybatis.DBMeta;

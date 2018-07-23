@@ -13,10 +13,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class UserEntity extends BaseModel{
     public String icon;
-    public String pwd;
+
     public String name;
     public int point;//积分
     public int vip;//积分
     public String permission;
     public String role;
+    public String pwd;
 }

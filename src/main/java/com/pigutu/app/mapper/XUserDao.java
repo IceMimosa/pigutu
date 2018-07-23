@@ -1,14 +1,14 @@
-package com.pigutu.app.xforum.dao;
+package com.pigutu.app.mapper;
 
 import com.pigutu.app.mapper.mybatis.BaseDao;
 import com.pigutu.app.mapper.mybatis.DBMeta;
-import com.pigutu.app.xforum.model.Post;
+import com.pigutu.app.xforum.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-
 @Mapper
 @Repository
-@DBMeta(table = "x_post")
-public interface XPostDao extends BaseDao<Post>{
+@DBMeta(table = XUserDao.TABLE)
+public interface XUserDao extends BaseDao<User> {
+    String TABLE = "x_user";
 }

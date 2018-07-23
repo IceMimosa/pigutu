@@ -1,16 +1,13 @@
 package com.pigutu.app.typeHandler;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-import com.pigutu.app.xforum.dao.XUserDao;
+import com.pigutu.app.mapper.XUserDao;
 import com.pigutu.app.xforum.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -19,7 +16,7 @@ import java.sql.SQLException;
 
 
 @Slf4j
-@Service
+@Component
 public class UserTypeHandler extends BaseTypeHandler<User> {
     @Autowired
     XUserDao xUserDao;

@@ -2,14 +2,13 @@ package com.pigutu.app.xforum.service
 
 import com.google.common.collect.ImmutableMap
 import com.pigutu.app.entity.ResponseReturn
-import com.pigutu.app.entity.UserEntity
 import com.pigutu.app.mapper.UserDao
 import com.pigutu.app.mapper.mybatis.OrderBy
 import com.pigutu.app.mapper.mybatis.QueryCondition
-import com.pigutu.app.xforum.dao.XCommentDao
-import com.pigutu.app.xforum.dao.XPostDao
-import com.pigutu.app.xforum.dao.XReplyDao
-import com.pigutu.app.xforum.dao.XUserDao
+import com.pigutu.app.mapper.XCommentDao
+import com.pigutu.app.mapper.XPostDao
+import com.pigutu.app.mapper.XReplyDao
+import com.pigutu.app.mapper.XUserDao
 import com.pigutu.app.xforum.model.Reply
 import com.pigutu.app.xforum.model.Comment
 import com.pigutu.app.xforum.model.Post
